@@ -7,6 +7,7 @@ package it.polimi.ingsw;
 public class App 
 {
     int i = 3;
+    private String toBeDeleted;
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
