@@ -7,7 +7,6 @@
     - upPoints() takes as argument an amount to add to the player points
     - showHand() TUI implemented method
     - Initial and Objective Card related methods
-
     - Player constructors work with nickName and playerColour,
         insert all the Player attributes inside the constructor
         to recreate a pre-existing player

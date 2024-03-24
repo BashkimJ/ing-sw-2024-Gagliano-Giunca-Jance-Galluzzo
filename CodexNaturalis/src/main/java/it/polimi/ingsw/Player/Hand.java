@@ -3,7 +3,6 @@
     - Player's Hand attributes which includes the list of (up to) 3 cards
     - Hand constructor
     - Player actions such as draw or use cards after the initial phase
-
     - An empty declaration of Hand results in a Hand class with empty List
     - A Hand declaration with Resource card List and Gold card List
         results in an already filled hand, if card number is acceptable.
