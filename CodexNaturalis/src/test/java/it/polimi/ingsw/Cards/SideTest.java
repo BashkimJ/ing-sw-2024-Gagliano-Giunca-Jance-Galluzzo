@@ -1,9 +1,9 @@
 package test.java.it.polimi.ingsw.Cards;
 
-import main.java.it.polimi.ingsw.Cards.Corner;
-import main.java.it.polimi.ingsw.Cards.Side;
-import main.java.it.polimi.ingsw.Enumerations.Items;
-import main.java.it.polimi.ingsw.Enumerations.Resource;
+import main.java.it.polimi.ingsw.Model.Cards.Corner;
+import main.java.it.polimi.ingsw.Model.Cards.Side;
+import main.java.it.polimi.ingsw.Model.Enumerations.Items;
+import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,6 +32,8 @@ class SideTest {
 
     @Test
     void getUpLeft() {
+        upLeft.setFreeValue(false);
+        assertEquals(false,front.getUpLeft().isFree());
         assertEquals(upLeft, front.getUpLeft());
         assertEquals(true,front.getUpLeft().isVisible());
         assertEquals(Resource.Fungi,front.getUpLeft().getResource());

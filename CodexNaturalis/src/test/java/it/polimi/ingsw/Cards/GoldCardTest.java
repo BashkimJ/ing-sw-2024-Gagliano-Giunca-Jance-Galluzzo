@@ -1,8 +1,8 @@
 package test.java.it.polimi.ingsw.Cards;
 
-import main.java.it.polimi.ingsw.Cards.*;
-import main.java.it.polimi.ingsw.Enumerations.Items;
-import main.java.it.polimi.ingsw.Enumerations.Resource;
+import main.java.it.polimi.ingsw.Model.Cards.*;
+import main.java.it.polimi.ingsw.Model.Enumerations.Items;
+import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -52,6 +52,7 @@ class GoldCardTest {
     @Test
     void getCondition() {
         assertEquals(cond, card.getCondition());
+        boolean val;
         assertEquals(false, card.getCondition().getCornerCondition());
         assertEquals(Items.Inkwell,card.getCondition().getItemType());
 

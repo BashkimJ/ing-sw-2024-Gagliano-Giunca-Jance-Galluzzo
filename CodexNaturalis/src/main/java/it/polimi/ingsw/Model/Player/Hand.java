@@ -13,9 +13,9 @@
 
     - To draw cards we can use setrCards() and setgCards()
 */
-package main.java.it.polimi.ingsw.Player;
+package main.java.it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Cards.*;
+import main.java.it.polimi.ingsw.Model.Cards.*;
 
 import java.util.List;
 

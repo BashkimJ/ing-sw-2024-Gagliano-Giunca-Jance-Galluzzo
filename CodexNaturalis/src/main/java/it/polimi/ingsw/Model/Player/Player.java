@@ -11,10 +11,11 @@
         insert all the Player attributes inside the constructor
         to recreate a pre-existing player
 */
-package main.java.it.polimi.ingsw.Player;
+package main.java.it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Enumerations.*;
-import main.java.it.polimi.ingsw.Cards.*;
+import main.java.it.polimi.ingsw.Model.Enumerations.*;
+import main.java.it.polimi.ingsw.Model.Cards.*;
+
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
