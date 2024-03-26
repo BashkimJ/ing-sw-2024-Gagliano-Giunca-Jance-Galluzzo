@@ -1,0 +1,74 @@
+[
+  {
+    "card_id": 81,
+    "corner0": "o",
+    "corner1": "g",
+    "corner2": "p",
+    "corner3": "o",
+    "resurces_at_front": "p",
+    "corner4": "r",
+    "corner5": "g",
+    "corner6": "p",
+    "corner7": "b"
+  },
+  {
+    "card_id": 82,
+    "corner0": "b",
+    "corner1": "o",
+    "corner2": "o",
+    "corner3": "r",
+    "resurces_at_front": "r",
+    "corner4": "g",
+    "corner5": "b",
+    "corner6": "r",
+    "corner7": "p"
+  },
+  {
+    "card_id": 83,
+    "corner0": "o",
+    "corner1": "o",
+    "corner2": "o",
+    "corner3": "o",
+    "resurces_at_front": "gr",
+    "corner4": "p",
+    "corner5": "b",
+    "corner6": "r",
+    "corner7": "g"
+  },
+  {
+    "card_id": 84,
+    "corner0": "o",
+    "corner1": "o",
+    "corner2": "o",
+    "corner3": "o",
+    "resurces_at_front": "bp",
+    "corner4": "g",
+    "corner5": "p",
+    "corner6": "b",
+    "corner7": "r"
+  },
+  {
+    "card_id": 85,
+    "corner0": "o",
+    "corner1": "o",
+    "corner2": "x",
+    "corner3": "x",
+    "resurces_at_front": "bpg",
+    "corner4": "p",
+    "corner5": "r",
+    "corner6": "g",
+    "corner7": "b"
+  },
+  {
+    "card_id": 86,
+    "corner0": "o",
+    "corner1": "o",
+    "corner2": "x",
+    "corner3": "x",
+    "resurces_at_front": "gbr",
+    "corner4": "r",
+    "corner5": "b",
+    "corner6": "g",
+    "corner7": "p"
+  }
+]
