@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Cards;
+package main.java.it.polimi.ingsw.Model.Cards;
 
 public abstract class Card {
     private Side front;

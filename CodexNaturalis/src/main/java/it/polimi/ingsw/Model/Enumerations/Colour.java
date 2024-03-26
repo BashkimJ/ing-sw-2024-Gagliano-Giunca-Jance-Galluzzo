@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Enumerations;
+package main.java.it.polimi.ingsw.Model.Enumerations;
 
 public enum Colour {
     red,

@@ -11,10 +11,10 @@
         insert all the Player attributes inside the constructor
         to recreate a pre-existing player
 */
-package main.java.it.polimi.ingsw.Player;
+package main.java.it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Enumerations.*;
-import main.java.it.polimi.ingsw.Cards.*;
+import main.java.it.polimi.ingsw.Model.Enumerations.*;
+import main.java.it.polimi.ingsw.Model.Cards.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -47,10 +47,10 @@ public class Player {
 
         this.playerHand = new Hand();
     }
-    public Player(String name, Colour c, List<ResourceCard> r, List<GoldCard> g, InitialCard i, ObjectiveCard o){
+    public Player(String name, Colour c, int pts, List<ResourceCard> r, List<GoldCard> g, InitialCard i, ObjectiveCard o){
         this.nickName = name;
         this.playerColour = c;
-        this.points = 0;
+        this.points = pts;
         //Need to ask permission for this lib
         try {
             this.tokenImage = ImageIO.read(new File("/../ImageFiles/" + c + ".png"));
@@ -105,7 +105,7 @@ public class Player {
             System.out.println("  - Top right corner: " + ( r.getFront().getUpRight().isFree() ? "free" : ( r.getFront().getUpRight().getItems()!=null ? r.getFront().getUpRight().getItems().toString() : r.getFront().getUpRight().getResource().toString())));
             System.out.println("  - Bottom left corner: " + ( r.getFront().getDownLeft().isFree() ? "free" : ( r.getFront().getDownLeft().getItems()!=null ? r.getFront().getDownLeft().getItems().toString() : r.getFront().getDownLeft().getResource().toString())));
             System.out.println("  - Bottom right corner: " + ( r.getFront().getUpRight().isFree() ? "free" : ( r.getFront().getDownRight().getItems()!=null ? r.getFront().getDownRight().getItems().toString() : r.getFront().getDownRight().getResource().toString())));
-            System.out.println("  - Points on usage: "+ r .getPoints());
+            System.out.println("  - Points on usage: " + r .getPoints());
             i++;
         }
         for (GoldCard g : playerHand.getgCards()){
@@ -142,6 +142,5 @@ public class Player {
     public void setPlayerObjective(ObjectiveCard playerObjective) {
         this.playerObjective = playerObjective;
     }
-
 
 }
