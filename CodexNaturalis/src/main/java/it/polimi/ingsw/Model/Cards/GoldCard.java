@@ -5,7 +5,7 @@ import java.util.List;
 
 public class GoldCard extends ResourceCard{
     private PointCondition Condition;
-    private List<Resource> neccesaryRes;
+    private List<Resource> necessaryRes;
 
     /**
      *  The constructor of the Gold Card.
@@ -19,7 +19,7 @@ public class GoldCard extends ResourceCard{
      */
     public GoldCard(Side front,Side retro,int Id, Resource rsc,int points,List<Resource> nessRes,PointCondition Cond){
         super(front,retro,Id,rsc,points);
-        this.neccesaryRes = nessRes;
+        this.necessaryRes = nessRes;
         this.Condition = Cond;
     }
 
@@ -35,7 +35,7 @@ public class GoldCard extends ResourceCard{
      *
      * @return The list of the necessary resources.
      */
-    public List<Resource> getNeccesaryRes(){
-        return this.neccesaryRes;
+    public List<Resource> getNecessaryRes(){
+        return this.necessaryRes;
     }
 }

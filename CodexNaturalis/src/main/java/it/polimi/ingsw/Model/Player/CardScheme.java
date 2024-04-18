@@ -89,7 +89,7 @@ public class CardScheme {
         int insects = 0;
         int plant = 0;
         int fungi = 0;
-        List<Resource> rsc = new ArrayList<Resource>(card.getNeccesaryRes());
+        List<Resource> rsc = new ArrayList<Resource>(card.getNecessaryRes());
         for(Resource r:rsc){
             if(r==Animal){
                 animal++;

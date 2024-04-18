@@ -60,8 +60,8 @@ class GoldCardTest {
 
     @Test
     void getNeccesaryRes() {
-        assertEquals(Resource.Animal,card.getNeccesaryRes().get(0));
-        assertEquals(Resource.Animal, card.getNeccesaryRes().get(1));
-        assertEquals(Resource.Insects,card.getNeccesaryRes().get(2));
+        assertEquals(Resource.Animal,card.getNecessaryRes().get(0));
+        assertEquals(Resource.Animal, card.getNecessaryRes().get(1));
+        assertEquals(Resource.Insects,card.getNecessaryRes().get(2));
     }
 }
