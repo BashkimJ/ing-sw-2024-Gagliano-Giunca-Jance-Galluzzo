@@ -124,7 +124,7 @@ public class Player {
             else {
                 System.out.println("  - Points on usage: " + g.getPoints());
             }
-            System.out.println("  - Requires: " + g.getNeccesaryRes().toString());
+            System.out.println("  - Requires: " + g.getNecessaryRes().toString());
         }
     }
 
