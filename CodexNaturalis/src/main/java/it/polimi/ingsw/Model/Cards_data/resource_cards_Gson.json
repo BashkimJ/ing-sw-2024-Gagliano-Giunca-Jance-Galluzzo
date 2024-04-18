@@ -1,0 +1,1804 @@
+[
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 1
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 2
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 3
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 4
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Quill"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 5
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Inkwell"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 6
+  },
+  {
+    "points": 0,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Manuscript"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 7
+  },
+  {
+    "points": 1,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 8
+  },
+  {
+    "points": 1,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 9
+  },
+  {
+    "points": 1,
+    "resourceType": "Fungi",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 10
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 11
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 12
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 13
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 14
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Quill"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 15
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Inkwell"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 16
+  },
+  {
+    "points": 0,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Manuscript"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 17
+  },
+  {
+    "points": 1,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 18
+  },
+  {
+    "points": 1,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 19
+  },
+  {
+    "points": 1,
+    "resourceType": "Plant",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 20
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 21
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 22
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 23
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 24
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Manuscript"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 25
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Manuscript"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 26
+  },
+  {
+    "points": 0,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Quill"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 27
+  },
+  {
+    "points": 1,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 28
+  },
+  {
+    "points": 1,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 29
+  },
+  {
+    "points": 1,
+    "resourceType": "Animal",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 30
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 31
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 32
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 33
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 34
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Quill"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 35
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Manuscript"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 36
+  },
+  {
+    "points": 0,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "itemstype": "Inkwell"
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 37
+  },
+  {
+    "points": 1,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": false,
+        "Free": false
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 38
+  },
+  {
+    "points": 1,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 39
+  },
+  {
+    "points": 1,
+    "resourceType": "Insects",
+    "front": {
+      "upLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      ,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "CardId": 40
+  }
+]
