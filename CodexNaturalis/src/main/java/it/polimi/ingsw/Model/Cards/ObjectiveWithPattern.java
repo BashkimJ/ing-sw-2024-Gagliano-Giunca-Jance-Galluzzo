@@ -1,10 +1,12 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
 import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
+import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 public class ObjectiveWithPattern implements MainObjective{
     private Pattern patternType;
     private int points;
+
 
     /**
      * The constructor of the objective with patterns.
@@ -14,6 +16,7 @@ public class ObjectiveWithPattern implements MainObjective{
     public ObjectiveWithPattern(Pattern pattern, int points){
         this.points = points;
         this.patternType = pattern;
+
     }
 
     /**
@@ -31,5 +34,4 @@ public class ObjectiveWithPattern implements MainObjective{
     public Pattern getObjectives(){
         return this.patternType;
     }
-
 }
