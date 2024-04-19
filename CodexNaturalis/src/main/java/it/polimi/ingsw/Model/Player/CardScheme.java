@@ -1,7 +1,12 @@
 package main.java.it.polimi.ingsw.Model.Player;
 
+import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
+import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
+import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
+import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
 import main.java.it.polimi.ingsw.Model.Cards.*;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
+import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.util.ArrayList;
@@ -9,12 +14,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.min;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
+import static main.java.it.polimi.ingsw.Model.Enumerations.Pattern.*;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
 
 public class CardScheme {
     private Map<ArrayList<Integer>, Side> playedCards;
     private Map<ArrayList<Integer>,Resource> CardsResource;
+    private Map<ArrayList<Integer>,Resource> counted;
     private int [][] Scheme;//0-> Free, 1->Part of the Card,, 2->Free corner, 3->Corner taken or Not visible
     private int numAnimal;
     private  int numInsects;
@@ -32,9 +40,10 @@ public class CardScheme {
         numInkwell = 0;
         numManuscript = 0;
         numQuill = 0;
+        counted = new HashMap<ArrayList<Integer>,Resource>();
         CardsResource = new HashMap<ArrayList<Integer>,Resource>();
         playedCards = new HashMap<ArrayList<Integer>, Side>();
-        Scheme = new int[80][80];
+        Scheme = new int[160][160];
     }
 
     /**
@@ -61,7 +70,7 @@ public class CardScheme {
      * @return True if the position is not trying to exceed the limits, false otherwise.
      */
     private boolean checkPosition(int x,int y){
-        if(x-1<0 || x+1>79 || y-1<0 || y+1>79){
+        if(x-1<0 || x+1>159 || y-1<0 || y+1>159){
             return false;
         }
         if(Scheme[x-1][y-1]==0 && Scheme[x-1][y+1]==0 && Scheme[x+1][y-1]==0 && Scheme[x+1][y+1]==0){
@@ -274,8 +283,9 @@ public class CardScheme {
      * @param initial The initial card to be played.
      * @param side The side chosen to place the card.The string side must correspond with the words front or retro to choose the side.
      * @return True after the card is placed.
-     */
-   public boolean placeInitialCard(InitialCard initial,String side){
+     * @throws InvalidSideException When an invalid side is chosen.
+     **/
+   public boolean placeInitialCard(InitialCard initial,String side)throws InvalidSideException{
         Side playedSide ;
         if(side.equalsIgnoreCase("front")){
             playedSide = initial.getFront();
@@ -284,55 +294,59 @@ public class CardScheme {
             playedSide = initial.getRetro();
         }
         else{
-            return false;
+            throw new InvalidSideException();
         }
        numAnimal = numAnimal + countResources(Animal,playedSide,initial);
        numFungi = numFungi + countResources(Fungi,playedSide,initial);
        numPlants = numPlants + countResources(Plant,playedSide,initial);
        numInsects = numInsects + countResources(Insects,playedSide,initial);
-       Scheme[40][40] = 1;
-       Scheme[40][39] = 1;
-       Scheme[40][41] = 1;
-       Scheme[39][40] = 1;
-       Scheme[41][40] = 1;
+       Scheme[80][80] = 1;
+       Scheme[80][79] = 1;
+       Scheme[80][81] = 1;
+       Scheme[79][80] = 1;
+       Scheme[81][80] = 1;
        if(playedSide.getUpLeft().isVisible()){
-           Scheme[39][39] = 2;
-       }else Scheme[39][39] = 3;
+           Scheme[79][79] = 2;
+       }else Scheme[79][79] = 3;
        if(playedSide.getDownLeft().isVisible()){
-           Scheme[41][39] = 2;
-       }else Scheme[41][39] = 3;
+           Scheme[81][79] = 2;
+       }else Scheme[81][79] = 3;
        if(playedSide.getUpRight().isVisible()){
-           Scheme[39][41] = 2;
-       }else Scheme[39][41] = 3;
+           Scheme[79][81] = 2;
+       }else Scheme[79][81] = 3;
        if(playedSide.getDownRight().isVisible()){
-           Scheme[41][41] = 2;
-       }else Scheme[41][41] = 3;
+           Scheme[81][81] = 2;
+       }else Scheme[81][81] = 3;
        ArrayList position = new ArrayList();
-       position.add(0,40);
-       position.add(1,40);
+       position.add(0,80);
+       position.add(1,80);
        playedCards.put(position,playedSide);
        return true;
 
    }
 
     /**
-     * Places the resource or the gold card.
-     * @param resource The Resource card to be placed.
-     * @param positionTobePlaced The position chosen for the card to be placed.
-     * @param side The side of the card to use. Side must be equal to "front" or "retro".
-     * @return True if the card is placed, false otherwise.
+     * This method allows to play a card gold or resource.
+     * @param resource The card to be played.
+     * @param positionTobePlaced The position of the card interms of x and y.
+     * @param side The side chosen to be played
+     * @return The points the card gives when played.
+     * @throws GoldCardPlacementException When there are not enough resources or items to play the card.
+     * @throws OutOfBoundsException When the position chosen tries to exceed the limit of the scheme.
+     * @throws InvalidPositionException When the card cant be placed in the position chosen because it is covering a not visible corner or is overlapping another card.
+     * @throws InvalidSideException The side chosen is not valid.
      */
-   public boolean placeCard(ResourceCard resource, int[] positionTobePlaced,String side) {
+   public int placeCard(ResourceCard resource, int[] positionTobePlaced,String side)throws GoldCardPlacementException, OutOfBoundsException, InvalidPositionException, InvalidSideException {
        if(resource instanceof GoldCard){
-           if(!checkPlacementCondition((GoldCard) resource)) return false;
+           if(!checkPlacementCondition((GoldCard) resource)) throw new GoldCardPlacementException();
        }
        int x = positionTobePlaced[0];
        int y = positionTobePlaced[1];
        if(!checkPosition(x,y)){
-           return false;
+           throw new OutOfBoundsException();
        }
        if(!checkPlacement(x,y)){
-           return false;
+           throw new InvalidPositionException();
        }
        Side sideToBeplaced = null;
        if(side.equalsIgnoreCase("front")){
@@ -341,6 +355,10 @@ public class CardScheme {
        else if(side.equalsIgnoreCase("retro")){
            sideToBeplaced = resource.getRetro();
        }
+       else{
+           throw new InvalidSideException();
+       }
+       int corners_covering = 0;
        numAnimal  = numAnimal + countResources(Animal,sideToBeplaced,resource);
        numFungi  = numFungi + countResources(Fungi,sideToBeplaced,resource);
        numPlants  = numPlants + countResources(Plant,sideToBeplaced,resource);
@@ -361,6 +379,7 @@ public class CardScheme {
        }
        else if(Scheme[x-1][y-1]==2) {
            Scheme[x - 1][y - 1] = 3;
+           corners_covering++;
            checkCorner(positionTobePlaced,"downRight");
 
        }
@@ -371,6 +390,7 @@ public class CardScheme {
        }
        else if(Scheme[x+1][y-1]==2) {
            Scheme[x + 1][y - 1] = 3;
+           corners_covering++;
            checkCorner(positionTobePlaced,"upRight");
        }
        //Update the upRight corner
@@ -380,6 +400,7 @@ public class CardScheme {
        }
        else if(Scheme[x-1][y+1]==2) {
            Scheme[x - 1][y + 1] = 3;
+           corners_covering++;
            checkCorner(positionTobePlaced,"downLeft");
        }
        //update the downright corner
@@ -389,6 +410,7 @@ public class CardScheme {
        }
        else if(Scheme[x+1][y+1]==2) {
            Scheme[x + 1][y + 1] = 3;
+           corners_covering++;
            checkCorner(positionTobePlaced,"upLeft");
        }
        ArrayList<Integer> pos = new ArrayList<Integer>();
@@ -396,8 +418,229 @@ public class CardScheme {
        pos.add(1,positionTobePlaced[1]);
        playedCards.put(pos,sideToBeplaced);
        CardsResource.put(pos,resource.getResourceType());
-       return true;
+       if(resource instanceof GoldCard && ((GoldCard) resource).getCondition()!=null){
+           if(((GoldCard) resource).getCondition().getCornerCondition()==true){
+               return corners_covering*(resource.getPoints());
+           }
+           else{
+               if(((GoldCard) resource).getCondition().getItemType()==Inkwell)return numInkwell*resource.getPoints();
+               else if (((GoldCard) resource).getCondition().getItemType()==Quill) return numQuill*resource.getPoints();
+               else if (((GoldCard) resource).getCondition().getItemType()==Manuscript) return numManuscript*resource.getPoints();
+           }
+       }
+       return resource.getPoints();
    }
+
+   public int ControlObjective(ObjectiveCard objective){
+       int min = 0;
+       int pattern_found = 0;
+       ArrayList<Integer> firstmove= new ArrayList<Integer>();
+       ArrayList<Integer> secondmove= new ArrayList<Integer>();
+       if (objective.getObjective() instanceof ObjectiveWithItems){
+           if(((ObjectiveWithItems)(objective.getObjective())).getObjectives().size()==3)
+           {
+               min = min(numManuscript,numInkwell);
+               min= min(min,numQuill);
+               return min*3;
+           }
+           else{
+               if(((ObjectiveWithItems)(objective.getObjective())).getObjectives().get(0)==Inkwell)
+                   return 2*(numInkwell/2);
+               if(((ObjectiveWithItems)(objective.getObjective())).getObjectives().get(0)==Manuscript)
+                   return 2*(numManuscript/2);
+               if(((ObjectiveWithItems)(objective.getObjective())).getObjectives().get(0)==Quill)
+                   return 2*(numQuill/2);
+           }
+       }
+       else if(objective.getObjective() instanceof ObjectiveWithResources){
+           if(((ObjectiveWithResources)(objective.getObjective())).getObjectives().get(0)==Animal)
+               return 2*(numAnimal/3);
+           if(((ObjectiveWithResources)(objective.getObjective())).getObjectives().get(0)==Insects)
+               return 2*(numInsects/3);
+           if(((ObjectiveWithResources)(objective.getObjective())).getObjectives().get(0)==Plant)
+               return 2*(numPlants/3);
+           if(((ObjectiveWithResources)(objective.getObjective())).getObjectives().get(0)==Fungi)
+               return 2*(numFungi/3);
+       }
+       else {
+           Pattern toControl = ((ObjectiveWithPattern)(objective.getObjective())).getObjectives();
+           if(toControl == downUpLR_RED){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Fungi){
+                       firstmove.add(0,position.get(0)-2);
+                       firstmove.add(1,position.get(1)+2);
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Fungi){
+                          secondmove.add(0,firstmove.get(0)-2);
+                          secondmove.add(1,firstmove.get(1)+2);
+                          if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Fungi){
+                              counted.put(secondmove,Fungi);
+                              counted.put(position,Fungi);
+                              counted.put(firstmove,Fungi);
+                              pattern_found++;
+
+                          }
+                       }
+
+                   }
+               }
+               return pattern_found*2;
+           }
+           else if(toControl == upDownLR_GREEN){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Plant){
+                       firstmove.add(0,position.get(0)+2);
+                       firstmove.add(1,position.get(1)+2);
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Plant){
+                           secondmove.add(0,firstmove.get(0)+2);
+                           secondmove.add(1,firstmove.get(1)+2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Plant){
+                               counted.put(secondmove,Plant);
+                               counted.put(position,Plant);
+                               counted.put(firstmove,Plant);
+                               pattern_found++;
+
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*2;
+
+           }
+           else if(toControl == downUpLR_PURPLE){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Insects){
+                       firstmove.add(0,position.get(0)-2);
+                       firstmove.add(1,position.get(1)+2);
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Insects){
+                           secondmove.add(0,firstmove.get(0)-2);
+                           secondmove.add(1,firstmove.get(1)+2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Insects){
+                               counted.put(secondmove,Insects);
+                               pattern_found++;
+                               counted.put(position,Insects);
+                               counted.put(firstmove,Insects);
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*2;
+           }
+           else if(toControl == upDownLR_BLUE){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Animal){
+                       firstmove.add(0,position.get(0)+2);
+                       firstmove.add(1,position.get(1)+2);
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Animal){
+                           secondmove.add(0,firstmove.get(0)+2);
+                           secondmove.add(1,firstmove.get(1)+2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Animal){
+                               counted.put(secondmove,Animal);
+                               counted.put(position,Animal);
+                               counted.put(firstmove,Animal);
+                               pattern_found++;
+
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*2;
+
+           }
+           else if(toControl == LdownLeft){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Plant){
+                       firstmove.add(0,position.get(0)+4);
+                       firstmove.add(1,position.get(1));
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Plant){
+                           secondmove.add(0,firstmove.get(0)+2);
+                           secondmove.add(1,firstmove.get(1)-2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Insects){
+                               counted.put(secondmove,Animal);
+                               counted.put(firstmove,Plant);
+                               counted.put(position,Plant);
+                               pattern_found++;
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*3;
+
+           }
+           else if(toControl==LupLeft){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Insects){
+                       firstmove.add(0,position.get(0)-4);
+                       firstmove.add(1,position.get(1));
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Insects){
+                           secondmove.add(0,firstmove.get(0)-2);
+                           secondmove.add(1,firstmove.get(1)-2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Animal){
+                               counted.put(secondmove,Animal);
+                               counted.put(position,Insects);
+                               counted.put(firstmove,Insects);
+                               pattern_found++;
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*3;
+
+           }
+           else if(toControl == LupRight){
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Animal){
+                       firstmove.add(0,position.get(0)-4);
+                       firstmove.add(1,position.get(1));
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Animal){
+                           secondmove.add(0,firstmove.get(0)-2);
+                           secondmove.add(1,firstmove.get(1)+2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Fungi){
+                               counted.put(secondmove,Fungi);
+                               counted.put(position,Animal);
+                               counted.put(firstmove,Animal);
+                               pattern_found++;
+
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*3;
+
+           }
+           else {
+               for(ArrayList<Integer> position : CardsResource.keySet()){
+                   if(!counted.containsKey(position) && CardsResource.get(position)==Fungi){
+                       firstmove.add(0,position.get(0)+4);
+                       firstmove.add(1,position.get(1));
+                       if(!counted.containsKey(firstmove) && CardsResource.get(firstmove)==Fungi){
+                           secondmove.add(0,firstmove.get(0)+2);
+                           secondmove.add(1,firstmove.get(1)+2);
+                           if(!counted.containsKey(secondmove) && CardsResource.get(secondmove)==Plant){
+                               counted.put(secondmove,Plant);
+                               counted.put(position,Fungi);
+                               counted.put(firstmove,Fungi);
+                               pattern_found++;
+
+                           }
+                       }
+
+                   }
+               }
+               return pattern_found*3;
+
+           }
+
+       }
+       return pattern_found;
+   }
+
+
 
     /**
      *
@@ -431,7 +674,6 @@ public class CardScheme {
    public int[][] show() {
        return this.Scheme;
    }
-
     /**
      *
      * @return The map of the position of each played side.
@@ -439,4 +681,5 @@ public class CardScheme {
    public Map<ArrayList<Integer>,Side> getPlayedCards(){
         return this.playedCards;
    }
+
 }
