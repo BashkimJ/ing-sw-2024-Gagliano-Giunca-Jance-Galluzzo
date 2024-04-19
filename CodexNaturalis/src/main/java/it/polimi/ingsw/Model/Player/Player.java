@@ -21,7 +21,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.System.*;
 
 public class Player {
     private String nickName;
@@ -29,37 +32,36 @@ public class Player {
     private Colour playerColour;
     private BufferedImage tokenImage;
 
-
-    private Hand playerHand;
     private InitialCard playerInitial;
     private ObjectiveCard playerObjective;
-
+    private List<ResourceCard> playerHand;
+    private CardScheme playerScheme;
 
     public Player(String name, Colour c){
         this.nickName = name;
         this.playerColour = c;
         this.points = 0;
+        this.playerHand = new ArrayList<ResourceCard>();
+        this.playerScheme = new CardScheme();
         //Need to ask permission for this lib
         try {
             this.tokenImage = ImageIO.read(new File("/../ImageFiles/" + c + ".png"));
         } catch (IOException e) {
-            System.out.println("Impossible to load token image.");
+            out.println("Impossible to load token image.");
         }
-
-        this.playerHand = new Hand();
     }
-    public Player(String name, Colour c, List<ResourceCard> r, List<GoldCard> g, InitialCard i, ObjectiveCard o){
+    public Player(String name, Colour c, List<ResourceCard> r, InitialCard i, ObjectiveCard o, int p){
         this.nickName = name;
         this.playerColour = c;
-        this.points = 0;
+        this.points = p;
         //Need to ask permission for this lib
         try {
             this.tokenImage = ImageIO.read(new File("/../ImageFiles/" + c + ".png"));
         } catch (IOException e) {
-            System.out.println("Impossible to load token image.");
+            out.println("Impossible to load token image.");
         }
 
-        this.playerHand = new Hand(r, g);
+        this.playerHand = r;
         this.playerInitial = i;
         this.playerObjective = o;
     }
@@ -93,7 +95,7 @@ public class Player {
     }
 
     //TUI implemented
-    public void showHand() {
+    /*public void showHand() {
         int i=1;
         for (ResourceCard r : playerHand.getrCards()){
             System.out.println("--- Card " + i + ":");
@@ -126,7 +128,7 @@ public class Player {
             }
             System.out.println("  - Requires: " + g.getNecessaryRes().toString());
         }
-    }
+    }*/
 
     public InitialCard getPlayerInitial(){
         return this.playerInitial;
@@ -143,6 +145,53 @@ public class Player {
     public void setPlayerObjective(ObjectiveCard playerObjective) {
         this.playerObjective = playerObjective;
     }
+
+
+    public void pickCard(ResourceCard c) throws ArrayIndexOutOfBoundsException {
+        if(this.playerHand.size()==3)
+            throw new ArrayIndexOutOfBoundsException(out.println("The playerHand is already full"));
+        else
+            this.playerHand.add(c);
+    }
+    public void setPlayerHand(List<ResourceCard> l) throws IllegalArgumentException {
+        if(l.isEmpty() || l.size()>3)
+            throw new IllegalArgumentException(out.println("Trying to assign a wrong sized list to playerHand."));
+
+        if (this.playerHand.isEmpty()) {
+            this.playerHand.addAll(l);
+        } else {
+            this.playerHand.removeAll();
+            this.playerHand.addAll(l);
+        }
+    }
+
+    public List<ResourceCard> getPlayerHand(){
+        return this.playerHand;
+    }
+    public ResourceCard getCardById(int id) throws IllegalArgumentException{
+        if(id<0 || id>86)
+            throw new IllegalArgumentException(out.println("Invalid card Id to get."));
+
+        for(ResourceCard c: this.playerHand)
+            if (c.getCardId() == id)
+                return c;
+
+        out.println("This card is not present in the current player hand.");
+        return null;
+        }
+
+    // INDEXXXXXXXXXXXXXXXXXXXXXXX
+    public void removeCardById(int id) throws IllegalArgumentException {
+        if (id < 0 || id > 86)
+            throw new IllegalArgumentException(out.println("Invalid card Id to remove."));
+
+        for(ResourceCard c: this.playerHand)
+            if (c.getCardId() == id)
+                this.playerHand.remove();
+
+        out.println("This card is already not present in the current player hand.");
+    }
+
 
 
 }
