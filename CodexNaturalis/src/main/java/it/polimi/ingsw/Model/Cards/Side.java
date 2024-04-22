@@ -7,7 +7,7 @@ public class Side {
     private Corner downLeft;
     private Corner upRight;
     private Corner downRight;
-    private File image;
+    private transient File image;
 
     /**
      *
