@@ -19,6 +19,7 @@ import main.java.it.polimi.ingsw.Model.Cards.*;
 
 import java.util.List;
 
+@Deprecated
 public class Hand {
     private static final int DIM = 3;
     private List<ResourceCard> rCards;
@@ -32,7 +33,7 @@ public class Hand {
     //Already existing hand
     public Hand(List<ResourceCard> rCards, List<GoldCard> gCards) {
         int handSize = rCards.size() + gCards.size();
-        if ( handSize > 3) {
+        if ( handSize > getDim()) {
             System.out.println("This hand has an incorrect amount of cards.");
         } else {
             this.rCards = rCards;
