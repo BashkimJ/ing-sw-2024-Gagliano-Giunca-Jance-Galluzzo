@@ -1,5 +1,7 @@
 package test.java.it.polimi.ingsw.GameStatus;
 
+import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
 import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
@@ -34,7 +36,7 @@ class GameTest {
         assertEquals(3, game.getMAX_N_PLAYERS());
     }
     @Test
-    void playersManagement() {
+    void playersManagement() throws PlayersLimitExceededException, PlayerNotFoundException {
         assertEquals(expectedList, game.getPlayers());
         game.addPlayer(p2);
         game.addPlayer(p3);

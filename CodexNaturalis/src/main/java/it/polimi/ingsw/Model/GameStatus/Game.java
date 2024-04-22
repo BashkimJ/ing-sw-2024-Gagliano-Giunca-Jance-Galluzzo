@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
 import main.java.it.polimi.ingsw.Model.Cards.*;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
@@ -35,7 +37,11 @@ public class Game {
     public Game(Player player, int MAX_N_PLAYERS){
         this.MAX_N_PLAYERS = MAX_N_PLAYERS;
         players = new ArrayList<>();
-        this.addPlayer(player);
+        try {
+            this.addPlayer(player);
+        }catch (PlayersLimitExceededException e){
+            throw new RuntimeException(e);
+        }
         this.objectiveCards =  initializeObjCards();
         try {
             this.resourceDeck = readResFile();
@@ -51,11 +57,11 @@ public class Game {
     public List<Player> getPlayers() {
         return players;
     }
-    public void addPlayer(Player player){
+    public void addPlayer(Player player) throws PlayersLimitExceededException {
         if(players.size() < MAX_N_PLAYERS)
             players.add(player);
         else {
-            //TO DO: Throws Exception
+            throw new PlayersLimitExceededException();
         }
     }
 
@@ -74,10 +80,10 @@ public class Game {
     public Deck getInitialDeck() {
         return initialDeck;
     }
-    public void removePlayer(Player player){
+    public void removePlayer(Player player) throws PlayerNotFoundException {
         boolean deleted = players.remove(player);
         if (!deleted){
-            //TO DO: Throws Exception
+            throw new PlayerNotFoundException();
         }
 
     }
