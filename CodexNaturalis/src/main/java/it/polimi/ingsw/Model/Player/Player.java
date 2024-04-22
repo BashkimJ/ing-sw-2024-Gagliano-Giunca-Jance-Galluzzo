@@ -215,5 +215,4 @@ public class Player {
 
         this.playerHand.remove(idx);
     }
-
 }

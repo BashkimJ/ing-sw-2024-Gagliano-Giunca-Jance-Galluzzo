@@ -66,6 +66,7 @@ public class Hand {
         return cards;
     }
 
+
     public void setrCards(List<ResourceCard> rCards) {
         this.rCards = rCards;
     }
