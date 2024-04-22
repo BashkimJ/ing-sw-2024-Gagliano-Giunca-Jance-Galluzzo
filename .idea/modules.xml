@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/CodexNaturalis/PSP30.iml" filepath="$PROJECT_DIR$/CodexNaturalis/PSP30.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/ing-sw-2024-Gagliano-Giunca-Jance-Galluzzo.iml" filepath="$PROJECT_DIR$/.idea/ing-sw-2024-Gagliano-Giunca-Jance-Galluzzo.iml" />
     </modules>
   </component>
