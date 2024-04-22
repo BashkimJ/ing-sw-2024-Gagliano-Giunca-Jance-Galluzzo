@@ -9,5 +9,8 @@
         <module name="PSP30" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="PSP30" target="21" />
+    </bytecodeTargetLevel>
   </component>
 </project>

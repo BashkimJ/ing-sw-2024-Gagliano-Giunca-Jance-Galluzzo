@@ -2,6 +2,7 @@ package main.java.it.polimi.ingsw.Model.GameStatus;
 
 import main.java.it.polimi.ingsw.Model.Cards.Card;
 
+import java.util.Collections;
 import java.util.List;
 
 public class Deck {
@@ -15,12 +16,7 @@ public class Deck {
         return cards;
     }
 
-    public void shuffle() {
-        //TO DO
-    }
+    public void shuffle() { Collections.shuffle(cards); }
 
-    public Card pickCard() {
-        //TO DO
-        return null;
-    }
+    public Card pickCard() { return cards.get(cards.size() - 1); }
 }
