@@ -1,10 +1,12 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
+import com.google.gson.annotations.SerializedName;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.util.List;
 
 public class ObjectiveWithResources implements MainObjective{
+    @SerializedName("objectivesRESOURCES")
     private List<Resource> objectives;
     private int points;
 

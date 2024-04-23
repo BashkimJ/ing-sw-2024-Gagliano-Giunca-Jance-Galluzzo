@@ -12,19 +12,11 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import main.java.it.polimi.ingsw.Model.Player.Player;
 
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 public class Game {
-    private static final String resourceCardPath ="./CodexNaturalis/src/main/java/it/polimi/ingsw/" +
-            "Model/Cards_data/resource_cards_Gson.json";
-    private static final String goldCardPath ="./CodexNaturalis/src/main/java/it/polimi/ingsw/" +
-            "Model/Cards_data/gold_cards_Gson.json";
-    private static final String initialCardPath = "./CodexNaturalis/src/main/java/it/polimi/ingsw/" +
-            "Model/Cards_data/initial_cards_Gson.json";
-
     private final int MAX_N_PLAYERS;
     private List<Player> players;
     private List<ObjectiveCard> objectiveCards;
@@ -88,91 +80,24 @@ public class Game {
     }
 
     private List<ObjectiveCard>  initializeObjCards(){
-        List<ObjectiveCard> objList = new ArrayList<>();
-        //Card 87
-        MainObjective mainObj = new ObjectiveWithPattern(Pattern.downUpLR_RED, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 88
-        mainObj = new ObjectiveWithPattern(Pattern.upDownLR_GREEN, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 89
-        mainObj = new ObjectiveWithPattern(Pattern.upDownLR_BLUE, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 90
-        mainObj = new ObjectiveWithPattern(Pattern.downUpLR_PURPLE, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 91
-        mainObj = new ObjectiveWithPattern(Pattern.LdownRight, 3);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 92
-        mainObj = new ObjectiveWithPattern(Pattern.LdownLeft, 3);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 93
-        mainObj = new ObjectiveWithPattern(Pattern.LupRight, 3);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 94
-        mainObj = new ObjectiveWithPattern(Pattern.LupLeft, 3);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 95
-        List<Resource> resList = new ArrayList<Resource>();
-        resList.add(Resource.Fungi);
-        resList.add(Resource.Fungi);
-        resList.add(Resource.Fungi);
-        mainObj = new ObjectiveWithResources(resList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 96
-        resList = new ArrayList<Resource>();
-        resList.add(Resource.Plant);
-        resList.add(Resource.Plant);
-        resList.add(Resource.Plant);
-        mainObj = new ObjectiveWithResources(resList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 97
-        resList = new ArrayList<Resource>();
-        resList.add(Resource.Animal);
-        resList.add(Resource.Animal);
-        resList.add(Resource.Animal);
-        mainObj = new ObjectiveWithResources(resList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 98
-        resList = new ArrayList<Resource>();
-        resList.add(Resource.Insects);
-        resList.add(Resource.Insects);
-        resList.add(Resource.Insects);
-        mainObj = new ObjectiveWithResources(resList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 99
-        List<Items> itemsList = new ArrayList<>();
-        itemsList.add(Items.Quill);
-        itemsList.add(Items.Inkwell);
-        itemsList.add(Items.Manuscript);
-        mainObj = new ObjectiveWithItems(itemsList, 3);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 100
-        itemsList = new ArrayList<>();
-        itemsList.add(Items.Manuscript);
-        itemsList.add(Items.Manuscript);
-        mainObj = new ObjectiveWithItems(itemsList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 101
-        itemsList = new ArrayList<>();
-        itemsList.add(Items.Inkwell);
-        itemsList.add(Items.Inkwell);
-        mainObj = new ObjectiveWithItems(itemsList, 2);
-        objList.add(new ObjectiveCard(mainObj));
-        //Card 102
-        itemsList = new ArrayList<>();
-        itemsList.add(Items.Quill);
-        itemsList.add(Items.Quill);
-        mainObj = new ObjectiveWithItems(itemsList, 2);
-        objList.add(new ObjectiveCard(mainObj));
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(MainObjective.class, new MainObjectiveDeserializer())
+                .create();
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Cards_data/obj_cards_Gson.json");
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        JsonReader jsonReader = new JsonReader(reader);
+        Type listType = new TypeToken<List<ObjectiveCard>>(){}.getType();
+        List<ObjectiveCard> listObj = gson.fromJson(jsonReader, listType);
 
-        return objList;
+        return listObj;
     }
     private Deck readResFile () throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
-        JsonReader jsonReader = new JsonReader(new FileReader(resourceCardPath));
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Cards_data/resource_cards_Gson.json");
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        JsonReader jsonReader = new JsonReader(reader);
         Type listType = new TypeToken<List<ResourceCard>>(){}.getType();
         List<ResourceCard> listRes = gson.fromJson(jsonReader, listType);
         List<Card> listCards = new ArrayList<>(listRes);
@@ -180,7 +105,9 @@ public class Game {
     }
     private Deck readGoldFile () throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonReader jsonReader = new JsonReader(new FileReader(goldCardPath));
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Cards_data/gold_cards_Gson.json");
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        JsonReader jsonReader = new JsonReader(reader);
         Type listType = new TypeToken<List<GoldCard>>(){}.getType();
         List<GoldCard> listGolds = gson.fromJson(jsonReader, listType);
         List<Card> listCards = new ArrayList<>(listGolds);
@@ -189,7 +116,9 @@ public class Game {
     private Deck readInitFile () throws IOException {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonReader jsonReader = new JsonReader(new FileReader(initialCardPath));
+        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Cards_data/initial_cards_Gson.json");
+        InputStreamReader reader = new InputStreamReader(inputStream);
+        JsonReader jsonReader = new JsonReader(reader);
         Type listType = new TypeToken<List<InitialCard>>(){}.getType();
         List<InitialCard> listInits = gson.fromJson(jsonReader, listType);
         List<Card> listCards = new ArrayList<>(listInits);
