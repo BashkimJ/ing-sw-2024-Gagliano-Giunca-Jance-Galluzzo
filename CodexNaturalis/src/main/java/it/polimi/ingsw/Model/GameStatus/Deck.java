@@ -18,5 +18,9 @@ public class Deck {
 
     public void shuffle() { Collections.shuffle(cards); }
 
-    public Card pickCard() { return cards.get(cards.size() - 1); }
+    public Card pickCard() {
+        Card c = cards.remove(cards.size() - 1);
+        return c;
+    }
+
 }
