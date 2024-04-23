@@ -12,7 +12,6 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import main.java.it.polimi.ingsw.Model.Player.Player;
 
-
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.reflect.Type;
