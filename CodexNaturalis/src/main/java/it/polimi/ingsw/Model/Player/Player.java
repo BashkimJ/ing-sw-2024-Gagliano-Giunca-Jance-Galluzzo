@@ -107,7 +107,7 @@ public class Player {
         int i=0;
         GoldCard g;
         for (ResourceCard r : this.playerHand){
-            if( r instanceof GoldCard ){
+            if( r.getNecessaryRes()!=null){
                 //Gold card
                 g = (GoldCard) r;
                 System.out.println("--- Card " + i + ":");

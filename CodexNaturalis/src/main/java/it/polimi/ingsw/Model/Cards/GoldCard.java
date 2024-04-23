@@ -27,6 +27,7 @@ public class GoldCard extends ResourceCard{
      *
      * @return The points condition
      */
+    @Override
     public PointCondition getCondition(){
         return this.Condition;
     }
@@ -35,6 +36,7 @@ public class GoldCard extends ResourceCard{
      *
      * @return The list of the necessary resources.
      */
+    @Override
     public List<Resource> getNecessaryRes(){
         return this.necessaryRes;
     }

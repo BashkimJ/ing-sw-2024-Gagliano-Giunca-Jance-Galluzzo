@@ -84,7 +84,7 @@ public class CardScheme {
      * @param card The gold card to be placed.
      * @return True if the card can be placed false othersie.
      */
-    private boolean checkPlacementCondition(GoldCard card){
+    private boolean checkPlacementCondition(ResourceCard card){
         int animal = 0;
         int insects = 0;
         int plant = 0;
@@ -337,8 +337,8 @@ public class CardScheme {
      * @throws InvalidSideException The side chosen is not valid.
      */
    public int placeCard(ResourceCard resource, int[] positionTobePlaced,String side)throws GoldCardPlacementException, OutOfBoundsException, InvalidPositionException, InvalidSideException {
-       if(resource instanceof GoldCard){
-           if(!checkPlacementCondition((GoldCard) resource)) throw new GoldCardPlacementException();
+       if(resource.getCondition()!=null && resource.getNecessaryRes()!=null){
+           if(!checkPlacementCondition( resource)) throw new GoldCardPlacementException();
        }
        int x = positionTobePlaced[0];
        int y = positionTobePlaced[1];
