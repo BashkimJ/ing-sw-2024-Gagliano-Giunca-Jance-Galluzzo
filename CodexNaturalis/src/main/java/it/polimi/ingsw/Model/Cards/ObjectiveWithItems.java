@@ -1,10 +1,12 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
+import com.google.gson.annotations.SerializedName;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 
 import java.util.List;
 
 public class ObjectiveWithItems implements MainObjective{
+    @SerializedName("objectivesITEMS")
     private List<Items> objectives;
     int points;
 

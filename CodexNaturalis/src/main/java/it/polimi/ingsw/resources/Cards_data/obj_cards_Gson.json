@@ -1,0 +1,127 @@
+[
+  {
+    "objective": {
+      "patternType": "downUpLR_RED",
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "patternType": "upDownLR_GREEN",
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "patternType": "upDownLR_BLUE",
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "patternType": "downUpLR_PURPLE",
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "patternType": "LdownRight",
+      "points": 3
+    }
+  },
+  {
+    "objective": {
+      "patternType": "LdownLeft",
+      "points": 3
+    }
+  },
+  {
+    "objective": {
+      "patternType": "LupRight",
+      "points": 3
+    }
+  },
+  {
+    "objective": {
+      "patternType": "LupLeft",
+      "points": 3
+    }
+  },
+  {
+    "objective": {
+      "objectivesRESOURCES": [
+        "Fungi",
+        "Fungi",
+        "Fungi"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesRESOURCES": [
+        "Plant",
+        "Plant",
+        "Plant"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesRESOURCES": [
+        "Animal",
+        "Animal",
+        "Animal"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesRESOURCES": [
+        "Insects",
+        "Insects",
+        "Insects"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesITEMS": [
+        "Quill",
+        "Inkwell",
+        "Manuscript"
+      ],
+      "points": 3
+    }
+  },
+  {
+    "objective": {
+      "objectivesITEMS": [
+        "Manuscript",
+        "Manuscript"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesITEMS": [
+        "Inkwell",
+        "Inkwell"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "objective": {
+      "objectivesITEMS": [
+        "Quill",
+        "Quill"
+      ],
+      "points": 2
+    }
+  }
+]
