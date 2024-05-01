@@ -17,7 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 public class Game {
-    private final int MAX_N_PLAYERS;
+    private int MAX_N_PLAYERS;
     private final int N_FACEUP_CARDS = 4;
     private List<Player> players;
     private List<ObjectiveCard> objectiveCards;
@@ -44,6 +44,9 @@ public class Game {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public void setMAX_N_PLAYERS(int Players){
+        this.MAX_N_PLAYERS = Players;
     }
     public int getMAX_N_PLAYERS(){
         return MAX_N_PLAYERS;
