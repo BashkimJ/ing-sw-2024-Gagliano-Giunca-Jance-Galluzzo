@@ -2,6 +2,7 @@ package main.java.it.polimi.ingsw.Model.Cards;
 
 import com.google.gson.annotations.SerializedName;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
+import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.util.List;
 
@@ -35,5 +36,15 @@ public class ObjectiveWithItems implements MainObjective{
      */
     public int getPoints(){
         return this.points;
+    }
+    @Override
+    public String toString(){
+        String Info="";
+        for(Items tems: objectives){
+            Info  = Info + " " +tems.name();
+        }
+        Info=Info + " points: " + points;
+        return Info;
+
     }
 }

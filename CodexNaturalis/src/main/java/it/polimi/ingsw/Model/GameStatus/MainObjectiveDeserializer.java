@@ -3,7 +3,6 @@ package main.java.it.polimi.ingsw.Model.GameStatus;
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import main.java.it.polimi.ingsw.Main;
 import main.java.it.polimi.ingsw.Model.Cards.MainObjective;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithItems;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithPattern;

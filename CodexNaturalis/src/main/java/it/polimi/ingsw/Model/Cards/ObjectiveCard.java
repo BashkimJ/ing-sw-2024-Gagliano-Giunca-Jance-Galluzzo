@@ -1,6 +1,8 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
-public class ObjectiveCard {
+import java.io.Serializable;
+
+public class ObjectiveCard implements Serializable {
     private MainObjective objective;
 
     /**
