@@ -1,14 +1,11 @@
 package main.java.it.polimi.ingsw.Model.GameStatus;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
 import main.java.it.polimi.ingsw.Model.Cards.MainObjective;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithItems;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithPattern;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 
 public class MainObjectiveDeserializer implements JsonDeserializer<MainObjective> {
