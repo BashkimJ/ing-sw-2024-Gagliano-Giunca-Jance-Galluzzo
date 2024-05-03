@@ -34,4 +34,10 @@ public class ObjectiveWithPattern implements MainObjective{
     public Pattern getObjectives(){
         return this.patternType;
     }
+
+    @Override
+    public String toString(){
+        String Info = patternType.name() + " points: " +points;
+        return Info;
+    }
 }

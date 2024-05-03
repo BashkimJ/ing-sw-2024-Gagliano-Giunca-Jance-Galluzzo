@@ -35,4 +35,14 @@ public class ObjectiveWithResources implements MainObjective{
     public int getPoints(){
         return this.points;
     }
+    @Override
+    public String toString(){
+        String Info="";
+        for(Resource rsc: objectives){
+            Info  = Info + " " + rsc.name();
+        }
+        Info=Info + "points: " + points;
+        return Info;
+
+    }
 }

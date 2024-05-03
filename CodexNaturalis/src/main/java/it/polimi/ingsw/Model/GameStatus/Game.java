@@ -17,17 +17,20 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 public class Game {
-    private final int MAX_N_PLAYERS;
+    private int MAX_N_PLAYERS;
+    private final int N_FACEUP_CARDS = 4;
     private List<Player> players;
     private List<ObjectiveCard> objectiveCards;
     private Deck resourceDeck;
     private Deck goldDeck;
     private Deck initialDeck;
+    private ResourceCard[] faceupCards;
 
     //player who starts the game and number of players chosen
     public Game(Player player, int MAX_N_PLAYERS){
         this.MAX_N_PLAYERS = MAX_N_PLAYERS;
         players = new ArrayList<>();
+        faceupCards = new ResourceCard[N_FACEUP_CARDS];
         try {
             this.addPlayer(player);
         }catch (PlayersLimitExceededException e){
@@ -42,6 +45,9 @@ public class Game {
             throw new RuntimeException(e);
         }
     }
+    public void setMAX_N_PLAYERS(int Players){
+        this.MAX_N_PLAYERS = Players;
+    }
     public int getMAX_N_PLAYERS(){
         return MAX_N_PLAYERS;
     }
@@ -54,6 +60,14 @@ public class Game {
         else {
             throw new PlayersLimitExceededException();
         }
+    }
+
+    public ResourceCard[] getFaceupCards() {
+        return faceupCards;
+    }
+
+    public void setFaceupCards(ResourceCard[] faceupCards) {
+        this.faceupCards = faceupCards;
     }
 
     public List<ObjectiveCard> getObjectiveCards() {
