@@ -1,6 +1,8 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
-public interface MainObjective {
+import java.io.Serializable;
+
+public interface MainObjective extends Serializable {
     public int getPoints();
     public Object getObjectives();
 }
