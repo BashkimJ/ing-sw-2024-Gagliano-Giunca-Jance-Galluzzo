@@ -1,10 +1,10 @@
 package main.java.it.polimi.ingsw.View;
 
+import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
 import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.ErrorMessage;
-import main.java.it.polimi.ingsw.Network.Messages.LoginReply;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.PlayerNumberRequest;
+import main.java.it.polimi.ingsw.Network.Messages.*;
+
+import static main.java.it.polimi.ingsw.Network.Messages.MessageType.Winner_Mess;
 
 public class VirtualView implements View {
     ClientHandler clientHandler;
@@ -28,10 +28,35 @@ public class VirtualView implements View {
     public void askNumPlayers(){
         clientHandler.sendMessage(new PlayerNumberRequest());
     }
+    public void showInitial(Message message){
+        clientHandler.sendMessage(message);
+    }
+
+    @Override
+    public void initialiseCl(Message message) {
+        clientHandler.sendMessage(message);
+    }
+
+    @Override
+    public void showChatMessage(Message message) {
+        clientHandler.sendMessage(message);
+    }
+
+    @Override
+    public void showPlayer(Message message) {
+        clientHandler.sendMessage(message);
+    }
 
     @Override
     public void chooseObjectiveCard(Message message){
         clientHandler.sendMessage(message);
+    }
+    @Override
+    public void showGameInfo(Message message){
+        clientHandler.sendMessage(message);
+    }
+    public void winner(String message){
+        clientHandler.sendMessage(new WinnerMess("Server",message));
     }
 
 

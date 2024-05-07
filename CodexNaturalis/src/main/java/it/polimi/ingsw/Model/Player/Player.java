@@ -8,12 +8,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.*;
 
 import static java.lang.System.*;
 
-public class Player {
-    private String nickName;
+public class Player implements Serializable {
+    private final String nickName;
     private int points;
     private Colour playerColour;
     private BufferedImage tokenImage;
@@ -215,4 +216,6 @@ public class Player {
 
         this.playerHand.remove(idx);
     }
+
+
 }

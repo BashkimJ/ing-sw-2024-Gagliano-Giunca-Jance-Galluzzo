@@ -1,10 +1,11 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
+
 import java.util.List;
 
-public class InitialCard extends Card {
-    private List<Resource> middleResource;
+public class InitialCard extends Card{
+    private final List<Resource> middleResource;
 
     /**
      * The constructor of the card.
@@ -25,5 +26,17 @@ public class InitialCard extends Card {
      */
     public List<Resource> getMiddleResource(){
         return this.middleResource;
+    }
+
+    @Override
+    public String toString(){
+        String myCard = "***********ID: " + getCardId() + " ****************\n";
+        myCard = myCard + "Fronte: " + getFront().toString() +  "\n";
+        myCard  = myCard + "Retro: " + getRetro().toString() + "\nResources on the front: ";
+        for( Resource rsc: middleResource){
+           myCard = myCard + rsc.name() + " ";
+        }
+        return myCard;
+
     }
 }

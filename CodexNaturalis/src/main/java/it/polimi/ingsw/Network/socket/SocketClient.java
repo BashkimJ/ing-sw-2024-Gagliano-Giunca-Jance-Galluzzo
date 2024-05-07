@@ -38,7 +38,9 @@ public class SocketClient extends Client {
     public void sendMessage(Message message) {
         try{
             output.writeObject(message);
+            output.flush();
             output.reset();
+            output.flush();
 
         }catch(IOException e){
             this.Disconnect();

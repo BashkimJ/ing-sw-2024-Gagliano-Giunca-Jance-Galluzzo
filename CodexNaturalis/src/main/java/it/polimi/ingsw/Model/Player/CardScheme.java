@@ -9,6 +9,7 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,11 +20,11 @@ import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Pattern.*;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
 
-public class CardScheme {
+public class CardScheme implements Serializable {
     private Map<ArrayList<Integer>, Side> playedCards;
     private Map<ArrayList<Integer>,Resource> CardsResource;
     private Map<ArrayList<Integer>,Resource> counted;
-    private int [][] Scheme;//0-> Free, 1->Part of the Card,, 2->Free corner, 3->Corner taken or Not visible
+    private int [][] Scheme;//0-> Free, 1->Part of the Card, 2->Free corner, 3->Corner taken or Not visible
     private int numAnimal;
     private  int numInsects;
     private int numFungi;
@@ -682,4 +683,9 @@ public class CardScheme {
         return this.playedCards;
    }
 
+
+
+   public Map<ArrayList<Integer>,Resource> playedResources(){
+       return this.CardsResource;
+   }
 }

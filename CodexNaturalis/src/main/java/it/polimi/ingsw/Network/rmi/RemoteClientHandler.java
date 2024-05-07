@@ -12,7 +12,7 @@ public class RemoteClientHandler implements ClientHandler {
     private boolean isConnected;
     public RemoteClientHandler(RemoteClient client, RemoteServerInstance remoteServerInstance) {
         this.client = client;
-        this.server = server;
+        this.server = remoteServerInstance;
         isConnected = true;
     }
 

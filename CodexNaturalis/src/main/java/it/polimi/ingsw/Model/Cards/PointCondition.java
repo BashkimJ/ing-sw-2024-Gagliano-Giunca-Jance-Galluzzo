@@ -2,9 +2,11 @@ package main.java.it.polimi.ingsw.Model.Cards;
 
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 
-public class PointCondition {
-    private boolean CornerCondition;
-    private Items ItemType;
+import java.io.Serializable;
+
+public class PointCondition implements Serializable {
+    private final boolean CornerCondition;
+    private final Items ItemType;
 
     /**
      * The constructor of the Class
@@ -30,6 +32,21 @@ public class PointCondition {
      */
     public Items getItemType(){
         return this.ItemType;
+    }
+
+    @Override
+    public String toString(){
+        String myCondition = "";
+        if(!CornerCondition && ItemType!=null){
+            myCondition = myCondition + ItemType.name() + " ";
+        }
+        else if(CornerCondition && ItemType==null){
+            myCondition = myCondition + " Corner covering point condition ";
+        }
+        else{
+            myCondition = myCondition + " No condition ";
+        }
+        return myCondition;
     }
 
 

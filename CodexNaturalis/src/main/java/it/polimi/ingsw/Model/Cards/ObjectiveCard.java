@@ -3,7 +3,7 @@ package main.java.it.polimi.ingsw.Model.Cards;
 import java.io.Serializable;
 
 public class ObjectiveCard implements Serializable {
-    private MainObjective objective;
+    private final MainObjective objective;
 
     /**
      * The constructor of the objective card.
@@ -15,6 +15,11 @@ public class ObjectiveCard implements Serializable {
 
      public MainObjective getObjective(){
          return this.objective;
+     }
+
+     @Override
+    public String toString(){
+         return objective.toString();
      }
 
 }
