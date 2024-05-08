@@ -1,13 +1,14 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
 import java.io.File;
+import java.io.Serializable;
 
-public class Side {
-    private Corner upLeft;
-    private Corner downLeft;
-    private Corner upRight;
-    private Corner downRight;
-    private transient File image;
+public class Side implements Serializable {
+    private final Corner upLeft;
+    private final Corner downLeft;
+    private final Corner upRight;
+    private final Corner downRight;
+    private final transient File image;
 
     /**
      *
@@ -52,7 +53,7 @@ public class Side {
 
     /**
      *
-     * @returnThe down-right corner of the side.
+     * @return The down-right corner of the side.
      */
     public Corner getDownRight(){
         return this.downRight;
@@ -64,5 +65,12 @@ public class Side {
      */
     public File getImage(){
         return this.image;
+    }
+
+    @Override
+    public String toString(){
+        String mySide = "";
+        mySide = mySide + "upLeft: " + upLeft.toString() + " upRight: " + upRight.toString() + " downLeft: " + downLeft.toString() + " downRight: " + downRight.toString();
+        return mySide;
     }
 }

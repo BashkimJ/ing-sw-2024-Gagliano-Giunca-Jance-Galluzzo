@@ -89,6 +89,9 @@ public class SocketServer implements Runnable{
         }
         else{
             gameController.onMessageReceived(message);
+            if(gameController.getState().equals(GameState.End_Game)){
+                this.gameController = new GameController();
+            }
         }
     }
     public void ClientDisconnection(ClientHandler clientHandler ) throws PlayerNotFoundException {

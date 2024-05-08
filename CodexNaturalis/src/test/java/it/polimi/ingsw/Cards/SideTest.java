@@ -32,7 +32,7 @@ class SideTest {
 
     @Test
     void getUpLeft() {
-        upLeft.setFreeValue(false);
+
         assertEquals(false,front.getUpLeft().isFree());
         assertEquals(upLeft, front.getUpLeft());
         assertEquals(true,front.getUpLeft().isVisible());

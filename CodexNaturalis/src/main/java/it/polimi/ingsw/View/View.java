@@ -1,5 +1,7 @@
 package main.java.it.polimi.ingsw.View;
 
+import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
+import main.java.it.polimi.ingsw.Network.Messages.ChatMess;
 import main.java.it.polimi.ingsw.Network.Messages.Message;
 
 public interface View {
@@ -8,4 +10,11 @@ public interface View {
     public void showLogin(boolean conected,boolean nameAccepted);
     public void askNumPlayers();
     public void chooseObjectiveCard(Message message);
+    public void showInitial(Message message);
+    public void initialiseCl(Message message );
+    public void showChatMessage(Message message);
+    public void showPlayer(Message message);
+    public void showGameInfo(Message message);
+    public void winner(String message);
+
 }

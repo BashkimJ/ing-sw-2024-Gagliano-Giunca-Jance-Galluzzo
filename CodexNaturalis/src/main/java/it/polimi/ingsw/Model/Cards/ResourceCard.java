@@ -5,9 +5,9 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import java.util.List;
 
 
-public class ResourceCard extends Card {
-    private int points;
-    private Resource resourceType;
+public  class ResourceCard extends Card {
+    private final int points;
+    private final Resource resourceType;
 
     /**
      * The resource card's constructor.
@@ -42,5 +42,14 @@ public class ResourceCard extends Card {
     }
     public List<Resource> getNecessaryRes(){
         return null;
+    }
+
+    @Override
+    public String toString(){
+        String myCard = "**********ID: " + getCardId()+"*****************\n";
+        myCard = myCard + "Fronte: " + getFront().toString() +  "\n";
+        myCard  = myCard + "Retro: " + getRetro().toString() + "\nResource: " + resourceType.name() + "\nPoints: " + getPoints();
+        return myCard;
+
     }
 }

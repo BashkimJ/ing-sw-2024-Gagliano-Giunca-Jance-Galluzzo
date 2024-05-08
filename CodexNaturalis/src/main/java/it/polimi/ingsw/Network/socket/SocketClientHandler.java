@@ -83,7 +83,9 @@ public class SocketClientHandler implements ClientHandler,Runnable {
             try {
                 synchronized (outputLockObject) {
                     out.writeObject(message);
+                    out.flush();
                     out.reset();
+                    out.flush();
                 }
             } catch (IOException e) {
                 System.out.println("I/O error");
