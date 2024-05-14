@@ -1,5 +1,8 @@
 package main.java.it.polimi.ingsw.Network.Messages;
 
+/**
+ * Enumeration containing all the types of messages.
+ */
 public enum MessageType {
     //Lobby State
     Login_Req,
@@ -20,6 +23,8 @@ public enum MessageType {
     Game_St,
     Pick_Card,
     Winner_Mess,
+    Ping,
+    Player_Move_Resp,
 
 
 

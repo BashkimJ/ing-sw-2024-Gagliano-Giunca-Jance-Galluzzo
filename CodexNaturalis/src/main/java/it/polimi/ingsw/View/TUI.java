@@ -23,10 +23,9 @@ public class TUI implements View{
     public TUI(){
         sc = new Scanner(System.in);
         commands = new ArrayList<String>();
-        commands.add("chat");
-        commands.add("place");
-        commands.add("pick");
-        commands.add("save");
+        commands.add("chat {player name}");
+        commands.add("place {-f,-r} {cardID} {posY} {posX}");
+        commands.add("pick {cardID}");
         stop = false;
     }
     public void setClientManager(ClientManager clientManager){
@@ -51,8 +50,9 @@ public class TUI implements View{
       return m.matches();
 
     }
-
+    @Override
     public void serverInfo(){
+           this.stop = false;
            int defaultPort = 1099;
            String defaultHost = "127.0.0.1";
            String serverIP,connectionType;
@@ -62,7 +62,7 @@ public class TUI implements View{
            connectionType = sc.nextLine();
            if(!connectionType.equals("-s") && !connectionType.equals("-r")){
                System.out.println("No such connection");
-               return;
+               serverInfo();
            }
            if(connectionType.equals("-r")){
                rmi = true;
@@ -74,7 +74,7 @@ public class TUI implements View{
                try {
                    serverPort = Integer.parseInt(sc.nextLine());
                }catch(NumberFormatException e){
-                   validInput = false;
+                   System.out.println("Invalid input");
                    continue;
                }
            }while(!checkAddress(serverIP,serverPort));
@@ -98,6 +98,7 @@ public class TUI implements View{
             waitingPlayers();
         }
         else if(nameAccepted==false && connected==true){
+            System.out.println("Invalid nickname");
             askNickName();
         }
     }
@@ -124,7 +125,7 @@ public class TUI implements View{
         System.out.println("Please choose your objective card: \n1-->For first card\n2-->For second\n ");
         System.out.println(message.toString());
         try {
-           chosenCard =  sc.nextInt();
+           chosenCard =  Integer.parseInt(sc.nextLine());
         }catch(NumberFormatException e){
             System.out.println("Invalid input");
             chooseObjectiveCard(message);
@@ -145,7 +146,7 @@ public class TUI implements View{
                 "\n2-->Retro\n");
         System.out.println(((InitialCardMess)message).toString());
         try{
-            choice = sc.nextInt();
+            choice = Integer.parseInt(sc.nextLine());
         }catch(NumberFormatException e){
             System.out.println("Invalid input...");
             showInitial(message);
@@ -193,6 +194,11 @@ public class TUI implements View{
                 System.out.println(card.getRetro().toString()+"    Resource:"+card.getResourceType().name()+  "\n");
             }
         }
+        System.out.println("\nConnected players:");
+        for(String name: ((ShowGameResp) message).getPlayers()){
+            System.out.println(name);
+        }
+        System.out.println("\n Turn: " + ((ShowGameResp)message).getPlayerTurn());
     }
 
     @Override
@@ -202,6 +208,15 @@ public class TUI implements View{
        Stop();
     }
 
+    @Override
+    public void afterPlayerMove(Message message) {
+        if(((PlayerMoveResp)message).getMoveType().equals("Pick")){
+            System.out.println("Card picked");
+        }
+        else{
+            System.out.println("Card placed");
+        }
+    }
     private void askChatMess(String NickName){
         System.out.print(">Message to "+NickName + ":");
         String mess = sc.nextLine();
@@ -222,7 +237,7 @@ public class TUI implements View{
                 }
                 case "show" -> {
                     if (parts.length != 2) {
-                        System.out.println("Invalid arguments for the chat command");
+                        System.out.println("Invalid arguments for the show command");
                         return;
                     } else {
                         clientManager.showPlayer(parts[1]);
@@ -280,21 +295,22 @@ public class TUI implements View{
                 }
         }
     }
-
-
     public void initialiseCl() {
+        Scanner comm = new Scanner(System.in);
         String command = "";
-        System.out.println("Digit your command: ");
         for(String cmd: commands){
             System.out.println(cmd);
         }
-        sc.nextLine();
+        System.out.println("\nDigit your command:\n> ");
+        comm.nextLine();
         while(!stop) {
             System.out.print(">");
-            command = sc.nextLine();
+            command = comm.nextLine();
             checkCommand(command);
         }
+        comm.close();
     }
+    @Override
     public void Stop(){
         this.stop = true;
     }
@@ -303,15 +319,12 @@ public class TUI implements View{
         inputThread.start();
 
     }
-
-
     @Override
     public void showChatMessage(Message message) {
 
         System.out.println("\nMessage from "+message.getNickName() + ": " + ((ChatMess)message).getMess() + "\n>");
 
     }
-
     @Override
     public void showPlayer(Message message) {
         PlayerView player = ((ShowPlayerInfo)message).getPlayer();

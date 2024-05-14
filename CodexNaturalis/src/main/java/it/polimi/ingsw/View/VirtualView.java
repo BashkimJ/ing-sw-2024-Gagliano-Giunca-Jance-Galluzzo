@@ -59,5 +59,20 @@ public class VirtualView implements View {
         clientHandler.sendMessage(new WinnerMess("Server",message));
     }
 
+    @Override
+    public void afterPlayerMove(Message message) {
+        clientHandler.sendMessage(message);
+    }
+
+    @Override
+    public void serverInfo() {
+
+    }
+
+    @Override
+    public void Stop() {
+
+    }
+
 
 }

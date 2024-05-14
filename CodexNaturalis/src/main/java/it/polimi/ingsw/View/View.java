@@ -16,5 +16,8 @@ public interface View {
     public void showPlayer(Message message);
     public void showGameInfo(Message message);
     public void winner(String message);
+    public void afterPlayerMove(Message message);
+    public void serverInfo();
+    public void Stop();
 
 }

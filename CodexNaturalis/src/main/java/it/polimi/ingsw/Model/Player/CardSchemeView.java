@@ -33,6 +33,38 @@ public class CardSchemeView implements Serializable {
         this.numQuill = scheme.getItemNum(Items.Quill);
 
     }
+
+    public Map<ArrayList<Integer>, Side> getPlayedCards() {
+        return playedCards;
+    }
+    public Map<ArrayList<Integer>, Resource> getCardsResource() {
+        return CardsResource;
+    }
+    public int[][] getScheme() {
+        return Scheme;
+    }
+    public int getNumAnimal(){
+        return this.numAnimal;
+    }
+    public int getNumInsects() {
+        return numInsects;
+    }
+    public int getNumFungi() {
+        return numFungi;
+    }
+    public int getNumPlants(){
+        return this.numPlants;
+    }
+    public int getNumInkwell(){
+        return this.numInkwell;
+    }
+    public int getNumManuscript() {
+        return numManuscript;
+    }
+    public int getNumQuill() {
+        return numQuill;
+    }
+
     @Override
     public String toString(){
         String myScheme = "*********************\n";
