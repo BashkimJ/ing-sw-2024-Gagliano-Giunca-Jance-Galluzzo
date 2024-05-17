@@ -4,8 +4,8 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 import java.util.List;
 
 public class GoldCard extends ResourceCard{
-    private PointCondition Condition;
-    private List<Resource> necessaryRes;
+    private final PointCondition Condition;
+    private final List<Resource> necessaryRes;
 
     /**
      *  The constructor of the Gold Card.
@@ -39,5 +39,18 @@ public class GoldCard extends ResourceCard{
     @Override
     public List<Resource> getNecessaryRes(){
         return this.necessaryRes;
+    }
+
+    @Override
+    public String toString(){
+        String myCard = "************ID:" + getCardId()+"*************\n";
+        myCard = myCard + "Fronte: " + getFront().toString() +  "\n";
+        myCard  = myCard + "Retro: " + getRetro().toString() + "\nNeccessary resources to be played: ";
+        for( Resource rsc: necessaryRes){
+            myCard = myCard + rsc.name() + " ";
+        }
+        myCard = myCard + "\nPoint condition" + Condition.toString() + "\nPoints: " + getPoints();
+        return myCard;
+
     }
 }

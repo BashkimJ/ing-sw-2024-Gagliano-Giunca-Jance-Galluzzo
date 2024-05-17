@@ -24,13 +24,15 @@ public class Game {
     private Deck resourceDeck;
     private Deck goldDeck;
     private Deck initialDeck;
-    private ResourceCard[] faceupCards;
+    private List<ResourceCard> faceupCards;
+    private List<ObjectiveCard> globalObj;
 
     //player who starts the game and number of players chosen
     public Game(Player player, int MAX_N_PLAYERS){
         this.MAX_N_PLAYERS = MAX_N_PLAYERS;
         players = new ArrayList<>();
-        faceupCards = new ResourceCard[N_FACEUP_CARDS];
+        faceupCards = new ArrayList<ResourceCard>();
+        globalObj = new ArrayList<>();
         try {
             this.addPlayer(player);
         }catch (PlayersLimitExceededException e){
@@ -44,6 +46,9 @@ public class Game {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+    public List<ObjectiveCard> getGlobalObj(){
+        return this.globalObj;
     }
     public void setMAX_N_PLAYERS(int Players){
         this.MAX_N_PLAYERS = Players;
@@ -62,11 +67,11 @@ public class Game {
         }
     }
 
-    public ResourceCard[] getFaceupCards() {
+    public List<ResourceCard> getFaceupCards() {
         return faceupCards;
     }
 
-    public void setFaceupCards(ResourceCard[] faceupCards) {
+    public void setFaceupCards(ArrayList<ResourceCard> faceupCards) {
         this.faceupCards = faceupCards;
     }
 

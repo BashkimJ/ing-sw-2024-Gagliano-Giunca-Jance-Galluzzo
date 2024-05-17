@@ -1,9 +1,11 @@
 package main.java.it.polimi.ingsw.Model.Cards;
 
-public abstract class Card {
-    private Side front;
-    private Side retro;
-    private int CardId;
+import java.io.Serializable;
+
+ public  abstract class  Card implements Serializable {
+    private final Side front;
+    private final Side retro;
+    private final int CardId;
 
     /**
      * It is the constructor of the class

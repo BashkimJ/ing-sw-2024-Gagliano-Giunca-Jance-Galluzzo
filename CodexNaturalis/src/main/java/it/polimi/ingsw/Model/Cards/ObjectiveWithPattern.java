@@ -4,8 +4,8 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 public class ObjectiveWithPattern implements MainObjective{
-    private Pattern patternType;
-    private int points;
+    private final Pattern patternType;
+    private final int points;
 
 
     /**

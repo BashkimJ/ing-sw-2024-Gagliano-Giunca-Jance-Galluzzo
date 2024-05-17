@@ -7,8 +7,8 @@ import java.util.List;
 
 public class ObjectiveWithResources implements MainObjective{
     @SerializedName("objectivesRESOURCES")
-    private List<Resource> objectives;
-    private int points;
+    private final List<Resource> objectives;
+    private final int points;
 
     /**
      * The constructor of the class
@@ -24,7 +24,7 @@ public class ObjectiveWithResources implements MainObjective{
      *
      * @return The list of the objective resources.
      */
-    public List getObjectives(){
+    public List<Resource> getObjectives(){
         return this.objectives;
     }
 
@@ -39,7 +39,7 @@ public class ObjectiveWithResources implements MainObjective{
     public String toString(){
         String Info="";
         for(Resource rsc: objectives){
-            Info  = Info + " " + rsc.name();
+            Info  = Info  +  " " + rsc.name();
         }
         Info=Info + "points: " + points;
         return Info;

@@ -2,9 +2,11 @@ package main.java.it.polimi.ingsw.Model.Cards;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
-public class Corner {
+import java.io.Serializable;
+
+public class Corner implements Serializable {
     private final boolean Visible;
-    private boolean Free;
+    private final boolean Free;
     private final Resource resourceType;
     private final Items itemstype;
 
@@ -39,13 +41,6 @@ public class Corner {
         return this.Free;
     }
 
-    /**
-     *
-     * @param Free The new value of the attribute Free to be set.
-     */
-    public void setFreeValue(boolean Free ){
-        this.Free = Free;
-    }
 
     /**
      *
@@ -61,6 +56,27 @@ public class Corner {
      */
     public Items getItems(){
         return this.itemstype;
+    }
+
+    @Override
+    public String toString(){
+         if(Visible){
+             if(isFree()){
+                 if(itemstype!=null){
+                     return itemstype.name();
+                 }
+                 else if(resourceType!=null){
+                     return resourceType.name();
+                 }
+                 else{
+                     return "empty";
+                 }
+             }
+         }
+         else{
+             return "not visible";
+         }
+         return " ";
     }
 
 

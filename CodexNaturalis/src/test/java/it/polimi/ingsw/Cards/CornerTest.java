@@ -28,8 +28,7 @@ class CornerTest {
 
     @Test
     void setFreeValue() {
-        upLeft.setFreeValue(false);
-        assertEquals(false,upLeft.isFree());
+        assertEquals(true,upLeft.isFree());
     }
 
     @Test
