@@ -27,11 +27,12 @@ public class GameController {
     private Game game;
     private Map<String, VirtualView> view;
     private Map<String, List<ObjectiveCard>> objectives;
-    private List<String> onlinePlayers;
+    private Map<String,Integer> onlinePlayers; //TO DO: change better to map
     private Map<String,Integer> offlinePlayers;
     private int chosenObjInit;
     private String playerTurn;
     private final Object lockPlayers;
+    private int numPlayers;
 
     public GameController(){
         this.lockPlayers = new Object();
@@ -50,9 +51,10 @@ public class GameController {
         Collections.shuffle(game.getObjectiveCards());
         game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
         game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
-        onlinePlayers = new ArrayList<>();
+        onlinePlayers = new HashMap<>();
         offlinePlayers = new HashMap<String,Integer>();
         this.view = Collections.synchronizedMap(new HashMap<>());
+        numPlayers = 0;
         removePlayer("");
 
     }
@@ -144,7 +146,14 @@ public class GameController {
             }
             player.pickCard(card);
             setPlayerTurn(nickname);
-            view.get(nickname).afterPlayerMove(new PlayerMoveResp(player,"Pick"));
+            for(String p: new ArrayList<String>(view.keySet())){
+                if(view.get(p)!=null) {
+                    view.get(p).afterPlayerMove(new PlayerMoveResp(player, "Pick"));
+                    showGameInfo(new ShowGameMess(p));
+                }
+
+            }
+
         }
     }
 
@@ -154,18 +163,41 @@ public class GameController {
      */
     private void setPlayerTurn(String name){
         synchronized (lockPlayers) {
-            int index = onlinePlayers.indexOf(name);
-            index++;
-            if (index == onlinePlayers.size() - 1 && gameState.equals(Last_Lap)) {
-                gameState = End_Game;
-                decideWinner();
-            } else if (index >= onlinePlayers.size()) {
-                index = 0;
+            int index = onlinePlayers.get(name);
+            int max = Collections.max(onlinePlayers.values());
+            boolean found = false;
+            if (index == max && gameState.equals(Last_Lap)) {
+                    gameState = End_Game;
+                    decideWinner();
+                    return;
+            } else {
+                while(!found){
+                    index++;
+                    if(index - 1 == max || index==numPlayers){
+                        int min = Collections.min(onlinePlayers.values());
+                        for(String p: onlinePlayers.keySet()){
+                            if(onlinePlayers.get(p)==min){
+                                playerTurn = p;
+                                found=true;
+                            }
+                        }
+                    }
+                    else{
+                        for(String p: onlinePlayers.keySet()){
+                            if(onlinePlayers.get(p)==index){
+                                playerTurn = p;
+                                found = true;
+                            }
+                        }
+                    }
+                }
             }
-            if (gameState != End_Game) {
-                playerTurn = onlinePlayers.get(index);
-                view.get(onlinePlayers.get(index)).errorMessage("Your turn.....");
+
+
+            if (gameState != End_Game){
+                    view.get(playerTurn).showChatMessage(new ChatMess("Server",playerTurn,"Your turn"));
             }
+
         }
     }
 
@@ -205,7 +237,7 @@ public class GameController {
         deck.add((GoldCard) game.getGoldDeck().getCards().get(game.getGoldDeck().getCards().size()-1));
         ArrayList<String> players;
         synchronized (lockPlayers) {
-            players = new ArrayList<>(onlinePlayers);
+            players = new ArrayList<>(onlinePlayers.keySet());
         }
         view.get(message.getNickName()).showGameInfo(new ShowGameResp(message.getNickName(),revealed,global,deck,playerTurn,players));
 
@@ -250,7 +282,10 @@ public class GameController {
                         if(player.getPoints()>=20){
                             gameState = Last_Lap;
                         }
-                        view.get(message.getNickName()).afterPlayerMove(new PlayerMoveResp(player,"Place"));
+                        for(String p: new ArrayList<String>(view.keySet())) {
+                            if(view.get(p)!=null)
+                                view.get(p).afterPlayerMove(new PlayerMoveResp(player, "Place"));
+                        }
                     break;
 
                     } catch (GoldCardPlacementException e) {
@@ -268,7 +303,7 @@ public class GameController {
     }
 
     /**
-     * Allows the cotroller to obtain all the information of a player.
+     * Allows the controller to obtain all the information of a player.
      * @param message Must contain the name of the player who asked for information and the name of the player to obtain the info.
      */
     private void playerInfo(Message message) {
@@ -291,11 +326,11 @@ public class GameController {
     private void chatMessage(Message message){
         synchronized (lockPlayers) {
             if(((ChatMess)message).getDest().equals("all")){
-                for(String name: new ArrayList<String>(onlinePlayers)){
+                for(String name: new ArrayList<String>(onlinePlayers.keySet())){
                     view.get(name).showChatMessage(new ChatMess(message.getNickName(),((ChatMess) message).getDest(), ((ChatMess) message).getMess()));
                 }
             }
-            else if (!onlinePlayers.contains(((ChatMess) message).getDest())) {
+            else if (!onlinePlayers.containsKey(((ChatMess) message).getDest())) {
                 System.out.println("Player doesn't exist");
                 Message ChatMess = new ChatMess("Server", message.getNickName(), "No such connected player");
                 view.get(message.getNickName()).showChatMessage(ChatMess);
@@ -357,7 +392,7 @@ public class GameController {
      * @param NickName The name of the disconnected player.
      */
 
-    public void removePlayer(String NickName)  {
+    public synchronized void  removePlayer(String NickName)  {
         //If the game is still in the lobby state the server won't keep track of a disconnected player
             if (gameState == Lobby_State) {
                 Iterator<Player> iterator = game.getPlayers().iterator();
@@ -366,20 +401,20 @@ public class GameController {
                     if (player.getNickName().equals(NickName)) {
                         iterator.remove();
                         view.remove(NickName);
-                        synchronized (lockPlayers) {
-                            onlinePlayers.remove(NickName);
-                        }
+                        onlinePlayers.remove(NickName);
                         return;
                     }
                 }
             } else if (gameState == In_Game) {
-                if (playerTurn.equals(NickName)) {
+                if(onlinePlayers.size()==1) {
+                     playerTurn = "";
+                }
+                else if (playerTurn.equals(NickName)) {
                     setPlayerTurn(NickName);
                 }
-                synchronized (lockPlayers) {
-                    offlinePlayers.put(NickName, onlinePlayers.indexOf(NickName));
-                    onlinePlayers.remove(NickName);
-                }
+
+                offlinePlayers.put(NickName, onlinePlayers.get(NickName));
+                onlinePlayers.remove(NickName);
                 view.remove(NickName);
             }
 
@@ -404,7 +439,7 @@ public class GameController {
     /**
      * Sends two objective cards to all the players to chose from.
      */
-    public void objectiveCardOptionsSender(){
+    public synchronized void objectiveCardOptionsSender(){
             for (String name : new ArrayList<String>(view.keySet())) {
                 ArrayList<ObjectiveCard> options = new ArrayList<>();
                 options.add(game.getObjectiveCards().remove(game.getObjectiveCards().size() - 1));
@@ -412,14 +447,20 @@ public class GameController {
                 objectives.put(name, options);
                 view.get(name).chooseObjectiveCard(new ChooseObjReq(options));
             }
-            Collections.shuffle(onlinePlayers);
-            playerTurn = onlinePlayers.get(0);
+            ArrayList<String> random = new ArrayList<>(onlinePlayers.keySet());
+            Collections.shuffle(random);
+            int index = 0;
+            for(String p: random){
+                onlinePlayers.put(p,index);
+                index++;
+            }
+            playerTurn = random.get(0);
 
 
     }
 
     /**
-     * Updates the objective card chosen by the player and that resides in the oprions.
+     * Updates the objective card chosen by the player and that resides in the options.
      * @param message The message to elaborate which contains the name of the player and the information of the chosen card.
      */
     private void updateObjCard(Message message){
@@ -491,7 +532,7 @@ public class GameController {
      * @param view The VirtualView associated to the player used by the controller to communicate with the client
      * @throws PlayersLimitExceededException This exception occurs when we try to add more players to our game that the maximum number chosen.
      */
-    public void firstLogin(String NickName,VirtualView view) throws PlayersLimitExceededException {
+    public synchronized void firstLogin(String NickName,VirtualView view) throws PlayersLimitExceededException {
         if(game.getPlayers().isEmpty()){
             try {
                 game.addPlayer(new Player(NickName, getColor()));
@@ -499,7 +540,8 @@ public class GameController {
             }catch(PlayersLimitExceededException e){}
             this.view.put(NickName,view);
             synchronized (lockPlayers) {
-                onlinePlayers.add(NickName);
+                onlinePlayers.put(NickName,numPlayers);
+                numPlayers++;
             }
             System.out.println(NickName + "'s view added" );
             playerTurn = NickName;
@@ -508,7 +550,8 @@ public class GameController {
         else if(game.getPlayers().size()<game.getMAX_N_PLAYERS()){
             this.view.put(NickName,view);
             synchronized (lockPlayers){
-                onlinePlayers.add(NickName);
+                onlinePlayers.put(NickName,numPlayers);
+                numPlayers++;
             }
             System.out.println(NickName + "'s view added" );
             try {
@@ -522,8 +565,7 @@ public class GameController {
         }
         else {
             if(game.getMAX_N_PLAYERS()==1){
-                view.errorMessage("You try entering the game before the main player chose the max num of players" +
-                        "Please disconnect and connect again...");
+                view.errorMessage("Error: You tried entering the game before the main player chose the max num of players" );
             }
             else{
                 view.errorMessage("All players are connected...");
@@ -541,8 +583,11 @@ public class GameController {
        if(offlinePlayers.containsKey(nickName)){
            synchronized (lockPlayers) {
                view.put(nickName, virtualView);
-               onlinePlayers.add(offlinePlayers.get(nickName), nickName);
+               onlinePlayers.put(nickName, offlinePlayers.get((nickName)));
                offlinePlayers.remove(nickName);
+               if(playerTurn.isEmpty()){
+                   playerTurn = nickName;
+               }
            }
            Iterator<Player> iterator  = game.getPlayers().iterator();
            Player player = null;

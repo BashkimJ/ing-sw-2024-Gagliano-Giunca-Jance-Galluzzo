@@ -15,11 +15,13 @@ import java.util.Scanner;
 import java.util.regex.*;
 
 public class TUI implements View{
-    Thread inputThread;
+    private Thread inputThread;
     private ClientManager clientManager;
     private Scanner sc;
     private List<String> commands;
     private boolean stop;
+    private String red ="\u001B[31m";
+    private String reset  ="\u001B[0m";
     public TUI(){
         sc = new Scanner(System.in);
         commands = new ArrayList<String>();
@@ -57,7 +59,7 @@ public class TUI implements View{
            String defaultHost = "127.0.0.1";
            String serverIP,connectionType;
            int serverPort = defaultPort;
-           Boolean rmi = false,validInput = true;
+           boolean rmi = false,validInput = true;
            System.out.println("What type of connection would you like: -r or -s");
            connectionType = sc.nextLine();
            if(!connectionType.equals("-s") && !connectionType.equals("-r")){
@@ -78,21 +80,24 @@ public class TUI implements View{
                    continue;
                }
            }while(!checkAddress(serverIP,serverPort));
-           if(rmi==true){
+           if(rmi){
                serverPort = defaultPort;
            }
            clientManager.onUpdateServerInfo(serverIP,serverPort,rmi);
     }
+    @Override
     public void errorMessage(String message){
-        System.out.println(message);
+        System.out.println(red+message+reset);
     }
 
+    @Override
     public void askNickName(){
         System.out.println("Please enter your nickname to log in the game:  ");
         String nickname = sc.nextLine();
         clientManager.updateNickName(nickname);
     }
 
+    @Override
     public void showLogin(boolean connected, boolean nameAccepted){
         if(nameAccepted==true && connected==true){
             waitingPlayers();
@@ -205,15 +210,15 @@ public class TUI implements View{
     public void winner(String message)
     {
        System.out.println(message);
-       Stop();
+       stop();
     }
 
     @Override
     public void afterPlayerMove(Message message) {
-        if(((PlayerMoveResp)message).getMoveType().equals("Pick")){
+        if(((PlayerMoveResp)message).getMoveType().equals("Pick") && ((PlayerMoveResp)message).getUpdatedPlayer().getNickName().equals(clientManager.getNickName())){
             System.out.println("Card picked");
         }
-        else{
+        else if(((PlayerMoveResp)message).getUpdatedPlayer().getNickName().equals(clientManager.getNickName())){
             System.out.println("Card placed");
         }
     }
@@ -302,16 +307,14 @@ public class TUI implements View{
             System.out.println(cmd);
         }
         System.out.println("\nDigit your command:\n> ");
-        comm.nextLine();
-        while(!stop) {
+        while(!stop && !Thread.currentThread().isInterrupted()) {
             System.out.print(">");
             command = comm.nextLine();
             checkCommand(command);
         }
-        comm.close();
     }
     @Override
-    public void Stop(){
+    public void stop(){
         this.stop = true;
     }
     public void start(){

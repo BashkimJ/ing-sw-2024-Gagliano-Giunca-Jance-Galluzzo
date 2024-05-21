@@ -39,11 +39,13 @@ public class ClientManager {
     public void onUpdateServerInfo(String IpAddress, int port,boolean RMI){
         if(!RMI){
             try{
+
                 client = new SocketClient(this,IpAddress, port);
                 client.receiveMessage();
                 view.askNickName();
             }catch(IOException e){
                view.errorMessage("Unable to connect...");
+               System.exit(0);
             }
         }
         else{
@@ -52,6 +54,7 @@ public class ClientManager {
                 view.askNickName();
             } catch (RemoteException e) {
                 view.errorMessage("Unable to connect...");
+                System.exit(0);
             }
         }
     }
@@ -110,6 +113,10 @@ public class ClientManager {
         switch(message.getType()){
             case Error_Message ->{
                 view.errorMessage(message.toString());
+                if(message.toString().equals("Error: You tried entering the game before the main player chose the max num of players")){
+                    this.client.Disconnect();
+                    System.exit(0);
+                }
             }
             case Login_Rpl -> {
                 view.showLogin(((LoginReply) message).Connected(),((LoginReply) message).nameAccepted());
@@ -122,6 +129,7 @@ public class ClientManager {
             }
             case Initial_Card_Mess -> {
                 view.showInitial(message);
+
             }
             case Init_Cl -> {
                 ((TUI)view).start();

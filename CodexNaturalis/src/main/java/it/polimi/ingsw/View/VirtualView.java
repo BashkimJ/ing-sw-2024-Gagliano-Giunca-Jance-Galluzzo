@@ -70,7 +70,7 @@ public class VirtualView implements View {
     }
 
     @Override
-    public void Stop() {
+    public void stop() {
 
     }
 

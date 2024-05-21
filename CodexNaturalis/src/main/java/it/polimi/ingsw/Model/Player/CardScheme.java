@@ -10,10 +10,7 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.lang.Math.min;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
@@ -26,9 +23,9 @@ public class CardScheme implements Serializable {
     private Map<ArrayList<Integer>,Resource> counted;
     private int [][] Scheme;//0-> Free, 1->Part of the Card, 2->Free corner, 3->Corner taken or Not visible
     private int numAnimal;
+    private int numPlants;
     private  int numInsects;
     private int numFungi;
-    private int numPlants;
     private int numInkwell;
     private int numQuill;
     private int numManuscript;
@@ -43,7 +40,7 @@ public class CardScheme implements Serializable {
         numQuill = 0;
         counted = new HashMap<ArrayList<Integer>,Resource>();
         CardsResource = new HashMap<ArrayList<Integer>,Resource>();
-        playedCards = new HashMap<ArrayList<Integer>, Side>();
+        playedCards = new LinkedHashMap<ArrayList<Integer>, Side>();
         Scheme = new int[160][160];
     }
 

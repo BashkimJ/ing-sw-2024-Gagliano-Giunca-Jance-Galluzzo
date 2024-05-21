@@ -45,4 +45,5 @@ public abstract class Client extends UnicastRemoteObject {
     public void setClientManager(ClientManager clientMAnager) {
         this.clientManager = clientMAnager;
     }
+
 }

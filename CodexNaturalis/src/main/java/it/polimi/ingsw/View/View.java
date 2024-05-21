@@ -7,7 +7,7 @@ import main.java.it.polimi.ingsw.Network.Messages.Message;
 public interface View {
     public void askNickName();
     public void errorMessage(String message);
-    public void showLogin(boolean conected,boolean nameAccepted);
+    public void showLogin(boolean connected,boolean nameAccepted);
     public void askNumPlayers();
     public void chooseObjectiveCard(Message message);
     public void showInitial(Message message);
@@ -18,6 +18,6 @@ public interface View {
     public void winner(String message);
     public void afterPlayerMove(Message message);
     public void serverInfo();
-    public void Stop();
+    public void stop();
 
 }

@@ -41,10 +41,9 @@ public class RemoteClientHandler implements ClientHandler {
             isConnected = false;
             try {
                 server.ClientDisconnection(this);
+                pingService.shutdown();
             } catch (PlayerNotFoundException e) {
                 System.out.println("Couldn't find player");
-            }finally{
-                pingService.shutdown();
             }
         }
 

@@ -19,6 +19,8 @@ public class CardSchemeView implements Serializable {
     private final int numInkwell;
     private final int numQuill;
     private final int numManuscript;
+    private String red ="\u001B[31m";
+    private String reset  ="\u001B[0m";
 
     public CardSchemeView(CardScheme scheme){
         this.playedCards = scheme.getPlayedCards();
@@ -68,15 +70,75 @@ public class CardSchemeView implements Serializable {
     @Override
     public String toString(){
         String myScheme = "*********************\n";
+        int left=0,right=0,up=0,down = 0;
+        boolean found= false;
         for(int i = 0;i<160;i++){
-            for(int j = 0;j<160;j++){
-                if(Scheme[i][j]==0){
-                    myScheme = myScheme + " ";
+            for(int j=0;j<160;j++){
+                if(Scheme[i][j]!=0){
+                    up = i;
+                    found = true;
+                    break;
                 }
-                else{
-                    myScheme = myScheme + Scheme[i][j];               }
             }
-            myScheme = myScheme + "\n";
+            if(found){
+                found = false;
+                break;
+            }
+        }
+        for(int j = 0;j<160;j++){
+            for(int i=0;i<160;i++){
+                if(Scheme[i][j]!=0){
+                    left = j;
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                found = false;
+                break;
+            }
+        }
+        for(int i = 159;i>=0;i--){
+            for(int j=0;j<160;j++){
+                if(Scheme[i][j]!=0){
+                    down = i;
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                found = false;
+                break;
+            }
+        }
+        for(int j = 159;j>=0;j--){
+            for(int i=0;i<160;i++){
+                if(Scheme[i][j]!=0){
+                    right = j;
+                    found = true;
+                    break;
+                }
+            }
+            if(found){
+                found = false;
+                break;
+            }
+        }
+
+        for(int i = up;i<=down;i++){
+            for(int j = left;j<=right;j++){
+                if(Scheme[i][j]==0){
+                    myScheme = myScheme + " ";/*"\033[30;41;1m" + " " + "\033[0;0;0m"*/ ;
+                }
+                else {
+                    if ((i == 80 && j == 80) || (i == 79 && j == 80) || (i == 81 && j == 80) ||(i == 80 && j == 79) || (i == 80 && j == 81)) {
+                        myScheme = myScheme + red + Scheme[i][j] + reset;
+                    } else {
+                        myScheme = myScheme + Scheme[i][j];
+                    }
+                }
+            }
+            myScheme = myScheme +"\n";
         }
         myScheme = myScheme + "\n";
         for(ArrayList<Integer> pos: playedCards.keySet()){
