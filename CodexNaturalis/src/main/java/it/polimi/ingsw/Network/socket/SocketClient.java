@@ -5,6 +5,9 @@ import main.java.it.polimi.ingsw.Network.ClientManager;
 import main.java.it.polimi.ingsw.Network.Messages.ErrorMessage;
 import main.java.it.polimi.ingsw.Network.Messages.Message;
 import main.java.it.polimi.ingsw.Network.Messages.MessageType;
+import main.java.it.polimi.ingsw.Network.Messages.Ping;
+import main.java.it.polimi.ingsw.View.TUI;
+import main.java.it.polimi.ingsw.View.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,6 +16,8 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class implements the methods of the abstract class of the Client using the socket logic.
@@ -23,6 +28,7 @@ public class SocketClient extends Client {
     private ObjectOutputStream output;
     private final ExecutorService readService = Executors.newSingleThreadExecutor();
     private final Object lockConn;
+    private ScheduledExecutorService pingService;
 
     /**
      * Initialises the Client as SocketClient
@@ -38,6 +44,9 @@ public class SocketClient extends Client {
          output = new ObjectOutputStream(socket.getOutputStream());
          input = new ObjectInputStream(socket.getInputStream());
          lockConn  = new Object();
+         pingService = Executors.newScheduledThreadPool(1);
+         ping();
+
      }
 
     /**
@@ -54,6 +63,7 @@ public class SocketClient extends Client {
 
         }catch(IOException e){
             System.out.println("Couldn't send message");
+            Disconnect();
         }
     }
 
@@ -70,6 +80,7 @@ public class SocketClient extends Client {
                     message = (Message) input.readObject();
                 } catch (IOException | ClassNotFoundException e) {
                     Disconnect();
+
                 }
                 if(message!=null && !message.getType().equals(MessageType.Ping)) {
                     clientManager.update(message);
@@ -91,6 +102,9 @@ public class SocketClient extends Client {
                     socket.close();
                     clientManager.update(new ErrorMessage("Disconnected please try to close and reopen the app. To reconnect you need to use " +
                             "the previous name."));
+                    Thread.currentThread().interrupt();
+                    pingService.shutdown();
+                    System.exit(0);
                 }
             } catch (IOException e) {
                 System.out.println("Couldn't close socket...");
@@ -98,4 +112,17 @@ public class SocketClient extends Client {
 
         }
     }
+
+    /**
+     * Implements a simple ping service.
+     */
+    public void ping(){
+        pingService.scheduleAtFixedRate(()->
+                        sendMessage(new Ping()),
+                0,
+                1000,
+                TimeUnit.MILLISECONDS
+        );
+    }
+
 }

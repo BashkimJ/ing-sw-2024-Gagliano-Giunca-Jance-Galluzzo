@@ -4,6 +4,7 @@ import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
 import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
 import main.java.it.polimi.ingsw.Network.ClientHandler;
 import main.java.it.polimi.ingsw.Network.Messages.Message;
+import main.java.it.polimi.ingsw.Network.Messages.MessageType;
 import main.java.it.polimi.ingsw.Network.Messages.Ping;
 
 import java.io.IOException;
@@ -61,7 +62,7 @@ public class SocketClientHandler implements ClientHandler,Runnable {
                         Message message = null;
                         try {
                             message = (Message) in.readObject();
-                            if (message != null) {
+                            if (message != null && message.getType()!= MessageType.Ping) {
                                 System.out.println("Message received");
                             }
                         }catch(SocketTimeoutException e){
