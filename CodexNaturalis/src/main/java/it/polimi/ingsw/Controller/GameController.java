@@ -11,6 +11,7 @@ import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
 import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
 import main.java.it.polimi.ingsw.Model.GameStatus.Game;
 import main.java.it.polimi.ingsw.Model.Player.Player;
+import main.java.it.polimi.ingsw.Model.Save.SavesManager;
 import main.java.it.polimi.ingsw.Network.Messages.*;
 import main.java.it.polimi.ingsw.View.VirtualView;
 
@@ -32,6 +33,7 @@ public class GameController {
     private int chosenObjInit;
     private String playerTurn;
     private final Object lockPlayers;
+    private SavesManager sm;
 
     public GameController(){
         this.lockPlayers = new Object();
@@ -54,7 +56,27 @@ public class GameController {
         offlinePlayers = new HashMap<String,Integer>();
         this.view = Collections.synchronizedMap(new HashMap<>());
         removePlayer("");
+    }
 
+    /**
+     * Prepares a class with the necessary data from the current GameController to be written to file
+     * with the support of the SavesManager.
+     */
+    public void saveGame(){
+        SavesManager savesManager = new SavesManager();
+        savesManager.SaveGame(this.gameState,this.game,this.objectives,this.offlinePlayers,this.playerTurn);
+    }
+
+    /**
+     * Updates the current GameController with data from the last saved game if there is any.
+     */
+    public void loadGame(){
+        SavesManager sm = new SavesManager();
+        this.gameState = sm.LoadGame().getGameState();
+        this.game = sm.LoadGame().getGame();
+        this.offlinePlayers = sm.LoadGame().getOfflinePlayers();
+        this.objectives = sm.LoadGame().getObjectives();
+        this.playerTurn = sm.LoadGame().getPlayerTurn();
     }
 
     /**
