@@ -55,7 +55,6 @@ public class SavesManager
             throw new RuntimeException(e);
         }
     }
-
     /**
      * Reads from file to gather the last saved Game's data.
      * @return the Save class containing all the data from the last Game.

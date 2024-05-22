@@ -66,7 +66,6 @@ public class GameController {
         SavesManager savesManager = new SavesManager();
         savesManager.SaveGame(this.gameState,this.game,this.objectives,this.offlinePlayers,this.playerTurn);
     }
-
     /**
      * Updates the current GameController with data from the last saved game if there is any.
      */
