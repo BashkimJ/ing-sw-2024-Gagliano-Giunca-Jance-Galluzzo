@@ -43,13 +43,13 @@ public class GoldCard extends ResourceCard{
 
     @Override
     public String toString(){
-        String myCard = "************ID:" + getCardId()+"*************\n";
-        myCard = myCard + "Fronte: " + getFront().toString() +  "\n";
-        myCard  = myCard + "Retro: " + getRetro().toString() + "\nNeccessary resources to be played: ";
+        String myCard = " ";
+        myCard = myCard + super.toString();
+        myCard = myCard+ "\nNecessary resources to be played: ";
         for( Resource rsc: necessaryRes){
             myCard = myCard + rsc.name() + " ";
         }
-        myCard = myCard + "\nPoint condition" + Condition.toString() + "\nPoints: " + getPoints();
+        myCard = myCard + "\nPoint condition: " + Condition.toString() + "\n";
         return myCard;
 
     }
