@@ -27,7 +27,7 @@ public class GameController {
     private Game game;
     private Map<String, VirtualView> view;
     private Map<String, List<ObjectiveCard>> objectives;
-    private Map<String,Integer> onlinePlayers; //TO DO: change better to map
+    private Map<String,Integer> onlinePlayers;
     private Map<String,Integer> offlinePlayers;
     private int chosenObjInit;
     private String playerTurn;
