@@ -8,6 +8,12 @@ import java.util.List;
 public  class ResourceCard extends Card {
     private final int points;
     private final Resource resourceType;
+    private final String red = "\033[30;41;1m";
+    private final String green = "\033[30;42;1m";
+    private final String purple = "\033[30;45;1m";
+    private final String blue = "\033[30;44;1m";
+    private final String yellow = "\033[30;43;1m";
+    private final String reset = "\033[0;0;0m";
 
     /**
      * The resource card's constructor.
@@ -44,12 +50,149 @@ public  class ResourceCard extends Card {
         return null;
     }
 
+    private String[][] colorCorner(Corner corner,String[][] board,String pos,String side){
+        int x = 0;
+        int y = 0;
+        switch (pos) {
+            case "UL" -> {
+                if(side.equals("front")) {
+                    x = 0;
+                    y = 0;
+                    break;
+                }else{
+                    x = 4;
+                    y = 0;
+                }
+            }
+            case "UR" -> {
+                if(side.equals("front")) {
+                    x = 0;
+                    y = 2;
+                    break;
+                }else{
+                    x = 4;
+                    y = 2;
+                }
+
+            }
+            case "DL" -> {
+                if(side.equals("front")) {
+                    x = 2;
+                    y = 0;
+                    break;
+                }else{
+                    x = 6;
+                    y = 0;
+                }
+
+            }
+            case "DR" -> {
+                if(side.equals("front")) {
+                    x = 2;
+                    y = 2;
+                    break;
+                }else{
+                    x = 6;
+                    y = 2;
+                }
+            }
+        }
+        if (!corner.isVisible()) {
+            return board;
+        } else {
+            if (corner.getResource() != null) {
+                switch (corner.getResource()) {
+                    case Animal -> {
+                        board[x][y] = yellow + " A" + reset;
+                        break;
+                    }
+                    case Insects -> {
+                        board[x][y] = yellow + " I" + reset;
+                        break;
+                    }
+                    case Plant -> {
+                        board[x][y] = yellow + " P" + reset;
+                        break;
+                    }
+                    case Fungi -> {
+                        board[x][y] = yellow + " F" + reset;
+                        break;
+                    }
+                }
+                return board;
+            }
+            else if (corner.getItems() != null) {
+                switch (corner.getItems()) {
+                    case Quill -> {
+                        board[x][y] = yellow + " q" + reset;
+                        break;
+                    }
+                    case Inkwell -> {
+                        board[x][y] = yellow + " i" + reset;
+                        break;
+                    }
+                    case Manuscript -> {
+                        board[x][y] = yellow + " m" + reset;
+                        break;
+                    }
+                }
+
+            }
+            else{
+                board[x][y] = yellow + "  " + reset;
+            }
+        }
+        return board;
+    }
+
     @Override
     public String toString(){
-        String myCard = "**********ID: " + getCardId()+"*****************\n";
-        myCard = myCard + "Fronte: " + getFront().toString() +  "\n";
-        myCard  = myCard + "Retro: " + getRetro().toString() + "\nResource: " + resourceType.name() + "\nPoints: " + getPoints();
-        return myCard;
+        String myCardID = "**********ID: " + getCardId()+"*****************\n";
+        String[][] card = new String[7][3];
+        String defColor = " ";
+        switch (resourceType){
+            case Animal ->defColor = red;
+            case Plant -> defColor = green;
+            case Insects -> defColor = blue;
+            case Fungi -> defColor = purple;
+        }
+       for(int i=0;i<7;i++){
+           for(int j=0;j<3;j++){
+               if(i==3){
+                   card[i][j] = " ";
+               }
+               else{
+                   card[i][j] = defColor + "  " + reset;
+               }
+           }
+       }
+       Side front =getFront();
+       Side retro = getRetro();
+       Corner corner = front.getUpLeft();
+       card = colorCorner(corner,card,"UL","front");
+       corner = front.getUpRight();
+       card = colorCorner(corner,card,"UR","front");
+       corner = front.getDownRight();
+       card = colorCorner(corner,card,"DR","front");
+       corner = front.getDownLeft();
+       card = colorCorner(corner,card,"DL","front");
+
+       corner = retro.getUpLeft();
+       card = colorCorner(corner,card,"UL","retro");
+       corner = retro.getUpRight();
+       card = colorCorner(corner,card,"UR","retro");
+       corner = retro.getDownRight();
+       card = colorCorner(corner,card,"DR","retro");
+       corner = retro.getDownLeft();
+       card = colorCorner(corner,card,"DL","retro");
+       for(int i =0;i<7;i++){
+           for(int j =0;j<3;j++){
+               myCardID = myCardID + card[i][j];
+           }
+           myCardID+="\n";
+       }
+       myCardID+="\nPoints: " + getPoints() + "\n";
+       return myCardID;
 
     }
 }
