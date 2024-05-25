@@ -23,7 +23,6 @@ public class Player implements Serializable {
     private List<ResourceCard> playerHand;
     private CardScheme playerScheme;
 
-
 /**
  * This is the standard constructor that prepares all the Player attributes.
  * @param name the player's name.

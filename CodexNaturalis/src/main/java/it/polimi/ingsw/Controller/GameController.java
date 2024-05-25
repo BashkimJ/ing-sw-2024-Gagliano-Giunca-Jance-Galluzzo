@@ -80,6 +80,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             this.objectives = sm.LoadGame().getObjectives();
             this.playerTurn = sm.LoadGame().getPlayerTurn();
         }
+
         /**
          * Receives the message sent from the client to the server and takes decision based on the type of the message.
          * @param message The message to elaborate.
