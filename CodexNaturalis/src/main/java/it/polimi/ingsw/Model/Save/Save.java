@@ -18,6 +18,8 @@ public class Save implements Serializable {
     Map<String,Integer> offlinePlayers;
     String playerTurn;
 
+    public Save() {
+    }
     public Save(GameState gs, Game g, Map<String, List<ObjectiveCard>> obj, Map<String, Integer> offPlayers, String turn) {
         this.gameState = gs;
         this.game = g;
