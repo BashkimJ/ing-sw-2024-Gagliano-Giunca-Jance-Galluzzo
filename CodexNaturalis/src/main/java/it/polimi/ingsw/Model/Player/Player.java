@@ -17,8 +17,7 @@ public class Player implements Serializable {
     private final String nickName;
     private int points;
     private Colour playerColour;
-    private BufferedImage tokenImage;
-
+    private transient BufferedImage tokenImage;
     private InitialCard playerInitial;
     private ObjectiveCard playerObjective;
     private List<ResourceCard> playerHand;
