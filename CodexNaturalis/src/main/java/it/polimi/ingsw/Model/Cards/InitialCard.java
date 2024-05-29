@@ -28,6 +28,7 @@ public class InitialCard extends Card{
         return this.middleResource;
     }
 
+
     @Override
     public String toString(){
         String myCard = "***********ID: " + getCardId() + " ****************\n";

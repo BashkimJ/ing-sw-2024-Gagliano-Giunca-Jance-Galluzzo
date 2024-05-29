@@ -8,7 +8,6 @@ import java.util.List;
 public  class ResourceCard extends Card {
     private final int points;
     private final Resource resourceType;
-
     /**
      * The resource card's constructor.
      *
