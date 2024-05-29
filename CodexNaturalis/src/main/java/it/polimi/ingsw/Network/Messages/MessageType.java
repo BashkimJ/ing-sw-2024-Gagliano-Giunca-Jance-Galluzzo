@@ -16,7 +16,7 @@ public enum MessageType {
     Choose_Obj_Res,
     Initial_Card_Mess,
     Place_Initial_Card,
-    Init_Cl,
+    Game_Started,
     Chat_Mess,
     Player_Info,
     Place_Card,

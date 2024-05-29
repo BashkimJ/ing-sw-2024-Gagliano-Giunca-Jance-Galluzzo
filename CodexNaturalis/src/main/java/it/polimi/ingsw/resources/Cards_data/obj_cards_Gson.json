@@ -1,53 +1,62 @@
 [
   {
+    "cardId": 87,
     "objective": {
       "patternType": "downUpLR_RED",
       "points": 2
     }
   },
   {
+    "cardId": 88,
     "objective": {
       "patternType": "upDownLR_GREEN",
       "points": 2
     }
   },
   {
+    "cardId": 89,
     "objective": {
       "patternType": "upDownLR_BLUE",
       "points": 2
     }
   },
   {
+    "cardId": 90,
     "objective": {
       "patternType": "downUpLR_PURPLE",
       "points": 2
     }
   },
   {
+    "cardId": 91,
     "objective": {
       "patternType": "LdownRight",
       "points": 3
     }
   },
   {
+    "cardId": 92,
     "objective": {
       "patternType": "LdownLeft",
       "points": 3
     }
   },
   {
+    "cardId": 93,
     "objective": {
       "patternType": "LupRight",
       "points": 3
     }
   },
   {
+    "cardId": 94,
     "objective": {
       "patternType": "LupLeft",
       "points": 3
     }
   },
   {
+    "cardId": 95,
     "objective": {
       "objectivesRESOURCES": [
         "Fungi",
@@ -58,6 +67,7 @@
     }
   },
   {
+    "cardId": 96,
     "objective": {
       "objectivesRESOURCES": [
         "Plant",
@@ -68,6 +78,7 @@
     }
   },
   {
+    "cardId": 97,
     "objective": {
       "objectivesRESOURCES": [
         "Animal",
@@ -78,6 +89,7 @@
     }
   },
   {
+    "cardId": 98,
     "objective": {
       "objectivesRESOURCES": [
         "Insects",
@@ -88,6 +100,7 @@
     }
   },
   {
+    "cardId": 99,
     "objective": {
       "objectivesITEMS": [
         "Quill",
@@ -98,6 +111,7 @@
     }
   },
   {
+    "cardId": 100,
     "objective": {
       "objectivesITEMS": [
         "Manuscript",
@@ -107,6 +121,7 @@
     }
   },
   {
+    "cardId": 101,
     "objective": {
       "objectivesITEMS": [
         "Inkwell",
@@ -116,6 +131,7 @@
     }
   },
   {
+    "cardId": 102,
     "objective": {
       "objectivesITEMS": [
         "Quill",

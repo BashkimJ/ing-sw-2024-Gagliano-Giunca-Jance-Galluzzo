@@ -131,8 +131,8 @@ public class ClientManager {
                 view.showInitial(message);
 
             }
-            case Init_Cl -> {
-                ((TUI)view).start();
+            case Game_Started -> {
+                view.alertGameStarted(message);
             }
             case Chat_Mess -> {
                 view.showChatMessage(message);

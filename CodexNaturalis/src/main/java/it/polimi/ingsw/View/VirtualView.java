@@ -37,7 +37,7 @@ public class VirtualView implements View {
     }
 
     @Override
-    public void initialiseCl(Message message) {
+    public void alertGameStarted(Message message) {
         clientHandler.sendMessage(message);
     }
 

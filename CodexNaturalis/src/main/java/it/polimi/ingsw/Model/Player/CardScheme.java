@@ -9,8 +9,10 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.List;
 
 import static java.lang.Math.min;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
@@ -21,6 +23,7 @@ public class CardScheme implements Serializable {
     private Map<ArrayList<Integer>, Side> playedCards;
     private Map<ArrayList<Integer>,Resource> CardsResource;
     private Map<ArrayList<Integer>,Resource> counted;
+    private Map<Point, Integer> cardsIds;
     private int [][] Scheme;//0-> Free, 1->Part of the Card, 2->Free corner, 3->Corner taken or Not visible
     private int numAnimal;
     private int numPlants;
@@ -41,6 +44,7 @@ public class CardScheme implements Serializable {
         counted = new HashMap<ArrayList<Integer>,Resource>();
         CardsResource = new HashMap<ArrayList<Integer>,Resource>();
         playedCards = new LinkedHashMap<ArrayList<Integer>, Side>();
+        cardsIds = new LinkedHashMap<Point, Integer>();
         Scheme = new int[160][160];
     }
 
@@ -319,6 +323,7 @@ public class CardScheme implements Serializable {
        position.add(0,80);
        position.add(1,80);
        playedCards.put(position,playedSide);
+       cardsIds.put(new Point(80, 80), initial.getCardId());
        return true;
 
    }
@@ -416,6 +421,7 @@ public class CardScheme implements Serializable {
        pos.add(1,positionTobePlaced[1]);
        playedCards.put(pos,sideToBeplaced);
        CardsResource.put(pos,resource.getResourceType());
+       cardsIds.put(new Point(positionTobePlaced[0], positionTobePlaced[1]), resource.getCardId());
        if(resource instanceof GoldCard && ((GoldCard) resource).getCondition()!=null){
            if(((GoldCard) resource).getCondition().getCornerCondition()==true){
                return corners_covering*(resource.getPoints());
@@ -685,4 +691,8 @@ public class CardScheme implements Serializable {
    public Map<ArrayList<Integer>,Resource> playedResources(){
        return this.CardsResource;
    }
+
+    public Map<Point, Integer> getCardsIds() {
+        return cardsIds;
+    }
 }

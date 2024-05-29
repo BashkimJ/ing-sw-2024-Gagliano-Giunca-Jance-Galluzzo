@@ -14,7 +14,7 @@ public interface View {
     public void askNumPlayers();
     public void chooseObjectiveCard(Message message);
     public void showInitial(Message message);
-    public void initialiseCl(Message message );
+    public void alertGameStarted(Message message);
     public void showChatMessage(Message message);
     public void showPlayer(Message message);
     public void showGameInfo(Message message);

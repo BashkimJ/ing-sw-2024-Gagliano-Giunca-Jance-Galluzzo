@@ -62,10 +62,12 @@ class GameTest {
         objectiveCard = game.getObjectiveCards().get(0);
         assertEquals(Pattern.downUpLR_RED, objectiveCard.getObjective().getObjectives());
         assertEquals(2, objectiveCard.getObjective().getPoints());
+        assertEquals(87, objectiveCard.getCardId());
         //Card 93 - index 6
         objectiveCard =  game.getObjectiveCards().get(6);
         assertEquals(Pattern.LupRight, objectiveCard.getObjective().getObjectives());
         assertEquals(3, objectiveCard.getObjective().getPoints());
+        assertEquals(93, objectiveCard.getCardId());
         //Card 96 - index 9
         objectiveCard =  game.getObjectiveCards().get(9);
         List<Resource> resList = new ArrayList<Resource>();
@@ -74,6 +76,7 @@ class GameTest {
         resList.add(Resource.Plant);
         assertEquals(resList, objectiveCard.getObjective().getObjectives());
         assertEquals(2, objectiveCard.getObjective().getPoints());
+        assertEquals(96, objectiveCard.getCardId());
         //Card 99 - index 12
         objectiveCard =  game.getObjectiveCards().get(12);
         List<Items> itemsList = new ArrayList<>();
@@ -82,6 +85,7 @@ class GameTest {
         itemsList.add(Items.Manuscript);
         assertEquals(itemsList, objectiveCard.getObjective().getObjectives());
         assertEquals(3, objectiveCard.getObjective().getPoints());
+        assertEquals(99, objectiveCard.getCardId());
     }
 
     @Test
