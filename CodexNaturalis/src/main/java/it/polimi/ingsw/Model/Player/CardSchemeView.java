@@ -5,6 +5,7 @@ import main.java.it.polimi.ingsw.Model.Cards.Side;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
@@ -12,6 +13,7 @@ import java.util.Map;
 public class CardSchemeView implements Serializable {
     private final Map<ArrayList<Integer>, Side> playedCards;
     private final Map<ArrayList<Integer>, Resource> CardsResource;
+    private final Map<Point, Integer> cardsIds;
     private final int[][] Scheme;//0-> Free, 1->Part of the Card, 2->Free corner, 3->Corner taken or Not visible
     private final int numAnimal;
     private final int numInsects;
@@ -32,6 +34,7 @@ public class CardSchemeView implements Serializable {
     public CardSchemeView(CardScheme scheme) {
         this.playedCards = scheme.getPlayedCards();
         this.CardsResource = scheme.playedResources();
+        this.cardsIds= scheme.getCardsIds();
         this.Scheme = scheme.show();
         this.numAnimal = scheme.getResourceNum(Resource.Animal);
         this.numInsects = scheme.getResourceNum(Resource.Insects);
@@ -49,6 +52,10 @@ public class CardSchemeView implements Serializable {
 
     public Map<ArrayList<Integer>, Resource> getCardsResource() {
         return CardsResource;
+    }
+
+    public Map<Point, Integer> getCardsIds() {
+        return cardsIds;
     }
 
     public int[][] getScheme() {

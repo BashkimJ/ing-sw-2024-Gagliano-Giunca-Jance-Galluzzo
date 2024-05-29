@@ -165,8 +165,13 @@ public class TUI implements View{
         }
     }
 
-    @Deprecated
     @Override
+    public void alertGameStarted(Message message) {
+        inputThread = new Thread(this::initialiseCl);
+        inputThread.start();
+    }
+
+    @Deprecated
     public void initialiseCl(Message message) {
     }
 
@@ -317,11 +322,7 @@ public class TUI implements View{
     public void stop(){
         this.stop = true;
     }
-    public void start(){
-        inputThread = new Thread(this::initialiseCl);
-        inputThread.start();
 
-    }
     @Override
     public void showChatMessage(Message message) {
 

@@ -545,7 +545,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     player.pickCard((GoldCard) game.getGoldDeck().pickCard());
                 }
             }
-            view.get(NickName).initialiseCl(new Message("Server",MessageType.Init_Cl));
+            view.get(NickName).alertGameStarted(new Message("Server",MessageType.Game_Started));
         }
 
         /**
