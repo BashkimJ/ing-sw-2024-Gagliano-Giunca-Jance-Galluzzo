@@ -275,6 +275,12 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
          * @param message Contains all the necessary information of the player and the card he wants to place.
          */
         private void placeCard(Message message){
+            if(onlinePlayers.size()==1){
+                if(view.get(message.getNickName())!=null) {
+                    view.get(message.getNickName()).errorMessage("Waiting for other players");
+                    return;
+                }
+            }
             if(!playerTurn.equals(message.getNickName())){
                 if(view.get(message.getNickName())!=null) {
                     view.get(message.getNickName()).errorMessage("Not your turn");
@@ -558,7 +564,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                 }
             }
             if(view.get(NickName)!=null)
-                view.get(NickName).initialiseCl(new Message("Server",MessageType.Init_Cl));
+                view.get(NickName).alertGameStarted(new Message("Server",MessageType.Game_Started));
         }
 
         /**

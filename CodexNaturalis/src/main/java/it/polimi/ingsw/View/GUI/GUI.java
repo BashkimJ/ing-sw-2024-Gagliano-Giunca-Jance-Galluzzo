@@ -102,7 +102,7 @@ public class GUI implements View {
                 configFrame.closeWindow();
                 configFrame = null;
                 gameFrame = new GameFrame(GUI.this);
-                gameFrame.showTwoObj(((ChooseObjReq)message).getOptions().getFirst(), ((ChooseObjReq)message).getOptions().get(1));
+                gameFrame.showTwoObj(((ChooseObjReq)message).getOptions().get(0), ((ChooseObjReq)message).getOptions().get(1));
             }
         });
     }

@@ -48,7 +48,7 @@ public class JRightPanel extends JPanel {
         tableCards.setLayout(new GridLayout(4, 2, 20, 20));
         //Objectives
         List<Integer> ids = obj.stream().map(x -> x.getCardId()).toList();
-        UnselectableCard u_card = new UnselectableCard(ids.getFirst(), true);
+        UnselectableCard u_card = new UnselectableCard(ids.get(0), true);
         tableCards.add(u_card);
         u_card = new UnselectableCard(ids.get(1), true);
         tableCards.add(u_card);

@@ -220,11 +220,6 @@ public class TUI implements View{
         }
     }
 
-    @Deprecated
-    @Override
-    public void initialiseCl(Message message) {
-    }
-
     /**
      * Implements the showGameInfo method of the View interface. It has to show the information related to the state of the game.
      * @param message The message sent from the server and in which are contained all the necessary info. For more read the documentation
@@ -402,10 +397,8 @@ public class TUI implements View{
         this.stop = true;
     }
 
-    /**
-     * Starts a new thread for the command line using the initialiseCl() method and the inputThread.
-     */
-    public void start(){
+    @Override
+    public void alertGameStarted(Message message){
         inputThread = new Thread(this::initialiseCl);
         inputThread.start();
 
