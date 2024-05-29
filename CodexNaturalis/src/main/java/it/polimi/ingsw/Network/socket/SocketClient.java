@@ -28,7 +28,7 @@ public class SocketClient extends Client {
     private ObjectOutputStream output;
     private final ExecutorService readService = Executors.newSingleThreadExecutor();
     private final Object lockConn;
-    private ScheduledExecutorService pingService;
+
 
     /**
      * Initialises the Client as SocketClient
@@ -44,8 +44,7 @@ public class SocketClient extends Client {
          output = new ObjectOutputStream(socket.getOutputStream());
          input = new ObjectInputStream(socket.getInputStream());
          lockConn  = new Object();
-         pingService = Executors.newScheduledThreadPool(1);
-         ping();
+
 
      }
 
@@ -103,7 +102,6 @@ public class SocketClient extends Client {
                     clientManager.update(new ErrorMessage("Disconnected please try to close and reopen the app. To reconnect you need to use " +
                             "the previous name."));
                     Thread.currentThread().interrupt();
-                    pingService.shutdown();
                     System.exit(0);
                 }
             } catch (IOException e) {
@@ -113,16 +111,6 @@ public class SocketClient extends Client {
         }
     }
 
-    /**
-     * Implements a simple ping service.
-     */
-    public void ping(){
-        pingService.scheduleAtFixedRate(()->
-                        sendMessage(new Ping()),
-                0,
-                1000,
-                TimeUnit.MILLISECONDS
-        );
-    }
+
 
 }

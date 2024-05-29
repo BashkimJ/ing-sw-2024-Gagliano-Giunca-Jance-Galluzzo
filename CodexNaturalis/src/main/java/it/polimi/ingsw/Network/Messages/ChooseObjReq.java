@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The ChooseObjReq represents a message that containing the options of the objective card.
+ * The ChooseObjReq represents a message  containing the options of the objective card.
  */
 public class ChooseObjReq extends Message{
     private List<ObjectiveCard> options;

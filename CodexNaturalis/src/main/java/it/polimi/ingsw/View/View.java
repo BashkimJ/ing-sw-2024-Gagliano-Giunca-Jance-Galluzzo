@@ -4,6 +4,9 @@ import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
 import main.java.it.polimi.ingsw.Network.Messages.ChatMess;
 import main.java.it.polimi.ingsw.Network.Messages.Message;
 
+/**
+ * Interface used for the implementation of the TUI or GUI.
+ */
 public interface View {
     public void askNickName();
     public void errorMessage(String message);

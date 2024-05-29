@@ -119,7 +119,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * This method allows the controller to add the specified card into the players hand.
+         * This method allows the controller to add the specified card from a player into his hand.It defines the pick movement at the end of the turn.
          * @param message It is the message that contains the cardID to add and the name of the player to add the card.
          */
         private void pickCard(Message message){
@@ -134,7 +134,9 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                 }
             }
             if(!nickname.equals(playerTurn) || player.getPlayerHand().size()==3){
-                view.get(nickname).errorMessage("Its not the moment to pick a card");
+                if(view.get(nickname)!=null) {
+                    view.get(nickname).errorMessage("Its not the moment to pick a card");
+                }
                 return;
             }
             ResourceCard card = null;
@@ -243,7 +245,9 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             }
 
             for(String name: new ArrayList<String>(view.keySet())){
-                view.get(name).winner("\nThe winner is   " +  Winner);
+                if(view.get(name)!=null) {
+                    view.get(name).winner("\nThe winner is   " + Winner);
+                }
             }
         }
 
@@ -261,18 +265,20 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             synchronized (lockPlayers) {
                 players = new ArrayList<>(onlinePlayers.keySet());
             }
-            view.get(message.getNickName()).showGameInfo(new ShowGameResp(message.getNickName(),revealed,global,deck,playerTurn,players));
-
+            if(view.get(message.getNickName())!=null) {
+                view.get(message.getNickName()).showGameInfo(new ShowGameResp(message.getNickName(), revealed, global, deck, playerTurn, players));
+            }
         }
 
         /**
-         * The method allows the controller to place a card in the cardScheme of the player.
+         * The method allows the controller to place a card in the cardScheme of the player.The card to be placed is specified using the cardID found int the message.
          * @param message Contains all the necessary information of the player and the card he wants to place.
          */
         private void placeCard(Message message){
             if(!playerTurn.equals(message.getNickName())){
-                view.get(message.getNickName()).errorMessage("Not your turn");
-                return;
+                if(view.get(message.getNickName())!=null) {
+                    view.get(message.getNickName()).errorMessage("Not your turn");
+                }
             }
             else{
                 String side = ((PlaceCardMess)message).getSide();
@@ -291,7 +297,9 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     }
                 }
                 if(player.getPlayerHand().size()<3){
-                    view.get(message.getNickName()).errorMessage("You already played your card");
+                    if(view.get(message.getNickName())!=null) {
+                        view.get(message.getNickName()).errorMessage("You already played your card");
+                    }
                     return;
                 }
                 iterator = player.getPlayerHand().iterator();
@@ -335,7 +343,9 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             while(iterator.hasNext()){
                 Player player = (Player)iterator.next();
                 if(player.getNickName().equals(toShow) && view.containsKey(toShow)){
-                    view.get(Nickname).showPlayer(new ShowPlayerInfo("Server",player,toShow));
+                    if(view.get(Nickname)!=null){
+                        view.get(Nickname).showPlayer(new ShowPlayerInfo("Server", player, toShow));
+                    }
                     break;
                 }
             }
@@ -378,7 +388,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
          * @param Name The string to be checked.
          * @return Boolean. So if its true the name doesn't exist.
          */
-        public boolean checkNickName(String Name){
+        public synchronized boolean checkNickName(String Name){
             Iterator<Player> iterator  = game.getPlayers().iterator();
             while(iterator.hasNext()){
                 Player player = iterator.next();
@@ -393,7 +403,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
          * Returns a color that is not present currently in the game.
          * @return Colour.
          */
-        private Colour getColor(){
+        private synchronized Colour getColor(){
             boolean present = false;
             for(Colour color: Colour.values()){
                 for(Player player: game.getPlayers()){
@@ -402,7 +412,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                         break;
                     }
                 }
-                if(present==false){
+                if(!present){
                     return color;
                 }
             }
@@ -455,7 +465,9 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     player.setPlayerInitial(card);
                 }
             }
-            view.get(NickName).showInitial(new InitialCardMess(card));
+            if(view.get(NickName)!=null) {
+                view.get(NickName).showInitial(new InitialCardMess(card));
+            }
         };
 
         /**
@@ -545,7 +557,8 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     player.pickCard((GoldCard) game.getGoldDeck().pickCard());
                 }
             }
-            view.get(NickName).initialiseCl(new Message("Server",MessageType.Init_Cl));
+            if(view.get(NickName)!=null)
+                view.get(NickName).initialiseCl(new Message("Server",MessageType.Init_Cl));
         }
 
         /**
@@ -597,53 +610,53 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * Manages the reconnection of a player
+         * Manages the reconnection of a player using its nickname as an authentication element.
          * @param nickName The name of the player to reconnect
          * @param virtualView The VirtualView associated to the player.
          */
         public void reconnect(String nickName, VirtualView virtualView) {
-            if(offlinePlayers.containsKey(nickName)){
-                synchronized (lockPlayers) {
-                    view.put(nickName, virtualView);
-                    onlinePlayers.put(nickName, offlinePlayers.get((nickName)));
-                    offlinePlayers.remove(nickName);
-                    if(playerTurn.isEmpty()){
-                        playerTurn = nickName;
+            synchronized (lockPlayers) {
+                if (offlinePlayers.containsKey(nickName)) {
+                    synchronized (lockPlayers) {
+                        view.put(nickName, virtualView);
+                        onlinePlayers.put(nickName, offlinePlayers.get((nickName)));
+                        offlinePlayers.remove(nickName);
+                        if (playerTurn.isEmpty()) {
+                            playerTurn = nickName;
+                        }
                     }
-                }
-                Iterator<Player> iterator  = game.getPlayers().iterator();
-                Player player = null;
-                while(iterator.hasNext()){
-                    player = (Player) iterator.next();
-                    if(player.getNickName().equals(nickName))
-                        break;
-                }
-                //Control if he already chose his objective card
-                if(player!=null && player.getPlayerObjective()==null){
-                    if(!objectives.containsKey(nickName)){
-                        List<ObjectiveCard> obj = new ArrayList<>();
-                        obj.add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
-                        obj.add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
-                        objectives.put(nickName,obj);
+                    Iterator<Player> iterator = game.getPlayers().iterator();
+                    Player player = null;
+                    while (iterator.hasNext()) {
+                        player = (Player) iterator.next();
+                        if (player.getNickName().equals(nickName))
+                            break;
                     }
-                    view.get(nickName).chooseObjectiveCard(new ChooseObjReq(objectives.get(nickName)));
-                }
-
-                //Control if he has played the initial
-                else if(player!=null && player.getPlayerScheme().getPlayedCards().isEmpty()){
-                    if(player.getPlayerInitial()==null){
-                        player.setPlayerInitial((InitialCard) game.getInitialDeck().pickCard());
+                    //Control if he already chose his objective card
+                    if (player != null && player.getPlayerObjective() == null) {
+                        if (!objectives.containsKey(nickName)) {
+                            List<ObjectiveCard> obj = new ArrayList<>();
+                            obj.add(game.getObjectiveCards().remove(game.getObjectiveCards().size() - 1));
+                            obj.add(game.getObjectiveCards().remove(game.getObjectiveCards().size() - 1));
+                            objectives.put(nickName, obj);
+                        }
+                        view.get(nickName).chooseObjectiveCard(new ChooseObjReq(objectives.get(nickName)));
                     }
-                    view.get(nickName).showInitial(new InitialCardMess(player.getPlayerInitial()));
-                }
-                else{
-                    initGame(nickName);
-                }
+
+                    //Control if he has played the initial
+                    else if (player != null && player.getPlayerScheme().getPlayedCards().isEmpty()) {
+                        if (player.getPlayerInitial() == null) {
+                            player.setPlayerInitial((InitialCard) game.getInitialDeck().pickCard());
+                        }
+                        view.get(nickName).showInitial(new InitialCardMess(player.getPlayerInitial()));
+                    } else {
+                        initGame(nickName);
+                    }
 
 
-            }
-            else{
-                virtualView.showLogin(false,true);
+                } else {
+                    virtualView.showLogin(false, true);
+                }
             }
         }
     }

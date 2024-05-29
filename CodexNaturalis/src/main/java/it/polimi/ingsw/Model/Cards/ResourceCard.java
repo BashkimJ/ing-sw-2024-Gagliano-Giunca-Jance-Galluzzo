@@ -60,8 +60,8 @@ public  class ResourceCard extends Card {
                     y = 0;
                     break;
                 }else{
-                    x = 4;
-                    y = 0;
+                    x = 0;
+                    y = 4;
                 }
             }
             case "UR" -> {
@@ -70,8 +70,8 @@ public  class ResourceCard extends Card {
                     y = 2;
                     break;
                 }else{
-                    x = 4;
-                    y = 2;
+                    x = 0;
+                    y = 6;
                 }
 
             }
@@ -81,8 +81,8 @@ public  class ResourceCard extends Card {
                     y = 0;
                     break;
                 }else{
-                    x = 6;
-                    y = 0;
+                    x = 2;
+                    y = 4;
                 }
 
             }
@@ -92,8 +92,8 @@ public  class ResourceCard extends Card {
                     y = 2;
                     break;
                 }else{
-                    x = 6;
-                    y = 2;
+                    x = 2;
+                    y = 6;
                 }
             }
         }
@@ -148,7 +148,7 @@ public  class ResourceCard extends Card {
     @Override
     public String toString(){
         String myCardID = "**********ID: " + getCardId()+"*****************\n";
-        String[][] card = new String[7][3];
+        String[][] card = new String[3][7];
         String defColor = " ";
         switch (resourceType){
             case Animal ->defColor = red;
@@ -156,9 +156,9 @@ public  class ResourceCard extends Card {
             case Insects -> defColor = blue;
             case Fungi -> defColor = purple;
         }
-       for(int i=0;i<7;i++){
-           for(int j=0;j<3;j++){
-               if(i==3){
+       for(int i=0;i<3;i++){
+           for(int j=0;j<7;j++){
+               if(j==3){
                    card[i][j] = " ";
                }
                else{
@@ -185,8 +185,8 @@ public  class ResourceCard extends Card {
        card = colorCorner(corner,card,"DR","retro");
        corner = retro.getDownLeft();
        card = colorCorner(corner,card,"DL","retro");
-       for(int i =0;i<7;i++){
-           for(int j =0;j<3;j++){
+       for(int i =0;i<3;i++){
+           for(int j =0;j<7;j++){
                myCardID = myCardID + card[i][j];
            }
            myCardID+="\n";

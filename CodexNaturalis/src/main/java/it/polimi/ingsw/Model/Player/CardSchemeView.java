@@ -9,6 +9,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Map;
 
+/**
+ * This class is very similar to the CardScheme,but it doesn't have the setter methods. It is used
+ * to send the CardScheme from the server to player in order not to risk any changes during the travel of the corrisponding
+ * message.
+ * @see CardScheme
+ */
 public class CardSchemeView implements Serializable {
     private final Map<ArrayList<Integer>, Side> playedCards;
     private final Map<ArrayList<Integer>, Resource> CardsResource;
