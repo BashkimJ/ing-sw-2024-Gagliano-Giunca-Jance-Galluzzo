@@ -6,6 +6,10 @@ import main.java.it.polimi.ingsw.Network.Messages.*;
 
 import static main.java.it.polimi.ingsw.Network.Messages.MessageType.Winner_Mess;
 
+/**
+ * Class that implements the View. It is used from the controller to send messages to the client.
+ * Also, it hides from the controller then network components such as the ClientHandler!
+ */
 public class VirtualView implements View {
     ClientHandler clientHandler;
     public VirtualView(ClientHandler ClientHandler){
@@ -33,7 +37,7 @@ public class VirtualView implements View {
     }
 
     @Override
-    public void initialiseCl(Message message) {
+    public void alertGameStarted(Message message) {
         clientHandler.sendMessage(message);
     }
 
@@ -57,6 +61,21 @@ public class VirtualView implements View {
     }
     public void winner(String message){
         clientHandler.sendMessage(new WinnerMess("Server",message));
+    }
+
+    @Override
+    public void afterPlayerMove(Message message) {
+        clientHandler.sendMessage(message);
+    }
+
+    @Override
+    public void serverInfo() {
+
+    }
+
+    @Override
+    public void stop() {
+
     }
 
 

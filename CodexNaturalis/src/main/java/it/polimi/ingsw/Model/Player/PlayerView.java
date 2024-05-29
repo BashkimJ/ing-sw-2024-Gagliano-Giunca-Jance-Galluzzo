@@ -31,7 +31,30 @@ public class PlayerView implements Serializable {
          this.playerHand = player.getPlayerHand();
          this.playerScheme  =new CardSchemeView(player.getPlayerScheme());
     }
-
+    public String getNickName(){
+        return this.nickName;
+    }
+    public int getPoints(){
+        return this.points;
+    }
+    public Colour getPlayerColour(){
+        return this.playerColour;
+    }
+    public BufferedImage getTokenImage(){
+        return this.tokenImage;
+    }
+    public InitialCard getPlayerInitial(){
+        return this.playerInitial;
+    }
+    public ObjectiveCard getPlayerObjective(){
+        return this.playerObjective;
+    }
+    public List<ResourceCard> getPlayerHand() {
+        return playerHand;
+    }
+    public CardSchemeView getPlayerScheme() {
+        return playerScheme;
+    }
 
     @Override
     public String toString(){

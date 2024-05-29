@@ -1,4 +1,4 @@
-package test.java.it.polimi.ingsw.Model.Cards;
+package test.java.it.polimi.ingsw.Cards;
 
 import main.java.it.polimi.ingsw.Model.Cards.Corner;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,23 +18,23 @@ class CornerTest {
     }
     @Test
     void isVisible() {
-        assertTrue(upLeft.isVisible());
+        assertEquals(true, upLeft.isVisible());
     }
 
     @Test
     void isFree() {
-        assertTrue(upLeft.isFree());
+        assertEquals(true,upLeft.isFree());
     }
 
     @Test
     void setFreeValue() {
-        assertTrue(upLeft.isFree());
+        assertEquals(true,upLeft.isFree());
     }
 
     @Test
     void getResource() {
         assertEquals(Animal, upLeft.getResource());
-        assertNull(downLeft.getResource());
+        assertEquals(null, downLeft.getResource());
     }
 
     @Test
