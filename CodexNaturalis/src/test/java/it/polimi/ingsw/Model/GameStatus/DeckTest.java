@@ -42,6 +42,7 @@ class DeckTest {
 
     @Test
     void shuffle(){
+        //Test that the order of the cards is different
         List<Card> originalDeck = new ArrayList<>(deck.getCards());
         deck.shuffle();
         assertNotEquals(originalDeck, deck.getCards());
@@ -49,6 +50,7 @@ class DeckTest {
 
     @Test
     void pickCard() {
+        //Test that the function returns the last card of the deck and that it gets removed from it
         for(int i = 85; i>=0; i--){
             assertEquals(cards.getLast(), lastcard = deck.pickCard());
             assertEquals(i, deck.getCards().size());
