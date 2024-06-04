@@ -123,6 +123,7 @@ public class InitialCard extends Card{
         return board;
     }
 
+
     @Override
     public String toString(){
         String myCardId = "***********ID: " + getCardId() + " ****************\n";

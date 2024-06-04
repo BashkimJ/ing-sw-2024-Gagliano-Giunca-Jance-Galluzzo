@@ -1,4 +1,4 @@
-package test.java.it.polimi.ingsw.GameStatus;
+package test.java.it.polimi.ingsw.Model.GameStatus;
 
 import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
 import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
@@ -7,6 +7,7 @@ import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
 import main.java.it.polimi.ingsw.Model.Enumerations.Items;
 import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
 import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import main.java.it.polimi.ingsw.Model.GameStatus.Deck;
 import main.java.it.polimi.ingsw.Model.GameStatus.Game;
 import main.java.it.polimi.ingsw.Model.Player.Player;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,6 +44,9 @@ class GameTest {
         expectedList.add(p2);
         expectedList.add(p3);
         assertEquals(expectedList, game.getPlayers());
+
+        assertThrows(PlayersLimitExceededException.class, () -> game.addPlayer(p4));
+
         game.removePlayer(p2);
         expectedList.remove(p2);
         assertEquals(expectedList, game.getPlayers());
@@ -50,8 +54,7 @@ class GameTest {
         expectedList.remove(p1);
         assertEquals(expectedList, game.getPlayers());
 
-        //TO DO: test exceptions
-
+        assertThrows(PlayerNotFoundException.class, () -> game.removePlayer(p2));
     }
 
 
@@ -90,17 +93,29 @@ class GameTest {
 
     @Test
     void getResourceDeck() {
-        //TO DO
+        Deck resourceDeck = game.getResourceDeck();
+
+        for(int i = 1; i < 41; i++){
+            assertEquals(i, resourceDeck.getCards().get(i-1).getCardId());
+        }
     }
 
     @Test
     void getGoldDeck() {
-        //TO DO
+        Deck goldDeck = game.getGoldDeck();
+
+        for(int i = 41; i < 81; i++){
+            assertEquals(i, goldDeck.getCards().get(i-41).getCardId());
+        }
     }
 
     @Test
     void getInitialDeck() {
-        //TO DO
+        Deck initialDeck = game.getInitialDeck();
+
+        for(int i = 81; i < 87; i++){
+            assertEquals(i, initialDeck.getCards().get(i-81).getCardId());
+        }
     }
 
 }

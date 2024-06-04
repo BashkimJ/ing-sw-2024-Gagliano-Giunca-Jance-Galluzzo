@@ -6,6 +6,26 @@
     "front": {
       "upLeft": {
         "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
         "Free": true,
         "resourceType": "Fungi"
       },
@@ -23,26 +43,6 @@
         "Visible": true,
         "Free": true,
         "resourceType": "Animal"
-      }
-    },
-    "retro": {
-      "upLeft": {
-        "Visible": true,
-        "Free": true
-      },
-      "downLeft": {
-        "Visible": true,
-        "Free": true,
-        "resourceType": "Insects"
-      },
-      "upRight": {
-        "Visible": true,
-        "Free": true,
-        "resourceType": "Plant"
-      },
-      "downRight": {
-        "Visible": true,
-        "Free": true
       }
     },
     "CardId": 81
@@ -55,6 +55,26 @@
       "upLeft": {
         "Visible": true,
         "Free": true,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
         "resourceType": "Plant"
       },
       "downLeft": {
@@ -71,26 +91,6 @@
         "Visible": true,
         "Free": true,
         "resourceType": "Insects"
-      }
-    },
-    "retro": {
-      "upLeft": {
-        "Visible": true,
-        "Free": true,
-        "resourceType": "Animal"
-      },
-      "downLeft": {
-        "Visible": true,
-        "Free": true
-      },
-      "upRight": {
-        "Visible": true,
-        "Free": true
-      },
-      "downRight": {
-        "Visible": true,
-        "Free": true,
-        "resourceType": "Fungi"
       }
     },
     "CardId": 82
@@ -103,6 +103,24 @@
     "front": {
       "upLeft": {
         "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
         "Free": true,
         "resourceType": "Insects"
       },
@@ -122,24 +140,6 @@
         "resourceType": "Plant"
       }
     },
-    "retro": {
-      "upLeft": {
-        "Visible": true,
-        "Free": true
-      },
-      "downLeft": {
-        "Visible": true,
-        "Free": true
-      },
-      "upRight": {
-        "Visible": true,
-        "Free": true
-      },
-      "downRight": {
-        "Visible": true,
-        "Free": true
-      }
-    },
     "CardId": 83
   },
 {
@@ -148,6 +148,24 @@
     "Insects"
   ],
   "front": {
+    "upLeft": {
+      "Visible": true,
+      "Free": true
+    },
+    "downLeft": {
+      "Visible": true,
+      "Free": true
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true
+    },
+    "downRight": {
+      "Visible": true,
+      "Free": true
+    }
+  },
+  "retro": {
     "upLeft": {
       "Visible": true,
       "Free": true,
@@ -167,24 +185,6 @@
       "Visible": true,
       "Free": true,
       "resourceType": "Fungi"
-    }
-  },
-  "retro": {
-    "upLeft": {
-      "Visible": true,
-      "Free": true
-    },
-    "downLeft": {
-      "Visible": true,
-      "Free": true
-    },
-    "upRight": {
-      "Visible": true,
-      "Free": true
-    },
-    "downRight": {
-      "Visible": true,
-      "Free": true
     }
   },
   "CardId": 84
@@ -198,6 +198,24 @@
   "front": {
     "upLeft": {
       "Visible": true,
+      "Free": true
+    },
+    "downLeft": {
+      "Visible": false,
+      "Free": false
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true
+    },
+    "downRight": {
+      "Visible": false,
+      "Free": false
+    }
+  },
+  "retro": {
+    "upLeft": {
+      "Visible": true,
       "Free": true,
       "resourceType": "Insects"
     },
@@ -217,24 +235,6 @@
       "resourceType": "Animal"
     }
   },
-  "retro": {
-    "upLeft": {
-      "Visible": true,
-      "Free": true
-    },
-    "downLeft": {
-      "Visible": false,
-      "Free": false
-    },
-    "upRight": {
-      "Visible": true,
-      "Free": true
-    },
-    "downRight": {
-      "Visible": false,
-      "Free": false
-    }
-  },
   "CardId": 85
 },
   {
@@ -244,6 +244,24 @@
       "Fungi"
     ],
     "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
       "upLeft": {
         "Visible": true,
         "Free": true,
@@ -263,24 +281,6 @@
         "Visible": true,
         "Free": true,
         "resourceType": "Insects"
-      }
-    },
-    "retro": {
-      "upLeft": {
-        "Visible": true,
-        "Free": true
-      },
-      "downLeft": {
-        "Visible": false,
-        "Free": false
-      },
-      "upRight": {
-        "Visible": true,
-        "Free": true
-      },
-      "downRight": {
-        "Visible": false,
-        "Free": false
       }
     },
     "CardId": 86

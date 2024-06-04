@@ -1,4 +1,4 @@
-package test.java.it.polimi.ingsw.Cards;
+package test.java.it.polimi.ingsw.Model.Cards;
 
 import main.java.it.polimi.ingsw.Model.Cards.Corner;
 import org.junit.jupiter.api.BeforeEach;
