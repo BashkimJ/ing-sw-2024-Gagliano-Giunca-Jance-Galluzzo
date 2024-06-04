@@ -26,7 +26,6 @@ public class SocketClient extends Client {
     private Socket socket;
     private ObjectInputStream input;
     private ObjectOutputStream output;
-    private final ExecutorService readService = Executors.newSingleThreadExecutor();
     private final Object lockConn;
 
 
@@ -40,12 +39,14 @@ public class SocketClient extends Client {
      public SocketClient(ClientManager clientManager,String IP, int port) throws IOException {
          this.setClientManager(clientManager);
          this.socket = new Socket();
-         this.socket.connect(new InetSocketAddress(IP,port));
-         output = new ObjectOutputStream(socket.getOutputStream());
-         input = new ObjectInputStream(socket.getInputStream());
-         lockConn  = new Object();
+         connect(socket,IP,port);
+         lockConn = new Object();
+     }
 
-
+     private void connect(Socket socket,String Ip,int port) throws IOException{
+             this.socket.connect(new InetSocketAddress(Ip, port));
+             output = new ObjectOutputStream(socket.getOutputStream());
+             input = new ObjectInputStream(socket.getInputStream());
      }
 
     /**
@@ -72,20 +73,21 @@ public class SocketClient extends Client {
      */
     @Override
     public void receiveMessage() {
-        readService.execute(() -> {
-            while (!readService.isShutdown()) {
+        Thread readService  = new Thread(()->{
+            while(!Thread.currentThread().isInterrupted()){
                 Message message = null;
-                try {
+                try{
                     message = (Message) input.readObject();
                 } catch (IOException | ClassNotFoundException e) {
+                    Thread.currentThread().interrupt();
                     Disconnect();
-
                 }
-                if(message!=null && !message.getType().equals(MessageType.Ping)) {
+                if(message!=null && !message.getType().equals(MessageType.Ping)){
                     clientManager.update(message);
                 }
             }
         });
+        readService.start();
     }
 
 
@@ -97,11 +99,9 @@ public class SocketClient extends Client {
         synchronized (lockConn) {
             try {
                 if (!socket.isClosed()) {
-                    readService.shutdown();
                     socket.close();
                     clientManager.update(new ErrorMessage("Disconnected please try to close and reopen the app. To reconnect you need to use " +
                             "the previous name."));
-                    Thread.currentThread().interrupt();
                     System.exit(0);
                 }
             } catch (IOException e) {

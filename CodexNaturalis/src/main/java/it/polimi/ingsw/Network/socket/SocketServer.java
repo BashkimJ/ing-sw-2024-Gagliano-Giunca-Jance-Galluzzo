@@ -12,9 +12,7 @@ import main.java.it.polimi.ingsw.View.VirtualView;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class represents the Server accepting only socket connections.
@@ -24,7 +22,7 @@ public class SocketServer implements Runnable{
     private final int port;
     private String address;
     private ServerSocket socketServer;
-    private Map<String, ClientHandler> clientHandler;
+    private List<ClientHandler> clientHandler;
     private GameController gameController;
 
     /**
@@ -35,7 +33,7 @@ public class SocketServer implements Runnable{
     public SocketServer(GameController gameController,int port) {
         this.port = port;
         this.gameController = gameController;
-        this.clientHandler = Collections.synchronizedMap(new HashMap<String,ClientHandler>());
+        this.clientHandler = Collections.synchronizedList(new ArrayList<ClientHandler>());
 
     }
 
@@ -55,7 +53,6 @@ public class SocketServer implements Runnable{
             try {
                 Socket clientSocket = socketServer.accept();
                 System.out.println("New connection requested");
-                clientSocket.setSoTimeout(10000);
                 SocketClientHandler ClientHandler = new SocketClientHandler(this, clientSocket);
                 Thread thread = new Thread(ClientHandler);
                 thread.start();
@@ -68,19 +65,19 @@ public class SocketServer implements Runnable{
     }
 
     /**
-     * This method is responsible for the login phase when a playe ask to connect specifying his nickname which will serve ass an authentication credential.
-     * @param NickName The nickname of the player to login.
+     * This method is responsible for the login phase when a player ask to connect specifying his nickname which will serve ass an authentication credential.
      * @param clientHandler The ClientHandler object associated to the player.
      * @throws PlayersLimitExceededException Throws this exception when trying to log in a player exceeding the maximum number of players the game must contain.
      */
-    private void addClient(String NickName, ClientHandler clientHandler) throws PlayersLimitExceededException {
+    private void addClient(ClientHandler clientHandler) throws PlayersLimitExceededException {
         VirtualView virtualview =  new VirtualView(clientHandler);
         if(gameController.getState().equals(GameState.Lobby_State)){
-            addNewClient(NickName, clientHandler,virtualview);
+            addNewClient(clientHandler,virtualview);
         }
         else if(gameController.getState().equals(GameState.In_Game)){
-            this.clientHandler.put(NickName,clientHandler);
-            gameController.reconnect(NickName,virtualview);
+            this.clientHandler.add(clientHandler);
+            gameController.reconnect(clientHandler.getNickName(),virtualview);
+            System.out.println(clientHandler.getNickName() + "Reconnected");
 
         }
 
@@ -89,14 +86,13 @@ public class SocketServer implements Runnable{
     /**
      * Method called from the public method addClient when a player is connecting for the first time.
      * We can see this method as a very simple sign in request.
-     * @param NickName The nickname chosen by the player to connect.
      * @param clientHandler The ClientHandler object associated to the player.
      * @param virtualView The VirtualView object associated to the ClientHandler object of the player.
      */
-    private void addNewClient(String NickName, ClientHandler clientHandler,VirtualView virtualView) throws PlayersLimitExceededException {
-        if(gameController.checkNickName(NickName)){
-            this.clientHandler.put(NickName,clientHandler);
-            gameController.firstLogin(NickName, virtualView);
+    private void addNewClient(ClientHandler clientHandler,VirtualView virtualView) throws PlayersLimitExceededException {
+        if(gameController.checkNickName(clientHandler.getNickName())){
+            this.clientHandler.add(clientHandler);
+            gameController.firstLogin(clientHandler.getNickName(), virtualView);
             virtualView.showLogin(true,true);
             if(gameController.getState()==GameState.In_Game){
                 gameController.objectiveCardOptionsSender();
@@ -115,7 +111,8 @@ public class SocketServer implements Runnable{
     public void onMessageReceived(Message message,ClientHandler client){
         if(message.getType()==MessageType.Login_Req){
             try {
-                addClient(message.getNickName(),client);
+                client.setNickName(message.getNickName());
+                addClient(client);
             } catch (PlayersLimitExceededException e) {
                 System.out.println("Couldn't add client....");
             }
@@ -123,7 +120,7 @@ public class SocketServer implements Runnable{
         else{
             gameController.onMessageReceived(message);
             if(gameController.getState().equals(GameState.End_Game)){
-                this.gameController = new GameController();
+
             }
         }
     }
@@ -134,27 +131,11 @@ public class SocketServer implements Runnable{
      * @throws PlayerNotFoundException Exception thrown when the player was not found in the game.
      */
     public void ClientDisconnection(ClientHandler clientHandler ) throws PlayerNotFoundException {
-        String name = getName(clientHandler);
+        String name = clientHandler.getNickName();
         System.out.println(name + " Disconnecting...");
         gameController.removePlayer(name);
-        this.clientHandler.remove(name);
+        this.clientHandler.remove(clientHandler);
 
     }
-
-    /**
-     * Method that returns the name of the player associated with a specified ClientHandler object.
-     * @param clientHandler The ClientHandler object, for whom we want to know the name.
-     * @return The name(String).If the clientHandler is not contained in the server it will return "No name..."
-     * in order to not return Null.
-     */
-    private String getName(ClientHandler clientHandler){
-        for(String name:this.clientHandler.keySet()){
-            if(clientHandler.equals(this.clientHandler.get(name))){
-                return name;
-            }
-        }
-        return "No name...";
-    }
-
 
 }

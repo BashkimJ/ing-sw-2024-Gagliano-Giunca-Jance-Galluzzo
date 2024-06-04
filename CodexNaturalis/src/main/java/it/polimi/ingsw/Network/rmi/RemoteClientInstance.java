@@ -31,17 +31,21 @@ public class RemoteClientInstance extends Client implements  RemoteClient,Runnab
      * @param clientManager The ClientManager object related to the Client.
      * @throws RemoteException In cases when couldn't find the registry.
      */
-    public RemoteClientInstance(String ipAddress, ClientManager clientManager) throws RemoteException {
-        Registry registry = LocateRegistry.getRegistry(ipAddress,1099);
+    public RemoteClientInstance(String ipAddress, ClientManager clientManager) throws RemoteException{
+        connect(ipAddress);
+        pingService = Executors.newScheduledThreadPool(1);
+        readService  =  Executors.newSingleThreadExecutor();
+        ping();
+        setClientManager(clientManager);
+    }
+
+    private void connect(String IP) throws RemoteException{
+        Registry registry = LocateRegistry.getRegistry(IP,1099);
         try {
             server =(RemoteServer) registry.lookup("Server");
         } catch (NotBoundException e) {
             System.out.println("Couldn't find server");
-            return;
         }
-        pingService = Executors.newScheduledThreadPool(1);
-        ping();
-        setClientManager(clientManager);
     }
 
 
@@ -58,9 +62,6 @@ public class RemoteClientInstance extends Client implements  RemoteClient,Runnab
             try {
                 if(server!=null) {
                     server.messageToServer(message, this);
-                }else{
-                    clientManager.update(new ErrorMessage("Disconnected please try to close and reopen the app. To reconnect you need to use " +
-                            "the previous name."));
                 }
             } catch (RemoteException e) {
                 this.Disconnect();
@@ -77,13 +78,10 @@ public class RemoteClientInstance extends Client implements  RemoteClient,Runnab
      */
     @Override
     public void Disconnect() {
-        if(server!=null) {
-            this.server = null;
+            pingService.shutdown();
             clientManager.update(new ErrorMessage("Disconnected please try to close and reopen the app. To reconnect you need to use " +
                     "the previous name."));
-            pingService.shutdown();
             System.exit(0);
-        }
     }
 
     /**
@@ -92,10 +90,9 @@ public class RemoteClientInstance extends Client implements  RemoteClient,Runnab
      */
     @Override
     public void messageToClient(Message message) throws RemoteException {
-          readService.execute(()->{
+              readService.execute(()->{
                   clientManager.update(message);
-
-          });
+              });
     }
 
     /**

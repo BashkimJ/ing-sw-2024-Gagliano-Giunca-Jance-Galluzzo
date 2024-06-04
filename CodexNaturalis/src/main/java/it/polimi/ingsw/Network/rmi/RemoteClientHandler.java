@@ -16,6 +16,7 @@ public class RemoteClientHandler implements ClientHandler {
     private RemoteServerInstance server;
     private boolean isConnected;
     private ScheduledExecutorService pingService;
+    private String NickName;
     public RemoteClientHandler(RemoteClient client, RemoteServerInstance remoteServerInstance) {
         this.client = client;
         this.server = remoteServerInstance;
@@ -60,5 +61,15 @@ public class RemoteClientHandler implements ClientHandler {
     @Override
     public boolean isConnected() {
         return this.isConnected;
+    }
+
+    @Override
+    public void setNickName(String nickName) {
+        NickName = nickName;
+    }
+
+    @Override
+    public String getNickName(){
+        return NickName;
     }
 }

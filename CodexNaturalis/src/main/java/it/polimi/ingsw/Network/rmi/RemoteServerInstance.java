@@ -16,15 +16,13 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * The instance of the server that implements the RMI logic for connections.
  */
 public class RemoteServerInstance extends UnicastRemoteObject implements RemoteServer {
-    private Map<String, ClientHandler> clientHandler;
+    private List<ClientHandler> clientHandler;
     private GameController gameController;
 
     /**
@@ -44,7 +42,7 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
            return;
        }
        this.gameController = gameController;
-       clientHandler = Collections.synchronizedMap(new HashMap<String,ClientHandler>());
+       clientHandler = Collections.synchronizedList(new ArrayList<ClientHandler>());
     }
 
     /**
@@ -57,6 +55,9 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
             addClient(message.getNickName(), client);
         } else {
             gameController.onMessageReceived(message);
+            if(gameController.getState().equals(GameState.End_Game)){
+
+            }
         }
     }
 
@@ -67,6 +68,7 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
      */
     private void addClient(String NickName, RemoteClient client)  {
         RemoteClientHandler clientHandler= new RemoteClientHandler(client,this);
+        clientHandler.setNickName(NickName);
         VirtualView virtualview =  new VirtualView(clientHandler);
         if(gameController.getState().equals(GameState.Lobby_State)){
             try {
@@ -76,8 +78,9 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
             }
         }
         else if(gameController.getState().equals(GameState.In_Game)){
-            this.clientHandler.put(NickName,clientHandler);
+           this.clientHandler.add(clientHandler);
             gameController.reconnect(NickName,virtualview);
+            System.out.println(clientHandler.getNickName() + "Reconnected");
 
         }
 
@@ -91,7 +94,7 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
      */
     private void addNewClient(String NickName, ClientHandler clientHandler,VirtualView virtualView) throws PlayersLimitExceededException {
         if(gameController.checkNickName(NickName)){
-            this.clientHandler.put(NickName,clientHandler);
+            this.clientHandler.add(clientHandler);
             gameController.firstLogin(NickName, virtualView);
             virtualView.showLogin(true,true);
             if(gameController.getState()==GameState.In_Game){
@@ -108,27 +111,10 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
      * @throws PlayerNotFoundException Exception thrown when the player was not found in the game.
      */
     public void ClientDisconnection(ClientHandler clientHandler ) throws PlayerNotFoundException {
-        String name = getName(clientHandler);
+        String name = clientHandler.getNickName();
         System.out.println(name + " Disconnecting...");
         gameController.removePlayer(name);
-        this.clientHandler.remove(name);
-
-
+        this.clientHandler.remove(clientHandler);
     }
 
-    /**
-     * Method that returns the name of the player associated with a specified ClientHandler object.
-     * @param clientHandler The ClientHandler object, for whom we want to know the name.
-     * @return The name(String).If the clientHandler is not contained in the server it will return "No name..."
-     * in order to not return Null.
-     */
-
-    private String getName(ClientHandler clientHandler){
-        for(String name:this.clientHandler.keySet()){
-            if(clientHandler.equals(this.clientHandler.get(name))){
-                return name;
-            }
-        }
-        return "No name...";
-    }
 }

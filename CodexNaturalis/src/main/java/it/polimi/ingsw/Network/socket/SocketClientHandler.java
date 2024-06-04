@@ -32,6 +32,7 @@ public class SocketClientHandler implements ClientHandler,Runnable {
     private final Object inputLockObject;
     private final  Object outputLockObject;
     private ScheduledExecutorService pingService;
+    private String NickName;
     public SocketClientHandler(SocketServer socketServer, Socket socketClient){
         this.socketServer = socketServer;
         this.socketClient = socketClient;
@@ -62,11 +63,9 @@ public class SocketClientHandler implements ClientHandler,Runnable {
                         Message message = null;
                         try {
                             message = (Message) in.readObject();
-                            if (message != null && message.getType()!= MessageType.Ping) {
-                                System.out.println("Message received");
+                            if (message != null && message.getType() != MessageType.Ping) {
+                                System.out.println("Message received from "  +getNickName());
                             }
-                        }catch(SocketTimeoutException e){
-                            continue;
                         }
                         catch (IOException | ClassNotFoundException e) {
                             Thread.currentThread().interrupt();
@@ -151,5 +150,12 @@ public class SocketClientHandler implements ClientHandler,Runnable {
                 5000,
                 TimeUnit.MILLISECONDS
                 );
+    }
+
+    public void setNickName(String nickName) {
+        NickName = nickName;
+    }
+    public String getNickName(){
+        return NickName;
     }
 }

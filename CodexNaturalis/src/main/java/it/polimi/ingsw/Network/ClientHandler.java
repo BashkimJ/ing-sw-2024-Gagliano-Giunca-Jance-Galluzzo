@@ -29,4 +29,7 @@ public interface ClientHandler extends Remote {
      * Method to constantly send a ping message to the client in order to keep track of his connection.
      */
     abstract void ping();
+
+    abstract String getNickName();
+    abstract void setNickName(String nickName);
 }
