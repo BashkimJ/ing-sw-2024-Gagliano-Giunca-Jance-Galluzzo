@@ -112,6 +112,7 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
                     "Choose Y", JOptionPane.PLAIN_MESSAGE));
             int[] pos={x, y};
             gui.clientManager.placeCard(card.getCardId(), frontSide ? "-f" : "-r", pos);
+            System.out.println(gui.clientManager.getNickName() + " placing card: [id, side, position] " + card.getCardId() + ", " + (frontSide ? "-f" : "-r") + ", " + "{" + pos[0] + ", " + pos[1] +"}");
             selectedCardIndex = -1;
         }
         @Override

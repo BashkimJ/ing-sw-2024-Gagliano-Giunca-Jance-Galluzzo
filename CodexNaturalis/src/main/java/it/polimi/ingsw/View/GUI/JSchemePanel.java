@@ -100,9 +100,9 @@ public class JSchemePanel extends JPanel {
         Side side = playedCards.get(coordinates);
 
         if(side.getDownLeft().getResource()!=null && side.getUpLeft().getResource()!=null && side.getDownRight().getResource()!=null && side.getUpRight().getResource()!=null)
-            isFront = true;
-        else
             isFront = false;
+        else
+            isFront = true;
         createCard(clientPane, id, isFront, matrixOrigin);
         cardsIds.remove(matrixOrigin);
         for (Point p : cardsIds.keySet()) {
@@ -111,17 +111,17 @@ public class JSchemePanel extends JPanel {
             coordinates.add(0, p.x);
             coordinates.add(1, p.y);
             side = playedCards.get(coordinates);
-            if(side.getDownLeft().isVisible() && side.getUpLeft().isVisible() && side.getDownRight().isVisible() && side.getUpRight().isVisible())
-                isFront = false;
-            else
-                isFront = true;
+            isFront = getSide(side);
             createCard(clientPane, id, isFront, p);
-
         }
 
         scrollPane.setViewportView(clientPane);
         this.clientPane = clientPane;
         centerView();
+    }
+    private boolean getSide(Side side){
+        return !(side.getDownLeft().isVisible() && side.getUpLeft().isVisible() && side.getDownRight().isVisible() && side.getUpRight().isVisible()
+                && side.getUpLeft().getResource() == null);
     }
     private void createCard(JLayeredPane clientPane, Integer id, boolean isFront, Point placeTo){
         String side = isFront ? "Front" : "Back";

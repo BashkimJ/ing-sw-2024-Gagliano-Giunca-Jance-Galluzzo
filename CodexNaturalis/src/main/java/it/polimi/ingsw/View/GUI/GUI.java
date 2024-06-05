@@ -133,7 +133,12 @@ public class GUI implements View {
 
     @Override
     public void showChatMessage(Message message) {
-
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gameFrame.shotChatMessage(message.getNickName(), ((ChatMess)message).getMess());
+            }
+        });
     }
 
     @Override
@@ -167,7 +172,7 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gameFrame.updateRightPanel(revealed, obj, deck);
+                gameFrame.updateRightPanel(revealed, obj, deck, onlinePlayers);
                 gameFrame.updateLeftPanel(onlinePlayers, turn);
             }
         });

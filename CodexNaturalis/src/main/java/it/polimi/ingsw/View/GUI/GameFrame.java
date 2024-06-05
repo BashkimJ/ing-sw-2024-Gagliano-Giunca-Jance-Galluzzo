@@ -7,6 +7,7 @@ import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
 import main.java.it.polimi.ingsw.Model.Player.CardSchemeView;
 import main.java.it.polimi.ingsw.Model.Player.PlayerView;
 import main.java.it.polimi.ingsw.Network.ClientManager;
+import main.java.it.polimi.ingsw.Network.Messages.ChatMess;
 import main.java.it.polimi.ingsw.Network.Messages.ChooseObjResp;
 
 import javax.swing.*;
@@ -100,6 +101,8 @@ public class GameFrame extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 chosenSide = 1;
                 gui.clientManager.placeInitial(chosenSide);
+                System.out.println(gui.clientManager.getNickName() + " placing initial card: front");
+
             }
         });
         centralPanel.add(front);
@@ -112,6 +115,7 @@ public class GameFrame extends JFrame {
             public void mouseClicked(MouseEvent evt) {
                 chosenSide = 2;
                 gui.clientManager.placeInitial(chosenSide);
+                System.out.println(gui.clientManager.getNickName() + " placing initial card: back");
             }
         });
         centralPanel.add(back);
@@ -159,8 +163,11 @@ public class GameFrame extends JFrame {
         centerManager.updatePlayers(onlinePlayers, turn);
     }
 
-    public void updateRightPanel(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck){
-        rightPanel.update(revealed, obj, deck);
+    public void updateRightPanel(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
+        rightPanel.update(revealed, obj, deck, onlinePlayers);
+    }
+    public void shotChatMessage(String sender, String message){
+        rightPanel.printChatMessage(sender, gui.clientManager.getNickName(), message);
     }
     public static void main(String[] args) {
         GUI gui = new GUI();
