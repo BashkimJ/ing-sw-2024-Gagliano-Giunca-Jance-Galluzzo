@@ -3,6 +3,8 @@ package main.java.it.polimi.ingsw.View.GUI;
 import main.java.it.polimi.ingsw.Model.Cards.GoldCard;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
 import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
+import main.java.it.polimi.ingsw.View.GUI.Utils.SelectableCard;
+import main.java.it.polimi.ingsw.View.GUI.Utils.UnselectableCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +13,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 

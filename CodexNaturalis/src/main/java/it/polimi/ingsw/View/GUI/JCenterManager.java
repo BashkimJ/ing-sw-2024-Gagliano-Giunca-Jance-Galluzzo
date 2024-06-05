@@ -1,6 +1,8 @@
 package main.java.it.polimi.ingsw.View.GUI;
 
 import main.java.it.polimi.ingsw.Model.Player.PlayerView;
+import main.java.it.polimi.ingsw.View.GUI.Utils.PlayerItem;
+import main.java.it.polimi.ingsw.View.GUI.Utils.PlayerRenderer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -9,6 +11,7 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 //Created the first time, then updated
 //Handles the different JCenterPanels, binding them with the nickname of the corresponding player.
@@ -17,8 +20,8 @@ public class JCenterManager extends JPanel {
     private Map<String, JCenterPanel> centerPanels;
     private JPanel leftPanel;
     private JPanel cardsPanel;
-    private JList<String> gamePlayers;
-    private DefaultListModel<String>  listModel;
+    private JList<PlayerItem> gamePlayers;
+    private DefaultListModel<PlayerItem>  listModel;
     public JCenterManager(GUI gui){
         this.gui = gui;
         String nickname = gui.clientManager.getNickName();
@@ -43,11 +46,22 @@ public class JCenterManager extends JPanel {
         if(centerPanels.containsKey(player.getNickName())){
             //Existing scheme
             centerPanel = centerPanels.get(player.getNickName());
+            for(int i = 0; i<listModel.size(); i++){
+                if(Objects.equals(listModel.get(i).getNickname(), player.getNickName())){
+                    PlayerItem playerItem = listModel.get(i);
+                    playerItem.updatePlayer(player);
+                    //calls listmodel.fireContentsChanged()
+                    listModel.setElementAt(playerItem, i);
+                    break;
+                }
+            }
         }else{
             //Create scheme
             centerPanel = createOtherPlayerPanel();
             centerPanels.put(player.getNickName(), centerPanel);
-            listModel.addElement(player.getNickName());
+            PlayerItem playerItem = new PlayerItem(player.getNickName());
+            playerItem.updatePlayer(player);
+            listModel.addElement(playerItem);
             cardsPanel.add(centerPanel, player.getNickName());
         }
         centerPanel.update(player);
@@ -66,8 +80,9 @@ public class JCenterManager extends JPanel {
     private JPanel createLeftPanel(String nickname){
         JPanel leftPanel = new JPanel();
         listModel = new DefaultListModel<>();
-        listModel.addElement(nickname);
+        listModel.addElement(new PlayerItem(nickname));
         gamePlayers = new JList<>(listModel);
+        gamePlayers.setCellRenderer(new PlayerRenderer());
         gamePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         gamePlayers.setLayoutOrientation(JList.VERTICAL);
         gamePlayers.setVisibleRowCount(-1);
@@ -80,7 +95,7 @@ public class JCenterManager extends JPanel {
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {
                 CardLayout cl = (CardLayout)(cardsPanel.getLayout());
-                cl.show(cardsPanel, gamePlayers.getSelectedValue());
+                cl.show(cardsPanel, gamePlayers.getSelectedValue().getNickname());
             }
         }
     }
