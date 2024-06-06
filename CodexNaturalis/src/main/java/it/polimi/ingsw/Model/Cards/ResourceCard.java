@@ -151,10 +151,10 @@ public  class ResourceCard extends Card {
         String[][] card = new String[3][7];
         String defColor = " ";
         switch (resourceType){
-            case Animal ->defColor = red;
+            case Animal ->defColor = blue;
             case Plant -> defColor = green;
-            case Insects -> defColor = blue;
-            case Fungi -> defColor = purple;
+            case Insects -> defColor = purple;
+            case Fungi -> defColor = red;
         }
        for(int i=0;i<3;i++){
            for(int j=0;j<7;j++){

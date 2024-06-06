@@ -340,7 +340,7 @@ public class CardScheme implements Serializable {
      * @throws InvalidSideException The side chosen is not valid.
      */
    public int placeCard(ResourceCard resource, int[] positionTobePlaced,String side)throws GoldCardPlacementException, OutOfBoundsException, InvalidPositionException, InvalidSideException {
-       if(resource.getCondition()!=null && resource.getNecessaryRes()!=null){
+       if(resource.getCondition()!=null && resource.getNecessaryRes()!=null && side.equals("front")){
            if(!checkPlacementCondition( resource)) throw new GoldCardPlacementException();
        }
        int x = positionTobePlaced[0];
@@ -422,6 +422,9 @@ public class CardScheme implements Serializable {
        playedCards.put(pos,sideToBeplaced);
        CardsResource.put(pos,resource.getResourceType());
        cardsIds.put(new Point(positionTobePlaced[0], positionTobePlaced[1]), resource.getCardId());
+       if(side.equals("retro")){
+           return 0;
+       }
        if(resource instanceof GoldCard && ((GoldCard) resource).getCondition()!=null){
            if(((GoldCard) resource).getCondition().getCornerCondition()==true){
                return corners_covering*(resource.getPoints());

@@ -99,13 +99,13 @@ public class CardSchemeView implements Serializable {
     private String getColor(ArrayList<Integer> position) {
         switch (CardsResource.get(position)) {
             case Animal -> {
-                return red;
-            }
-            case Insects -> {
                 return blue;
             }
-            case Fungi -> {
+            case Insects -> {
                 return purple;
+            }
+            case Fungi -> {
+                return red;
             }
             case Plant -> {
                 return green;

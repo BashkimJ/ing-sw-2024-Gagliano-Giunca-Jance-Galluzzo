@@ -80,9 +80,6 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                         if (message.getType().equals(MessageType.New_game) && !askedForNewGame) {
                             initialiseGame(message);
                         }
-                        else{
-                            view.get(message.getNickName()).errorMessage("A new game/saved game already created");
-                        }
                     }
                 }
                 case In_Game,Last_Lap-> {
