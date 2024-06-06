@@ -12,11 +12,11 @@ import java.util.List;
 public class JCenterPanel extends JPanel {
     private JBottomPanel bottomPanel;
     private JSchemePanel schemePanel;
-    public JCenterPanel(GUI gui, JBottomPanel bottomPanel){
+    public JCenterPanel(JSchemePanel schemePanel, JBottomPanel bottomPanel){
         setLayout(new BorderLayout());
         this.bottomPanel = bottomPanel;
-        schemePanel = new JSchemePanel(gui);
-        add(schemePanel, BorderLayout.CENTER);
+        this.schemePanel = schemePanel;
+        add(schemePanel.getSchemePanel(), BorderLayout.CENTER);
         add((JPanel)bottomPanel, BorderLayout.SOUTH);
     }
     public void update(PlayerView player){
