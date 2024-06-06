@@ -22,6 +22,7 @@ public class ClientManager {
     private View view;
     private Client client;
     private String NickName;
+    private boolean initialChosen;
 
     /**
      * Constructor to initialise the ClientManager object
@@ -29,6 +30,7 @@ public class ClientManager {
      */
     public ClientManager(View view){
         this.view = view;
+        initialChosen = false;
     }
 
     /**
@@ -145,6 +147,7 @@ public class ClientManager {
 
             }
             case Game_Started -> {
+                initialChosen = true;
                 view.alertGameStarted(message);
             }
             case Chat_Mess -> {
@@ -154,7 +157,9 @@ public class ClientManager {
                 view.showPlayer(message);
             }
             case Game_St -> {
-                view.showGameInfo(message);
+                if(initialChosen) {
+                    view.showGameInfo(message);
+                }
             }
             case Winner_Mess -> {
                 view.winner(((WinnerMess)message).getWinner());
