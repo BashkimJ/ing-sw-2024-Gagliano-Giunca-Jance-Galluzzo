@@ -164,7 +164,9 @@ public class JRightPanel extends JPanel {
         }
     }
     public void printChatMessage(String sender, String receiver, String msg){
-        chat.append("["+ sender + "-->" + receiver + "]: " + msg + "\n");
+        sender = Objects.equals(sender, gui.clientManager.getNickName()) ? "You" : sender;
+        receiver = Objects.equals(receiver, gui.clientManager.getNickName()) ? "You" : receiver;
+        chat.append("["+ sender + "→" + receiver + "]: " + msg + "\n");
     }
     private class SendMsgListener implements ActionListener{
 

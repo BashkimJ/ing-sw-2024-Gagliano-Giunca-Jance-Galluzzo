@@ -31,7 +31,6 @@ public class JCenterManager extends JPanel {
         centerPanels = new HashMap<>();
         JCenterPanel centerPanel = createMainPlayerPanel();
         centerPanels.put(nickname, centerPanel);
-        System.out.println(centerPanels.keySet());
         cardsPanel.add(centerPanel, nickname);
 
         leftPanel = createLeftPanel(nickname);
@@ -72,10 +71,10 @@ public class JCenterManager extends JPanel {
         //TO DO: different style for online players and player who has the turn
     }
     private JCenterPanel createMainPlayerPanel(){
-        return new JCenterPanel(gui, new JMainBottomPanel(gui));
+        return new JCenterPanel(new JMainSchemePanel(gui), new JMainBottomPanel(gui));
     }
     private JCenterPanel createOtherPlayerPanel(){
-        return new JCenterPanel(gui, new JViewBottomPanel(gui));
+        return new JCenterPanel(new JViewSchemePanel(gui), new JViewBottomPanel(gui));
     }
     private JPanel createLeftPanel(String nickname){
         JPanel leftPanel = new JPanel();

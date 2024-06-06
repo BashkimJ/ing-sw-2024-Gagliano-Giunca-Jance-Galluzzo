@@ -14,9 +14,9 @@ import java.util.List;
 
 public class JMainBottomPanel extends JPanel implements JBottomPanel{
     private GUI gui;
-    private List<SelectableCard> handCards;
-    private boolean frontSide = true;
-    private int selectedCardIndex = -1;
+    private static List<SelectableCard> handCards = new ArrayList<>();
+    private static boolean frontSide = true;
+    private static int selectedCardIndex = -1;
     public JMainBottomPanel(GUI gui){
         this.gui = gui;
         setLayout(new FlowLayout());
@@ -33,8 +33,8 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
 
     }
     public void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand){
-        this.handCards=new ArrayList<>();
-
+        handCards=new ArrayList<>();
+        selectedCardIndex = -1;
         removeAll();
         JToggleButton changeSideBtn = createToggleButton();
         this.add(changeSideBtn);
@@ -70,6 +70,14 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         });
         return changeSideBtn;
     }
+    protected static int getSelectedCardId(){
+        if(selectedCardIndex!=-1)
+            return handCards.get(selectedCardIndex).getCardId();
+        return -1;
+    }
+    protected static boolean getSide(){
+        return frontSide;
+    }
 
     public static void main(String[] args) throws InterruptedException {
 
@@ -104,18 +112,19 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         public void mouseClicked(MouseEvent e) {
             SelectableCard card = (SelectableCard) e.getSource();
             int newIndex = handCards.indexOf(card);
-            if(selectedCardIndex > 0 && selectedCardIndex != newIndex)
+
+            if(selectedCardIndex >= 0 && selectedCardIndex != newIndex)
                 handCards.get(selectedCardIndex).setDefaultBorder();
             selectedCardIndex = newIndex;
             card.setSelectedBorder();
-            int x = Integer.parseInt(JOptionPane.showInputDialog(null, "X position",
-                    "Choose X", JOptionPane.PLAIN_MESSAGE));
-            int y = Integer.parseInt(JOptionPane.showInputDialog(null, "Y position",
-                    "Choose Y", JOptionPane.PLAIN_MESSAGE));
-            int[] pos={x, y};
-            gui.clientManager.placeCard(card.getCardId(), frontSide ? "-f" : "-r", pos);
-            System.out.println(gui.clientManager.getNickName() + " placing card: [id, side, position] " + card.getCardId() + ", " + (frontSide ? "-f" : "-r") + ", " + "{" + pos[0] + ", " + pos[1] +"}");
-            selectedCardIndex = -1;
+//            int x = Integer.parseInt(JOptionPane.showInputDialog(null, "X position",
+//                    "Choose X", JOptionPane.PLAIN_MESSAGE));
+//            int y = Integer.parseInt(JOptionPane.showInputDialog(null, "Y position",
+//                    "Choose Y", JOptionPane.PLAIN_MESSAGE));
+//            int[] pos={x, y};
+//            gui.clientManager.placeCard(card.getCardId(), frontSide ? "-f" : "-r", pos);
+//            System.out.println(gui.clientManager.getNickName() + " placing card: [id, side, position] " + card.getCardId() + ", " + (frontSide ? "-f" : "-r") + ", " + "{" + pos[0] + ", " + pos[1] +"}");
+//            selectedCardIndex = -1;
         }
         @Override
         public void mouseEntered(MouseEvent e) {

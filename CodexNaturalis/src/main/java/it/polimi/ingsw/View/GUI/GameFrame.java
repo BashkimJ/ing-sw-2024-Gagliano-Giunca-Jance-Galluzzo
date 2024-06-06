@@ -4,10 +4,8 @@ package main.java.it.polimi.ingsw.View.GUI;
 import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
 import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Player.CardSchemeView;
 import main.java.it.polimi.ingsw.Model.Player.PlayerView;
 import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.Network.Messages.ChatMess;
 import main.java.it.polimi.ingsw.Network.Messages.ChooseObjResp;
 
 import javax.swing.*;
@@ -20,6 +18,7 @@ public class GameFrame extends JFrame {
     private static final String OBJECT_PANEL = "1G";
     private static final String INITIAL_PANEL = "2G";
     private static final String GAME_PANEL = "3G";
+    private static final String END_PANEL = "4G";
 
     private int chosenObjCard = 0;
     private int chosenSide = 0;
@@ -34,17 +33,20 @@ public class GameFrame extends JFrame {
     private JRightPanel rightPanel;
     private JCenterManager centerManager;
     private JPanel gamePanel;
+    private JLabel winnerLabel;
     public GameFrame(GUI gui){
         this.gui = gui;
         ImageIcon gameIcon = GUI.getImageIcon("Images/General/GameIcon.png", 0, 0);
 
         JPanel chooseObjPanel = new JPanel();
         JPanel placeInitialPanel = new JPanel();
+        JPanel endgamePanel = new JPanel();
         gamePanel = new JPanel();
         cardPanel = new JPanel(new CardLayout());
         cardPanel.add(chooseObjPanel, OBJECT_PANEL);
         cardPanel.add(placeInitialPanel, INITIAL_PANEL);
         cardPanel.add(gamePanel, GAME_PANEL);
+        cardPanel.add(endgamePanel, END_PANEL);
 
 
         //Object panel "1G"
@@ -121,7 +123,6 @@ public class GameFrame extends JFrame {
         centralPanel.add(back);
 
         //Game panel 3G
-        //gamePanel.setLayout(new GridBagLayout());
         gamePanel.setLayout(new BorderLayout());
         centerManager= new JCenterManager(gui);
         rightPanel = new JRightPanel(gui);
@@ -129,7 +130,17 @@ public class GameFrame extends JFrame {
         gamePanel.add(rightPanel, BorderLayout.EAST);
 
 
+        //End game panel 4G
+        centralPanel = new JPanel();
+        centralPanel.setPreferredSize(new Dimension(1000, 400));
+        centralPanel.setLayout(new GridBagLayout());
+        winnerLabel = new JLabel(" ");
+        winnerLabel.setFont(new Font("Serif", Font.BOLD, 80));
+        centralPanel.add(winnerLabel);
 
+        endgamePanel.setLayout(new GridBagLayout());
+        endgamePanel.add(centralPanel);
+        endgamePanel.setBackground(new Color(235, 161, 52));
 
 
 
@@ -147,6 +158,7 @@ public class GameFrame extends JFrame {
         card2.setIcon(GUI.getImageIcon("Images/Cards/Front/" + two.getCardId() +".png", 420, 280));
     }
     public void showInitial(InitialCard initialCard){
+        System.out.println("Showing initial card with id: " + initialCard.getCardId());
         front.setIcon(GUI.getImageIcon("Images/Cards/Front/" + initialCard.getCardId() + ".png", 420, 280));
         back.setIcon(GUI.getImageIcon("Images/Cards/Back/" + initialCard.getCardId() + ".png", 420, 280));
         CardLayout cl = (CardLayout)(cardPanel.getLayout());
@@ -166,6 +178,11 @@ public class GameFrame extends JFrame {
     public void updateRightPanel(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
         rightPanel.update(revealed, obj, deck, onlinePlayers);
     }
+    public void showWinner(String winnerMessage){
+        winnerLabel.setText(winnerMessage);
+        CardLayout cl = (CardLayout)(cardPanel.getLayout());
+        cl.show(cardPanel, END_PANEL);
+    }
     public void shotChatMessage(String sender, String message){
         rightPanel.printChatMessage(sender, gui.clientManager.getNickName(), message);
     }
@@ -176,8 +193,7 @@ public class GameFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GameFrame gf = new GameFrame(gui);
-                CardLayout cl = (CardLayout) (gf.cardPanel.getLayout());
-                cl.show(gf.cardPanel, "3G");
+                gf.showWinner("The winner is   " +"User x");
             }
         });
     }

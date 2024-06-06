@@ -182,6 +182,12 @@ public class GUI implements View {
 
     @Override
     public void winner(String message) {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                gameFrame.showWinner(message);
+            }
+        });
 
     }
 
