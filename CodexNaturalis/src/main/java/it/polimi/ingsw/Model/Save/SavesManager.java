@@ -4,13 +4,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import main.java.it.polimi.ingsw.Controller.GameState;
-import main.java.it.polimi.ingsw.Model.Cards.Card;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.GameStatus.Deck;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
+import main.java.it.polimi.ingsw.Model.Cards.*;
+import main.java.it.polimi.ingsw.Model.GameStatus.*;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.*;
 
@@ -28,46 +26,42 @@ public class SavesManager
 
     /**
      * Takes as input the necessary data to fill a Save class to be stored to file.
-     * @param gs The Enum GameState.
-     * @param g The Game itself with the PlayerList, CardSchemes and Decks.
-     * @param obj The objective cards.
+     * @param gs         The Enum GameState.
+     * @param g          The Game itself with the PlayerList, CardSchemes and Decks.
+     * @param obj        The objective cards.
      * @param offPlayers The list of all online and offline players which in the current state are all deemed as offline.
-     * @param turn The last player required to take action.
+     * @param turn       The last player required to take action.
+     * @param numPlayers The number of players playing the game.
      */
-    public void SaveGame(GameState gs, Game g, Map<String, List<ObjectiveCard>> obj, Map<String,Integer> offPlayers, String turn){
-        Save s = new Save(gs,g,obj,offPlayers,turn);
+    public void SaveGame(GameState gs, Game g, Map<String, List<ObjectiveCard>> obj, Map<String,Integer> offPlayers, String turn,int numPlayers){
+        Save s = new Save(gs,g,obj,offPlayers,turn,numPlayers);
         WriteSave(s);
     }
 
     /**
      * Writes to file the data gathered from the Save class taken as input.
      * @param s The Save class with all the information about the current Game.
-     * @throws IOException if can not write to file.
      */
     private void WriteSave(Save s){
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try {
-            FileWriter fw = new FileWriter("saved_game.json");
-            gson.toJson(s, fw);
-            fw.flush();
-            fw.close();
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CodexNaturalis/src/main/java/it/polimi/ingsw/resources/Games_data/saved_game.ser"));
+            out.writeObject(s);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Couldn't save");
         }
     }
     /**
      * Reads from file to gather the last saved Game's data.
      * @return the Save class containing all the data from the last Game.
-     * @throws IOException for any issues with file read.
      */
     private Save ReadSave() {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Save s;
-        InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Games_data/saved_game.json");
-        InputStreamReader reader = new InputStreamReader(inputStream);
-        JsonReader jsonReader = new JsonReader(reader);
 
-        s = gson.fromJson(jsonReader, Save.class);
+        Save s = null;
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("CodexNaturalis/src/main/java/it/polimi/ingsw/resources/Games_data/saved_game.ser"))){
+            s = (Save) in.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Couldn't read");;
+        }
         return s;
     }
 }

@@ -14,10 +14,10 @@ public class SavesManagerTest {
         this.gameController.saveGame();
     }
 
-    /**
+
     @Test
     void LoadGame(){
         this.gameController = new GameController();
         this.gameController.loadGame();
-    }*/
+    }
 }

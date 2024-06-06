@@ -119,9 +119,6 @@ public class SocketServer implements Runnable{
         }
         else{
             gameController.onMessageReceived(message);
-            if(gameController.getState().equals(GameState.End_Game)){
-
-            }
         }
     }
 

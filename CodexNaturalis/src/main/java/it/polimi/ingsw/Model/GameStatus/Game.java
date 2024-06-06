@@ -16,7 +16,7 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
-public class Game {
+public class Game implements Serializable {
     private int MAX_N_PLAYERS;
     private final int N_FACEUP_CARDS = 4;
     private List<Player> players;

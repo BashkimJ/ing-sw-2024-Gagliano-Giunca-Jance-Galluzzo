@@ -34,7 +34,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" name="Maven: org.junit.jupiter:junit-jupiter-api:5.10.2" level="project" />
     <orderEntry type="library" name="google.code.gson" level="project" />
   </component>
 </module>

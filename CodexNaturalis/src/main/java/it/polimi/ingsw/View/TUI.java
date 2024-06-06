@@ -398,6 +398,22 @@ public class TUI implements View{
     }
 
     @Override
+    public void askForNewGame() {
+        System.out.println("Would you like a new game  [y/n] : ");
+        Scanner sc = new Scanner(System.in);
+        String command = sc.nextLine();
+        if(command.equals("y")){
+             clientManager.newGame(true);
+        }
+        else if(command.equals("n")){
+             clientManager.newGame(false);
+        }
+        else{
+            askForNewGame();
+        }
+    }
+
+    @Override
     public void alertGameStarted(Message message){
         inputThread = new Thread(this::initialiseCl);
         inputThread.start();

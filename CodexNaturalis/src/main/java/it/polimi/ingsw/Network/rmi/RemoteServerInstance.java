@@ -55,9 +55,6 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
             addClient(message.getNickName(), client);
         } else {
             gameController.onMessageReceived(message);
-            if(gameController.getState().equals(GameState.End_Game)){
-
-            }
         }
     }
 

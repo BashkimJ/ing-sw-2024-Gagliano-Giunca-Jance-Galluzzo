@@ -15,32 +15,43 @@ public class Save implements Serializable {
     GameState gameState;
     Game game;
     Map<String, List<ObjectiveCard>> objectives;
-    Map<String,Integer> offlinePlayers;
+    Map<String, Integer> offlinePlayers;
     String playerTurn;
+    int numPlayers;
 
     public Save() {
     }
-    public Save(GameState gs, Game g, Map<String, List<ObjectiveCard>> obj, Map<String, Integer> offPlayers, String turn) {
+
+    public Save(GameState gs, Game g, Map<String, List<ObjectiveCard>> obj, Map<String, Integer> offPlayers, String turn, int numPlayers) {
         this.gameState = gs;
         this.game = g;
         this.objectives = obj;
         this.offlinePlayers = offPlayers;
-        this.playerTurn = (turn==null ? "Player1": turn);
+        this.playerTurn = (turn == null ? "Player1" : turn);
+        this.numPlayers = numPlayers;
     }
 
     public GameState getGameState() {
         return this.gameState;
     }
+
     public Game getGame() {
         return this.game;
     }
+
     public Map<String, Integer> getOfflinePlayers() {
         return this.offlinePlayers;
     }
+
     public Map<String, List<ObjectiveCard>> getObjectives() {
         return this.objectives;
     }
+
     public String getPlayerTurn() {
         return this.playerTurn;
+    }
+
+    public int getNumPlayers() {
+        return numPlayers;
     }
 }

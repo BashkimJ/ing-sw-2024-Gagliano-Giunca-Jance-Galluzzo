@@ -5,6 +5,7 @@ package main.java.it.polimi.ingsw.Network.Messages;
  */
 public enum MessageType {
     //Lobby State
+    New_game,
     Login_Req,
     Login_Rpl,
     Error_Message,

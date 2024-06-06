@@ -32,33 +32,14 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         private Map<String,Integer> offlinePlayers;
         private int chosenObjInit;
         private String playerTurn;
-        private final Object lockPlayers;
+        private Object lockPlayers;
         private int numPlayers;
+        private boolean askedForNewGame;
         private SavesManager sm;
+        private  Object lock;
 
         public GameController(){
-            this.lockPlayers = new Object();
-            chosenObjInit = 0;
-            this.gameState = Lobby_State;
-            Player player = new Player("",null);
-            objectives = new HashMap<>();
-            game = new Game(player,1);
-            game.getGoldDeck().shuffle();
-            game.getInitialDeck().shuffle();
-            game.getResourceDeck().shuffle();
-            game.getFaceupCards().add((ResourceCard)game.getResourceDeck().pickCard());
-            game.getFaceupCards().add((ResourceCard)game.getResourceDeck().pickCard());
-            game.getFaceupCards().add((GoldCard)game.getGoldDeck().pickCard());
-            game.getFaceupCards().add((GoldCard)game.getGoldDeck().pickCard());
-            Collections.shuffle(game.getObjectiveCards());
-            game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
-            game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size()-1));
-            onlinePlayers = new HashMap<>();
-            offlinePlayers = new HashMap<String,Integer>();
-            this.view = Collections.synchronizedMap(new HashMap<>());
-            numPlayers = 0;
-            removePlayer("");
-
+            newGame();
         }
 
         /**
@@ -67,7 +48,10 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
          */
         public void saveGame(){
             SavesManager savesManager = new SavesManager();
-            savesManager.SaveGame(this.gameState,this.game,this.objectives,this.offlinePlayers,this.playerTurn);
+            Map<String,Integer> off  =new HashMap<>();
+            off.putAll(onlinePlayers);
+            off.putAll(offlinePlayers);
+            savesManager.SaveGame(this.gameState,this.game,this.objectives,off,this.playerTurn,this.numPlayers);
         }
         /**
          * Updates the current GameController with data from the last saved game if there is any.
@@ -79,6 +63,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             this.offlinePlayers = sm.LoadGame().getOfflinePlayers();
             this.objectives = sm.LoadGame().getObjectives();
             this.playerTurn = sm.LoadGame().getPlayerTurn();
+            this.numPlayers = sm.LoadGame().getNumPlayers();
         }
 
         /**
@@ -90,6 +75,14 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                 case Lobby_State ->{
                     if(message.getType().equals(MessageType.Player_Num_Resp)){
                         game.setMAX_N_PLAYERS(((PlayerNumberResponse) message).getNumPlayers());
+                    }
+                    synchronized (lock) {
+                        if (message.getType().equals(MessageType.New_game) && !askedForNewGame) {
+                            initialiseGame(message);
+                        }
+                        else{
+                            view.get(message.getNickName()).errorMessage("A new game/saved game already created");
+                        }
                     }
                 }
                 case In_Game,Last_Lap-> {
@@ -116,6 +109,17 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     }
                 }
             }
+        }
+
+        private void initialiseGame(Message message) {
+            if(((NewGameMess)message).isNewGame()){
+                saveGame();
+            }
+            else{
+                loadGame();
+            }
+            this.askedForNewGame = true;
+
         }
 
         /**
@@ -203,6 +207,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                                 if(onlinePlayers.get(p)==min){
                                     playerTurn = p;
                                     found=true;
+                                    saveGame();
                                 }
                             }
                         }
@@ -211,6 +216,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                                 if(onlinePlayers.get(p)==index){
                                     playerTurn = p;
                                     found = true;
+                                    saveGame();
                                 }
                             }
                         }
@@ -249,6 +255,36 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     view.get(name).winner("\nThe winner is   " + Winner);
                 }
             }
+            newGame();
+        }
+
+        /**
+         * This method initialises a new game in after one game is finished
+         */
+        public void newGame(){
+            this.lockPlayers = new Object();
+            chosenObjInit = 0;
+            this.gameState = Lobby_State;
+            Player player = new Player("", null);
+            objectives = new HashMap<>();
+            game = new Game(player, 1);
+            game.getGoldDeck().shuffle();
+            game.getInitialDeck().shuffle();
+            game.getResourceDeck().shuffle();
+            game.getFaceupCards().add((ResourceCard) game.getResourceDeck().pickCard());
+            game.getFaceupCards().add((ResourceCard) game.getResourceDeck().pickCard());
+            game.getFaceupCards().add((GoldCard) game.getGoldDeck().pickCard());
+            game.getFaceupCards().add((GoldCard) game.getGoldDeck().pickCard());
+            Collections.shuffle(game.getObjectiveCards());
+            game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size() - 1));
+            game.getGlobalObj().add(game.getObjectiveCards().remove(game.getObjectiveCards().size() - 1));
+            onlinePlayers = new HashMap<>();
+            offlinePlayers = new HashMap<String,Integer>();
+            this.view = Collections.synchronizedMap(new HashMap<>());
+            numPlayers = 0;
+            removePlayer("");
+            this.askedForNewGame = false;
+            this.lock = new Object();
         }
 
         /**
@@ -543,6 +579,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
                     }
                 }
             }
+            saveGame();
             initGame(NickName);
 
 

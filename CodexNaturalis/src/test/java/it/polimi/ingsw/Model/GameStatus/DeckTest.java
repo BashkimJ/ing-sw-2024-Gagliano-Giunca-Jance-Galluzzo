@@ -52,7 +52,7 @@ class DeckTest {
     void pickCard() {
         //Test that the function returns the last card of the deck and that it gets removed from it
         for(int i = 85; i>=0; i--){
-            assertEquals(cards.getLast(), lastcard = deck.pickCard());
+            assertEquals(cards.get(cards.size()-1), lastcard = deck.pickCard());
             assertEquals(i, deck.getCards().size());
         }
     }

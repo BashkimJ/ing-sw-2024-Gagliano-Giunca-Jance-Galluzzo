@@ -11,6 +11,7 @@ import main.java.it.polimi.ingsw.View.View;
 import java.io.IOException;
 import java.rmi.RemoteException;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 
@@ -42,19 +43,27 @@ public class ClientManager {
 
                 client = new SocketClient(this,IpAddress, port);
                 client.receiveMessage();
+                view.askForNewGame();
+                TimeUnit.SECONDS.sleep(3);
                 view.askNickName();
             }catch(IOException e){
                view.errorMessage("Unable to connect...");
                System.exit(0);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
         else{
             try {
                 client  = new RemoteClientInstance(IpAddress,this);
+                view.askForNewGame();
+                TimeUnit.SECONDS.sleep(3);
                 view.askNickName();
             } catch (RemoteException e) {
                 view.errorMessage("Unable to connect...");
                 System.exit(0);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
             }
         }
     }
@@ -65,6 +74,10 @@ public class ClientManager {
      */
     public String getNickName(){
         return this.NickName;
+    }
+
+    public void newGame(boolean newGame){
+        client.sendMessage(new NewGameMess(getNickName(),newGame));
     }
 
     /**

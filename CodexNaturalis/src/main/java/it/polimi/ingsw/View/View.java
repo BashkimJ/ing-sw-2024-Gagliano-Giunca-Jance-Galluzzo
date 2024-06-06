@@ -22,5 +22,6 @@ public interface View {
     public void afterPlayerMove(Message message);
     public void serverInfo();
     public void stop();
+    public void askForNewGame();
 
 }

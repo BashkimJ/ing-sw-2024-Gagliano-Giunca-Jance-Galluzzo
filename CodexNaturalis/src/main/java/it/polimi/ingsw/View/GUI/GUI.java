@@ -49,6 +49,11 @@ public class GUI implements View {
     }
 
     @Override
+    public void askForNewGame() {
+
+    }
+
+    @Override
     public void askNickName() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override

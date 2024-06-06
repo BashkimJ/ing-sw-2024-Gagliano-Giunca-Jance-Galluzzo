@@ -17,6 +17,7 @@ public class VirtualView implements View {
     }
     @Override
     public void askNickName() {
+        clientHandler.sendMessage(new LoginRequest("Server"));
     }
     @Override
     public void errorMessage(String message){
@@ -75,6 +76,11 @@ public class VirtualView implements View {
 
     @Override
     public void stop() {
+
+    }
+
+    @Override
+    public void askForNewGame() {
 
     }
 

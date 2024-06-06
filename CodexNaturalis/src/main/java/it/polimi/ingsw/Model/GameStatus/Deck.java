@@ -2,9 +2,10 @@ package main.java.it.polimi.ingsw.Model.GameStatus;
 
 import main.java.it.polimi.ingsw.Model.Cards.Card;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Deck {
+public class Deck implements Serializable {
     private List<Card> cards;
 
     public Deck(List<Card> cards) {
