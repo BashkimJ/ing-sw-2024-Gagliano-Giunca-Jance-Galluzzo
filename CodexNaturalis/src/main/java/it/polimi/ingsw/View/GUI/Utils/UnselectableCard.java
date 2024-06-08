@@ -10,6 +10,7 @@ public class UnselectableCard extends JLabel {
     public UnselectableCard(int cardId, boolean frontSide){
         this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", 180, 120));
         setDefaultBorder();
+        setToolTipText("ID: " + cardId);
     }
     private void setDefaultBorder(){
         this.setBorder(BorderFactory.createCompoundBorder(

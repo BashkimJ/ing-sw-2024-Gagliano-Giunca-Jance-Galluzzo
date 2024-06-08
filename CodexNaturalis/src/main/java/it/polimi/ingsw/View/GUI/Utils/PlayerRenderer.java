@@ -14,12 +14,13 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
     private JLabel inkwellLabel;
     private JLabel quillLabel;
     private JLabel manuscriptLabel;
+    private JLabel pointsLabel;
     public PlayerRenderer() {
         setOpaque(true);
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createLineBorder(Color.GRAY));
         nicknameLabel = new JLabel(" ");
-        nicknameLabel.setFont(new Font("Serif", Font.PLAIN, 20));
+        nicknameLabel.setFont(new Font("Microsoft YaHei UI", Font.PLAIN, 20));
         fungiLabel  = getLabel("Images/General/FungiIcon.png", "0");
         plantLabel  = getLabel("Images/General/PlantIcon.png", "0");
         animalLabel  = getLabel("Images/General/AnimalIcon.png", "0");
@@ -27,6 +28,7 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
         inkwellLabel  = getLabel("Images/General/InkwellIcon.png", "0");
         quillLabel  = getLabel("Images/General/QuillIcon.png", "0");
         manuscriptLabel  = getLabel("Images/General/ManuscriptIcon.png", "0");
+        pointsLabel  = getLabel("Images/General/blackIcon.png", "0");
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
@@ -53,10 +55,12 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
         add(quillLabel, gbc);
         gbc.gridx = 2;
         add(manuscriptLabel, gbc);
+        gbc.gridx = 3;
+        add(pointsLabel, gbc);
     }
     @Override
     public JPanel getListCellRendererComponent(JList<? extends PlayerItem> list, PlayerItem value, int index, boolean isSelected, boolean cellHasFocus) {
-        nicknameLabel.setText(value.getNickname());
+
         fungiLabel.setText(String.valueOf(value.getNumFungi()));
         plantLabel.setText(String.valueOf(value.getNumPlants()));
         animalLabel.setText(String.valueOf(value.getNumAnimal()));
@@ -64,6 +68,9 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
         inkwellLabel.setText(String.valueOf(value.getNumInkwell()));
         quillLabel.setText(String.valueOf(value.getNumQuill()));
         manuscriptLabel.setText(String.valueOf(value.getNumManuscript()));
+        if(value.getPlayerColour() != null)
+            pointsLabel.setIcon(GUI.getImageIcon("Images/General/" + value.getPlayerColour() + "Icon.png", 30, 30));
+        pointsLabel.setText(String.valueOf(value.getPoints()));
 
         if (isSelected) {
             setBackground(list.getSelectionBackground());
@@ -73,6 +80,19 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
             setBackground(list.getBackground());
             setForeground(list.getForeground());
         }
+        if(value.isMainPlayer())
+            nicknameLabel.setText("<HTML><U>" + value.getNickname() + "</U></HTML>");
+        else{
+            nicknameLabel.setText(value.getNickname());
+        }
+        if(value.isOnline()) {
+            if (value.getHasTurn())
+                nicknameLabel.setForeground(Color.RED);
+            else
+                nicknameLabel.setForeground(Color.BLACK);
+        }else
+            nicknameLabel.setForeground(Color.GRAY);
+
         return this;
     }
     private JLabel getLabel(String path, String title){

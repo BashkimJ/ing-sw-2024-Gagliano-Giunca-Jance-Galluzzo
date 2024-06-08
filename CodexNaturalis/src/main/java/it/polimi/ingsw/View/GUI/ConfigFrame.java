@@ -8,14 +8,16 @@ import java.util.regex.Pattern;
 
 public class ConfigFrame extends JFrame{
     final static String CONNECTION_PANEL = "1";
-    final static String NICKNAME_PANEL = "2";
-    final static String CREATE_PANEL = "3";
-    final static String WAITING_PANEL = "4";
+    final static String ASK_GAME_PANEL = "2";
+    final static String NICKNAME_PANEL = "3";
+    final static String CREATE_PANEL = "4";
+    final static String WAITING_PANEL = "5";
 
 
     private JTextField ip;
     private JTextField nickname;
     private boolean isRMI = false;
+    private boolean isNewGame = true;
     private GUI gui;
     private JPanel cards;
     private int playersNumber = 2;
@@ -38,10 +40,49 @@ public class ConfigFrame extends JFrame{
         //center label
         Image gameIconMediumQ = gameIconHQ.getImage().getScaledInstance(300, 300,  Image.SCALE_SMOOTH);
         JLabel labelHQ = new JLabel(new ImageIcon(gameIconMediumQ));;
-        //labelHQ.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         add(labelHQ, BorderLayout.CENTER);
 
         //East panel 1: connection type
+        JPanel connPanel = createConnPanel();
+
+        //East Panel 2: ask if new game or resume game
+        JPanel askGamePanel = createAskGamePanel();
+
+        //East Panel 3: nickname request
+        JPanel nicknamePanel = createNicknamePanel();
+
+        //East panel 4: asks number of players
+        JPanel createPanel = createNumPlayersPanel();
+
+        //East panel 5: waits for others players to connect
+        JPanel waitingPanel = createWaitingPanel();
+
+
+        connPanel.addComponentListener(new focusOnCurrentCard());
+        askGamePanel.addComponentListener(new focusOnCurrentCard());
+        nicknamePanel.addComponentListener(new focusOnCurrentCard());
+        createPanel.addComponentListener(new focusOnCurrentCard());
+        waitingPanel.addComponentListener(new focusOnCurrentCard());
+
+        cards = new JPanel(new CardLayout());
+        cards.add(connPanel, CONNECTION_PANEL);
+        cards.add(askGamePanel, ASK_GAME_PANEL);
+        cards.add(nicknamePanel, NICKNAME_PANEL);
+        cards.add(createPanel, CREATE_PANEL);
+        cards.add(waitingPanel, WAITING_PANEL);
+        cards.setPreferredSize(new Dimension(175, 400));
+        add(cards, BorderLayout.EAST);
+
+        setTitle("Codex Naturalis - Config");
+        setIconImage(gameIcon.getImage());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(550, 375);
+        setLocationRelativeTo(null);
+        setResizable(true);
+        setVisible(true);
+
+    }
+    private JPanel createConnPanel(){
         JPanel connPanel = new JPanel();
         connPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
         connPanel.setLayout(new BoxLayout(connPanel, BoxLayout.Y_AXIS));
@@ -93,20 +134,59 @@ public class ConfigFrame extends JFrame{
         JButton connBtn = new JButton("Connect");
         connBtn.addActionListener(new CanPlayListener());
         connPanel.add(connBtn);
+        setEnterCommand(connPanel, connBtn);
+        return connPanel;
+    }
+    private JPanel createAskGamePanel(){
+        JPanel askGamePanel = new JPanel();
+        askGamePanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
+        askGamePanel.setLayout(new BoxLayout(askGamePanel, BoxLayout.Y_AXIS));
 
-        connPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-                "EnterAction");
-        connPanel.getActionMap().put("EnterAction",
-                new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        connBtn.doClick();
-                    }
-                });
+        JLabel askGameLabel = new JLabel("Do you want to:");
+        askGamePanel.add(askGameLabel);
+        askGameLabel.add(Box.createRigidArea(new Dimension(0, 5)));
+        JRadioButton newGameRadio = new JRadioButton("Start a new game", true);
+        newGameRadio.setMnemonic(KeyEvent.VK_0);
+        newGameRadio.setToolTipText("Shortcut: Alt+0");
+        askGamePanel.add(newGameRadio);
+        newGameRadio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isNewGame = true;
+            }
+        });
 
+        JRadioButton resumeGameRadio = new JRadioButton("Resume a game", false);
+        resumeGameRadio.setMnemonic(KeyEvent.VK_1);
+        resumeGameRadio.setToolTipText("Shortcut: Alt+1");
+        askGamePanel.add(resumeGameRadio);
+        resumeGameRadio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                isNewGame = false;
+            }
+        });
 
-        //East Panel 2: nickname request
+        ButtonGroup gameGrp = new ButtonGroup();
+        gameGrp.add(newGameRadio);
+        gameGrp.add(resumeGameRadio);
+
+        askGamePanel.add(Box.createVerticalGlue());
+
+        JButton startGameBtn = new JButton("Next");
+        startGameBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                gui.clientManager.newGame(isNewGame);
+                changePanel("3");
+                setSwitchable(true);
+            }
+        });
+        askGamePanel.add(startGameBtn);
+        setEnterCommand(askGamePanel, startGameBtn);
+        return askGamePanel;
+    }
+    private JPanel createNicknamePanel(){
         JPanel nicknamePanel = new JPanel();
         nicknamePanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
         nicknamePanel.setLayout(new BoxLayout(nicknamePanel, BoxLayout.Y_AXIS));
@@ -124,56 +204,34 @@ public class ConfigFrame extends JFrame{
         JButton cjBtn = new JButton("Create/Join game");
         cjBtn.addActionListener(new NicknameListener());
         nicknamePanel.add(cjBtn);
-
-        nicknamePanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-                        "EnterAction");
-        nicknamePanel.getActionMap().put("EnterAction",
-                new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        cjBtn.doClick();
-                    }
-                });
-
-
-        //East panel 3: asks number of players
+        setEnterCommand(nicknamePanel, cjBtn);
+        return nicknamePanel;
+    }
+    private JPanel createNumPlayersPanel(){
         JPanel createPanel = new JPanel();
         createPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
         createPanel.setLayout(new BoxLayout(createPanel, BoxLayout.Y_AXIS));
-        //player number text field
         JLabel playerNumLabel = new JLabel("Max number of players:");
         createPanel.add(playerNumLabel);
+
         JRadioButton twoRadio = new JRadioButton("Two players", true);
         twoRadio.setMnemonic(KeyEvent.VK_2);
         twoRadio.setToolTipText("Shortcut: Alt+2");
         createPanel.add(twoRadio);
-        twoRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playersNumber = 2;
-            }
-        });
+        twoRadio.addActionListener(new PlayersNumberListener());
+
         JRadioButton threeRadio = new JRadioButton("Three players", false);
         threeRadio.setMnemonic(KeyEvent.VK_3);
         threeRadio.setToolTipText("Shortcut: Alt+3");
         createPanel.add(threeRadio);
-        threeRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playersNumber = 3;
-            }
-        });
+        threeRadio.addActionListener(new PlayersNumberListener());
+
         JRadioButton fourRadio = new JRadioButton("Four players", false);
         fourRadio.setMnemonic(KeyEvent.VK_4);
         fourRadio.setToolTipText("Shortcut: Alt+4");
         createPanel.add(fourRadio);
-        fourRadio.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                playersNumber = 4;
-            }
-        });
+        fourRadio.addActionListener(new PlayersNumberListener());
+
         ButtonGroup playerNumGrp = new ButtonGroup();
         playerNumGrp.add(twoRadio);
         playerNumGrp.add(threeRadio);
@@ -190,54 +248,28 @@ public class ConfigFrame extends JFrame{
             }
         });
         createPanel.add(createGame);
-        createPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
-                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
-                        "EnterAction");
-        createPanel.getActionMap().put("EnterAction",
-                new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        createGame.doClick();
-                    }
-                });
-
-
-        //East panel 4: waits for others players to connect
+        setEnterCommand(createPanel, createGame);
+        return createPanel;
+    }
+    private JPanel createWaitingPanel(){
         JPanel waitingPanel = new JPanel();
         waitingPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
         waitingPanel.setLayout(new BoxLayout(waitingPanel, BoxLayout.Y_AXIS));
-        //nickname field
         JLabel waitingLabel = new JLabel("<html>Waiting for the other <br> players to connect...</html>");
         waitingPanel.add(waitingLabel);
-
-
-        //Adding focusOnCurrentCard Listener to each card
-        connPanel.addComponentListener(new focusOnCurrentCard());
-        nicknamePanel.addComponentListener(new focusOnCurrentCard());
-        createPanel.addComponentListener(new focusOnCurrentCard());
-        waitingPanel.addComponentListener(new focusOnCurrentCard());
-
-
-        cards = new JPanel(new CardLayout());
-        cards.add(connPanel, CONNECTION_PANEL);
-        cards.add(nicknamePanel, NICKNAME_PANEL);
-        cards.add(createPanel, CREATE_PANEL);
-        cards.add(waitingPanel, WAITING_PANEL);
-        cards.setPreferredSize(new Dimension(175, 400));
-        add(cards, BorderLayout.EAST);
-
-
-
-
-
-        setTitle("Codex Naturalis - Config");
-        setIconImage(gameIcon.getImage());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(550, 375);
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setVisible(true);
-
+        return waitingPanel;
+    }
+    private void setEnterCommand(JPanel panel, JButton button){
+        panel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+                .put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0),
+                        "EnterAction");
+        panel.getActionMap().put("EnterAction",
+                new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        button.doClick();
+                    }
+                });
     }
     private boolean checkAddress(String IP){
         if(IP==null || IP.isEmpty()){
@@ -272,14 +304,32 @@ public class ConfigFrame extends JFrame{
                         "Error!", JOptionPane.ERROR_MESSAGE);
                 ip.setText("");
             }
-            else
-                gui.clientManager.onUpdateServerInfo(input,6000,isRMI);
+            else {
+                Thread updateServer  = new Thread(()->{
+                    gui.clientManager.onUpdateServerInfo(input, 6000, isRMI);
+                });
+                updateServer.start();
+            }
         }
     }
     private class NicknameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             gui.clientManager.updateNickName(nickname.getText());
+        }
+    }
+    private class PlayersNumberListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String btnLabel = e.getActionCommand();
+            if (btnLabel.equals("Two players")) {
+                playersNumber = 2;
+            } else if (btnLabel.equals("Three players")) {
+                playersNumber = 3;
+            } else{
+                playersNumber = 4;
+            }
         }
     }
     private class focusOnCurrentCard extends ComponentAdapter {

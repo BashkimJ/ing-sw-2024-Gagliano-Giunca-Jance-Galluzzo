@@ -20,8 +20,8 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
     public JMainBottomPanel(GUI gui){
         this.gui = gui;
         setLayout(new FlowLayout());
-        setBackground(Color.ORANGE);
-
+        setBackground(new Color(230, 230, 230));
+        setBorder(BorderFactory.createLoweredBevelBorder());
         JToggleButton changeSideBtn = createToggleButton();
         changeSideBtn.setEnabled(false);
         this.add(changeSideBtn);
@@ -35,6 +35,7 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
     public void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand){
         handCards=new ArrayList<>();
         selectedCardIndex = -1;
+        frontSide = true;
         removeAll();
         JToggleButton changeSideBtn = createToggleButton();
         this.add(changeSideBtn);
@@ -117,14 +118,6 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
                 handCards.get(selectedCardIndex).setDefaultBorder();
             selectedCardIndex = newIndex;
             card.setSelectedBorder();
-//            int x = Integer.parseInt(JOptionPane.showInputDialog(null, "X position",
-//                    "Choose X", JOptionPane.PLAIN_MESSAGE));
-//            int y = Integer.parseInt(JOptionPane.showInputDialog(null, "Y position",
-//                    "Choose Y", JOptionPane.PLAIN_MESSAGE));
-//            int[] pos={x, y};
-//            gui.clientManager.placeCard(card.getCardId(), frontSide ? "-f" : "-r", pos);
-//            System.out.println(gui.clientManager.getNickName() + " placing card: [id, side, position] " + card.getCardId() + ", " + (frontSide ? "-f" : "-r") + ", " + "{" + pos[0] + ", " + pos[1] +"}");
-//            selectedCardIndex = -1;
         }
         @Override
         public void mouseEntered(MouseEvent e) {

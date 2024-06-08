@@ -25,6 +25,7 @@ public class JRightPanel extends JPanel {
     private JTextField messageField;
     private JPanel tableCards;
     private List<String> chatReceivers;
+    private JPanel bottomPanel;
     public JRightPanel(GUI gui){
         this.gui = gui;
         setBackground(new Color(230, 230, 230));
@@ -41,9 +42,19 @@ public class JRightPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
-        gbc.gridwidth = 4;
         add(tableCards, gbc);
-        chat = new JTextArea();
+        JPanel chatPanel = new JPanel();
+        chatPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 0, 10));
+        chatPanel.setLayout(new BoxLayout(chatPanel, BoxLayout.Y_AXIS));
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.weightx = 1;
+        gbc.weighty = 1;
+        gbc.fill = GridBagConstraints.BOTH;
+        add(chatPanel, gbc);
+
+        chatPanel.add(Box.createVerticalGlue());
+        chat = new JTextArea(10, 30);
         chat.setFont(new Font("Serif", Font.ITALIC, 16));
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
@@ -51,49 +62,45 @@ public class JRightPanel extends JPanel {
 
         JScrollPane scroll = new JScrollPane(chat);
         scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-        scroll.setPreferredSize(new Dimension(getPreferredSize().width, 200));
-        gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        gbc.weightx = 1;
-        gbc.gridwidth = 4;
-        gbc.insets = new Insets(10, 10, 0, 10);
-        add(scroll, gbc);
+        chatPanel.add(scroll);
+
+        bottomPanel = new JPanel(new GridBagLayout());
+        bottomPanel.setMaximumSize(new Dimension(bottomPanel.getMaximumSize().width, 70));
         messageField = new JTextField();
         messageField.addActionListener(new SendMsgListener());
         gbc = new GridBagConstraints();
         gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 0;
         gbc.weightx = 0.65;
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(10, 10, 10, 10);
-        add(messageField, gbc);
+        gbc.insets = new Insets(10, 0, 10, 10);
+        bottomPanel.add(messageField, gbc);
         JLabel toLabel = new JLabel("to:");
         gbc = new GridBagConstraints();
         gbc.gridx = 1;
-        gbc.gridy = 2;
-        add(toLabel, gbc);
+        gbc.gridy = 0;
+        bottomPanel.add(toLabel, gbc);
         String[] arrayOfPlayers = new String[chatReceivers.size()];
-        chatReceivers.toArray(arrayOfPlayers); // fill the array
+        chatReceivers.toArray(arrayOfPlayers);
         choosePlayer = new JComboBox<>(arrayOfPlayers);
         choosePlayer.setSelectedItem(null);
         gbc = new GridBagConstraints();
         gbc.gridx = 2;
-        gbc.gridy = 2;
+        gbc.gridy = 0;
         gbc.weightx = 0.35;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.insets = new Insets(10, 10, 10, 10);
-        add(choosePlayer, gbc);
+        bottomPanel.add(choosePlayer, gbc);
         JButton sendButton = new JButton("→");
         sendButton.addActionListener(new SendMsgListener());
         gbc = new GridBagConstraints();
         gbc.gridx = 3;
-        gbc.gridy = 2;
-        gbc.insets = new Insets(10, 0, 10, 10);
+        gbc.gridy = 0;
+        gbc.insets = new Insets(10, 0, 10, 0);
         gbc.ipadx = 10;
-        add(sendButton, gbc);
+        bottomPanel.add(sendButton, gbc);
 
-
+        chatPanel.add(bottomPanel);
     }
     public void update(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
         JPanel tableCards = new JPanel();
@@ -135,7 +142,6 @@ public class JRightPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
-        gbc.gridwidth = 4;
         add(tableCards, gbc);
         this.tableCards = tableCards;
         updatePlayers(onlinePlayers);
@@ -151,16 +157,16 @@ public class JRightPanel extends JPanel {
             chatReceivers.addAll(pl);
             String[] arrayOfPlayers = new String[chatReceivers.size()];
             chatReceivers.toArray(arrayOfPlayers);
-            remove(choosePlayer);
+            bottomPanel.remove(choosePlayer);
             choosePlayer = new JComboBox<>(arrayOfPlayers);
             choosePlayer.setSelectedItem(null);
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 2;
-            gbc.gridy = 2;
+            gbc.gridy = 0;
             gbc.weightx = 0.35;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.insets = new Insets(10, 10, 10, 10);
-            add(choosePlayer, gbc);
+            bottomPanel.add(choosePlayer, gbc);
         }
     }
     public void printChatMessage(String sender, String receiver, String msg){

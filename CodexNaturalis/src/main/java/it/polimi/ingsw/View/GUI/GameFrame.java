@@ -7,184 +7,214 @@ import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
 import main.java.it.polimi.ingsw.Model.Player.PlayerView;
 import main.java.it.polimi.ingsw.Network.ClientManager;
 import main.java.it.polimi.ingsw.Network.Messages.ChooseObjResp;
+import main.java.it.polimi.ingsw.View.GUI.Utils.SelectableCard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class GameFrame extends JFrame {
-    private static final String OBJECT_PANEL = "1G";
-    private static final String INITIAL_PANEL = "2G";
-    private static final String GAME_PANEL = "3G";
-    private static final String END_PANEL = "4G";
-
-    private int chosenObjCard = 0;
-    private int chosenSide = 0;
-
+    private static final String SMALL_PANEL = "1G";
+    private static final String GAME_PANEL = "2G";
     private GUI gui;
     private JPanel cardPanel;
-    private JLabel card1;
-    private JLabel card2;
-    private JLabel front;
-    private JLabel back;
+    private JPanel centralPanel;
+    private SelectableCard card1;
+    private SelectableCard card2;
 
     private JRightPanel rightPanel;
     private JCenterManager centerManager;
     private JPanel gamePanel;
-    private JLabel winnerLabel;
     public GameFrame(GUI gui){
         this.gui = gui;
         ImageIcon gameIcon = GUI.getImageIcon("Images/General/GameIcon.png", 0, 0);
 
-        JPanel chooseObjPanel = new JPanel();
-        JPanel placeInitialPanel = new JPanel();
-        JPanel endgamePanel = new JPanel();
-        gamePanel = new JPanel();
-        cardPanel = new JPanel(new CardLayout());
-        cardPanel.add(chooseObjPanel, OBJECT_PANEL);
-        cardPanel.add(placeInitialPanel, INITIAL_PANEL);
-        cardPanel.add(gamePanel, GAME_PANEL);
-        cardPanel.add(endgamePanel, END_PANEL);
-
-
-        //Object panel "1G"
-        JPanel centralPanel = new JPanel();
-        centralPanel.setPreferredSize(new Dimension(1000, 400));
-        centralPanel.setLayout(new BoxLayout(centralPanel, BoxLayout.Y_AXIS));
-        centralPanel.add(Box.createRigidArea(new Dimension(0, 10)));
-        JLabel askObjCard = new JLabel("Choose your objective card:");
-        askObjCard.setFont(new Font("Serif", Font.BOLD, 25));
-        askObjCard.setAlignmentX(Component.CENTER_ALIGNMENT);
-        centralPanel.add(askObjCard);
-
-        JPanel twoObjPanel = new JPanel(new GridLayout(1, 2));
-        card1 = new JLabel(GUI.getImageIcon("Images/Cards/Front/1.png", 420, 280));
-        card1.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                chosenObjCard = 1;
-                gui.clientManager.updateObjCard(new ChooseObjResp(gui.clientManager.getNickName(), chosenObjCard));
-            }
-        });
-        twoObjPanel.add(card1);
-
-
-
-        card2 = new JLabel(GUI.getImageIcon("Images/Cards/Front/1.png", 420, 280));
-        card2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                chosenObjCard = 2;
-                gui.clientManager.updateObjCard(new ChooseObjResp(gui.clientManager.getNickName(), chosenObjCard));
-            }
-        });
-        twoObjPanel.add(card2);
-
-        centralPanel.add(twoObjPanel);
-
-        chooseObjPanel.setLayout(new GridBagLayout());
-        chooseObjPanel.add(centralPanel);
-        chooseObjPanel.setBackground(new Color(235, 161, 52));
-
-        //Initial panel "2G"
         centralPanel = new JPanel();
-        centralPanel.setPreferredSize(new Dimension(1000, 400));
-        centralPanel.setLayout(new GridLayout(1, 2));
+        centralPanel.setPreferredSize(new Dimension(500, 400));
+        centralPanel.setLayout(new GridBagLayout());
+        centralPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 3));
 
-        placeInitialPanel.setLayout(new GridBagLayout());
-        placeInitialPanel.add(centralPanel);
-        placeInitialPanel.setBackground(new Color(235, 161, 52));
+        JPanel smallPanel = new JPanel();
+        smallPanel.setLayout(new GridBagLayout());
+        smallPanel.add(centralPanel);
+        smallPanel.setBackground(new Color(210, 166, 121));
 
-        front = new JLabel(GUI.getImageIcon("Images/Cards/Front/1.png", 420, 280));
-        front.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                chosenSide = 1;
-                gui.clientManager.placeInitial(chosenSide);
-                System.out.println(gui.clientManager.getNickName() + " placing initial card: front");
-
-            }
-        });
-        centralPanel.add(front);
-
-
-
-        back = new JLabel(GUI.getImageIcon("Images/Cards/Front/1.png", 420, 280));
-        back.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent evt) {
-                chosenSide = 2;
-                gui.clientManager.placeInitial(chosenSide);
-                System.out.println(gui.clientManager.getNickName() + " placing initial card: back");
-            }
-        });
-        centralPanel.add(back);
-
-        //Game panel 3G
+        gamePanel = new JPanel();
         gamePanel.setLayout(new BorderLayout());
         centerManager= new JCenterManager(gui);
         rightPanel = new JRightPanel(gui);
         gamePanel.add(centerManager, BorderLayout.CENTER);
         gamePanel.add(rightPanel, BorderLayout.EAST);
 
-
-        //End game panel 4G
-        centralPanel = new JPanel();
-        centralPanel.setPreferredSize(new Dimension(1000, 400));
-        centralPanel.setLayout(new GridBagLayout());
-        winnerLabel = new JLabel(" ");
-        winnerLabel.setFont(new Font("Serif", Font.BOLD, 80));
-        centralPanel.add(winnerLabel);
-
-        endgamePanel.setLayout(new GridBagLayout());
-        endgamePanel.add(centralPanel);
-        endgamePanel.setBackground(new Color(235, 161, 52));
-
-
+        cardPanel = new JPanel(new CardLayout());
+        cardPanel.add(smallPanel, SMALL_PANEL);
+        cardPanel.add(gamePanel, GAME_PANEL);
 
         setTitle("Codex Naturalis - " + gui.clientManager.getNickName());
         setIconImage(gameIcon.getImage());
         setContentPane(cardPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        pack();
         setExtendedState(Frame.MAXIMIZED_BOTH);
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
     }
     public void showTwoObj(ObjectiveCard one, ObjectiveCard two){
-        card1.setIcon(GUI.getImageIcon("Images/Cards/Front/" + one.getCardId() +".png", 420, 280));
-        card2.setIcon(GUI.getImageIcon("Images/Cards/Front/" + two.getCardId() +".png", 420, 280));
+        addTopLabel("Choose your objective card:");
+
+        card1 = new SelectableCard(one.getCardId(), Color.GREEN, true);
+        card1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                gui.clientManager.updateObjCard(new ChooseObjResp(gui.clientManager.getNickName(), 1));
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setEnteredBorder();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setDefaultBorder();
+            }
+        });
+
+
+        card2 = new SelectableCard(two.getCardId(), Color.GREEN, true);
+        card2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                gui.clientManager.updateObjCard(new ChooseObjResp(gui.clientManager.getNickName(), 2));
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setEnteredBorder();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setDefaultBorder();
+            }
+        });
+        addCards();
+        revalidate();
+        repaint();
     }
     public void showInitial(InitialCard initialCard){
         System.out.println("Showing initial card with id: " + initialCard.getCardId());
-        front.setIcon(GUI.getImageIcon("Images/Cards/Front/" + initialCard.getCardId() + ".png", 420, 280));
-        back.setIcon(GUI.getImageIcon("Images/Cards/Back/" + initialCard.getCardId() + ".png", 420, 280));
-        CardLayout cl = (CardLayout)(cardPanel.getLayout());
-        cl.show(cardPanel, INITIAL_PANEL);
+        centralPanel.removeAll();
+        addTopLabel("Choose initial card's side:");
+
+        card1 = new SelectableCard(initialCard.getCardId(), Color.GREEN, true);
+        card2 = new SelectableCard(initialCard.getCardId(), Color.GREEN, false);
+
+        card1.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                gui.clientManager.placeInitial(1);
+                System.out.println(gui.clientManager.getNickName() + " placing initial card: front");
+
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setEnteredBorder();
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                ((SelectableCard)e.getSource()).setDefaultBorder();
+            }
+        });
+        card2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent evt) {
+                gui.clientManager.placeInitial(2);
+                System.out.println(gui.clientManager.getNickName() + " placing initial card: back");
+            }
+        });
+        addCards();
+        revalidate();
+        repaint();
+
     }
     public void showGamePanel(){
         CardLayout cl = (CardLayout)(cardPanel.getLayout());
         cl.show(cardPanel, GAME_PANEL);
     }
+    public void showWinner(String winnerMessage){
+        centralPanel.removeAll();
+        addTopLabel(winnerMessage);
+        JButton quitButton = new JButton("Quit game");
+        quitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridy=1;
+        gbc.gridx=0;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.ipadx = 10;
+        gbc.ipady = 10;
+        centralPanel.add(quitButton, gbc);
+        revalidate();
+        repaint();
+        CardLayout cl = (CardLayout)(cardPanel.getLayout());
+        cl.show(cardPanel, SMALL_PANEL);
+    }
     public void updateCenterPanel(PlayerView playerView){
         centerManager.handlePlayerView(playerView);
     }
     public void updateLeftPanel(List<String> onlinePlayers, String turn){
-        centerManager.updatePlayers(onlinePlayers, turn);
+        centerManager.updatePlayersStatus(onlinePlayers, turn);
     }
-
     public void updateRightPanel(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
         rightPanel.update(revealed, obj, deck, onlinePlayers);
     }
-    public void showWinner(String winnerMessage){
-        winnerLabel.setText(winnerMessage);
-        CardLayout cl = (CardLayout)(cardPanel.getLayout());
-        cl.show(cardPanel, END_PANEL);
-    }
-    public void shotChatMessage(String sender, String message){
+    public void showChatMessage(String sender, String message){
         rightPanel.printChatMessage(sender, gui.clientManager.getNickName(), message);
+    }
+    private void addTopLabel(String text){
+        JLabel topLabel = new JLabel(text);
+        topLabel.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 25));
+        topLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx=0;
+        gbc.gridy=0;
+        gbc.gridwidth=2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(30, 30, 30, 30);
+        centralPanel.add(topLabel, gbc);
+    }
+    private void addCards(){
+        card1.addMouseListener(new MouseSelection());
+        card2.addMouseListener(new MouseSelection());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx=0;
+        gbc.gridy=1;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        centralPanel.add(card1, gbc);
+        gbc.gridx=1;
+        centralPanel.add(card2, gbc);
+    }
+    private class MouseSelection extends MouseAdapter{
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            ((SelectableCard)e.getSource()).setEnteredBorder();
+        }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            ((SelectableCard)e.getSource()).setDefaultBorder();
+        }
     }
     public static void main(String[] args) {
         GUI gui = new GUI();
@@ -193,7 +223,9 @@ public class GameFrame extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 GameFrame gf = new GameFrame(gui);
-                gf.showWinner("The winner is   " +"User x");
+                gf.showTwoObj(new ObjectiveCard(null, 100), new ObjectiveCard(null, 101));
+//                gf.showInitial(new InitialCard(null, null, 85, null));
+//                gf.showWinner("Winner is Pietro");
             }
         });
     }

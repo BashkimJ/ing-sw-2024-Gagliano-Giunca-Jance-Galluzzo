@@ -1,9 +1,7 @@
 package main.java.it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
 import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Player.CardSchemeView;
 import main.java.it.polimi.ingsw.Model.Player.PlayerView;
 import main.java.it.polimi.ingsw.Network.ClientManager;
 import main.java.it.polimi.ingsw.Network.Messages.*;
@@ -50,7 +48,13 @@ public class GUI implements View {
 
     @Override
     public void askForNewGame() {
-
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                configFrame.changePanel("2");
+                configFrame.setSwitchable(false);
+            }
+        });
     }
 
     @Override
@@ -58,7 +62,8 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                configFrame.changePanel("2");
+                configFrame.changePanel("3");
+                configFrame.setSwitchable(true);
             }
         });
     }
@@ -80,9 +85,9 @@ public class GUI implements View {
             @Override
             public void run() {
                 if (nameAccepted && connected) {
-                    configFrame.changePanel("4");
+                    configFrame.changePanel("5");
                 } else if (!nameAccepted && connected) {
-                    errorMessage("Nickname already taken.");
+                    errorMessage("You can't use this nickname.");
                 }
             }
         });
@@ -93,7 +98,7 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                configFrame.changePanel("3");
+                configFrame.changePanel("4");
                 configFrame.setSwitchable(false);
             }
         });
@@ -117,6 +122,11 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                if(configFrame != null) {
+                    configFrame.closeWindow();
+                    configFrame = null;
+                    gameFrame = new GameFrame(GUI.this);
+                }
                 gameFrame.showInitial(((InitialCardMess)message).getCard());
             }
         });
@@ -127,10 +137,14 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                if(configFrame != null) {
+                    configFrame.closeWindow();
+                    configFrame = null;
+                    gameFrame = new GameFrame(GUI.this);
+                }
                 gameFrame.showGamePanel();
             }
         });
-
         clientManager.showGameSt();
         clientManager.showPlayer(clientManager.getNickName());
     }
@@ -141,7 +155,7 @@ public class GUI implements View {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                gameFrame.shotChatMessage(message.getNickName(), ((ChatMess)message).getMess());
+                gameFrame.showChatMessage(message.getNickName(), ((ChatMess)message).getMess());
             }
         });
     }
@@ -161,18 +175,10 @@ public class GUI implements View {
 
     @Override
     public void showGameInfo(Message message) {
-        //Sono le carte scoperte
         ArrayList<ResourceCard> revealed = ((ShowGameResp)message).getRevealed();
-
         ArrayList<ObjectiveCard> obj =((ShowGameResp)message).getGlobalObj();
-
-        //due carte in cima al deck
         ArrayList<ResourceCard> deck = ((ShowGameResp)message).getDeck();
-
-
-        //Connected players
         List<String> onlinePlayers = ((ShowGameResp) message).getPlayers();
-
         String turn = ((ShowGameResp)message).getPlayerTurn();
         SwingUtilities.invokeLater(new Runnable() {
             @Override

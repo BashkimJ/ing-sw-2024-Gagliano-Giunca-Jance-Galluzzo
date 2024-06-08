@@ -16,7 +16,8 @@ public class JViewBottomPanel extends JPanel implements JBottomPanel{
     public JViewBottomPanel(GUI gui){
         this.gui = gui;
         setLayout(new FlowLayout());
-        setBackground(Color.ORANGE);
+        setBackground(new Color(230, 230, 230));
+        setBorder(BorderFactory.createLoweredBevelBorder());
     }
     public void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand){
         removeAll();

@@ -15,7 +15,9 @@ public class PlayerItem {
     private int numQuill;
     private int numManuscript;
     private boolean isOnline;
-    public PlayerItem(String nickName){
+    private boolean hasTurn;
+    private boolean isMainPlayer;
+    public PlayerItem(String nickName, boolean isMainPlayer){
         this.nickName = nickName;
         this.points = 0;
         this.numAnimal = 0;
@@ -26,9 +28,14 @@ public class PlayerItem {
         this.numQuill = 0;
         this.numManuscript = 0;
         this.isOnline = true;
+        this.hasTurn = false;
+        this.isMainPlayer = isMainPlayer;
     }
     public void setStatus(boolean isOnline){
         this.isOnline = isOnline;
+    }
+    public void setTurn(boolean hasTurn){
+        this.hasTurn = hasTurn;
     }
     public void updatePlayer(PlayerView playerView){
         this.playerColour = playerView.getPlayerColour();
@@ -79,5 +86,20 @@ public class PlayerItem {
 
     public int getNumManuscript() {
         return numManuscript;
+    }
+    public boolean isOnline() {
+        return isOnline;
+    }
+
+    public boolean getHasTurn() {
+        return hasTurn;
+    }
+
+    public boolean isMainPlayer() {
+        return isMainPlayer;
+    }
+
+    public Colour getPlayerColour() {
+        return playerColour;
     }
 }

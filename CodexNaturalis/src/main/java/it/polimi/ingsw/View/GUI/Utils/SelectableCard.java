@@ -14,6 +14,7 @@ public class SelectableCard extends JLabel {
         this.cardId = cardId;
         this.selectionColor = selectionColor;
         setDefaultBorder();
+        setToolTipText("ID: " + cardId);
     }
     public void showSide(boolean frontSide){
         this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", 180, 120));

@@ -26,10 +26,10 @@ import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
 public class JViewSchemePanel extends JPanel implements JSchemePanel{
     private final int CARD_WIDTH = 180;
     private final int CARD_HEIGHT = 120;
-    private final int PANEL_WIDTH=5000;
-    private final int PANEL_HEIGHT=5000;
-    private final int X_OVERLAPPING = 40;
-    private final int Y_OVERLAPPING = 48;
+    private final int PANEL_WIDTH;
+    private final int PANEL_HEIGHT;
+    private final int X_OVERLAPPING = 48;
+    private final int Y_OVERLAPPING = 40;
     private final int X_CARD_OFFSET;
     private final int Y_CARD_OFFSET;
     private final Point matrixOrigin = new Point(80, 80);
@@ -48,10 +48,14 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
                 new Point(-2,2),
                 new Point(-2,-2)
         );
+
+        X_CARD_OFFSET = CARD_HEIGHT - X_OVERLAPPING;
+        Y_CARD_OFFSET = CARD_WIDTH - Y_OVERLAPPING;
+        PANEL_HEIGHT = X_CARD_OFFSET*80;
+        PANEL_WIDTH = Y_CARD_OFFSET*80;
+        pixelOrigin = new Point(PANEL_HEIGHT/2 - CARD_HEIGHT/2, PANEL_WIDTH/2 - CARD_WIDTH/2);
+
         setLayout(new GridBagLayout());
-        pixelOrigin = new Point(PANEL_WIDTH/2 - CARD_WIDTH/2, PANEL_HEIGHT/2 - CARD_HEIGHT/2);
-        X_CARD_OFFSET = CARD_WIDTH - X_OVERLAPPING;
-        Y_CARD_OFFSET = CARD_HEIGHT - Y_OVERLAPPING;
         this.clientPane = createEmptyClientPane();
 
         GridBagConstraints gbc = new GridBagConstraints();
@@ -80,6 +84,7 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         gbc.fill = GridBagConstraints.BOTH;
 
         scrollPane = new JScrollPane(clientPane, ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setPreferredSize(new Dimension(900, 550));
         add(scrollPane, gbc);
 
     }
@@ -123,10 +128,15 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
             isFront = getSide(side);
             createCard(clientPane, id, isFront, p);
         }
-
-        scrollPane.setViewportView(clientPane);
         this.clientPane = clientPane;
-        centerView();
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                scrollPane.setViewportView(clientPane);
+                centerView();
+            }
+        });
+
 
     }
     public JPanel getSchemePanel(){return this;}
@@ -135,12 +145,10 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
                 && side.getUpLeft().getResource() == null);
     }
     private void createCard(JLayeredPane clientPane, Integer id, boolean isFront, Point placeTo){
-        String side = isFront ? "Front" : "Back";
         int xDistance = ((placeTo.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
         int yDistance = ((placeTo.y - matrixOrigin.y)/2)*Y_CARD_OFFSET;
-        //JLabel card = new JLabel(GUI.getImageIcon("Images/Cards/" + side + "/"+ id + ".png", CARD_WIDTH, CARD_HEIGHT));
         JLabel card = new UnselectableCard(id, isFront);
-        card.setBounds(pixelOrigin.x + xDistance, pixelOrigin.y + yDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
+        card.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
         clientPane.add(card, currentLayer);
         currentLayer++;
     }
@@ -161,13 +169,12 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         CardPlaceholder cardPlaceholder = new CardPlaceholder(position);
         int xDistance = ((position.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
         int yDistance = ((position.y - matrixOrigin.y)/2)*Y_CARD_OFFSET;
-        cardPlaceholder.setBounds(pixelOrigin.x + xDistance, pixelOrigin.y + yDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
+        cardPlaceholder.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
         cardPlaceholder.addMouseListener(new PlaceholderListener());
         this.clientPane.add(cardPlaceholder, -1);
     }
     private void centerView(){
         Rectangle bounds = scrollPane.getViewport().getViewRect();
-        //System.out.println(bounds);
         int x = (PANEL_WIDTH - bounds.width) / 2;
         int y = (PANEL_HEIGHT - bounds.height) / 2;
         scrollPane.getViewport().setViewPosition(new Point(x, y));

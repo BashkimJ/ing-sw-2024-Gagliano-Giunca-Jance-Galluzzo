@@ -58,17 +58,23 @@ public class JCenterManager extends JPanel {
             //Create scheme
             centerPanel = createOtherPlayerPanel();
             centerPanels.put(player.getNickName(), centerPanel);
-            PlayerItem playerItem = new PlayerItem(player.getNickName());
+            PlayerItem playerItem = new PlayerItem(player.getNickName(), false);
             playerItem.updatePlayer(player);
             listModel.addElement(playerItem);
             cardsPanel.add(centerPanel, player.getNickName());
         }
         centerPanel.update(player);
     }
-    public void updatePlayers(List<String> onlinePlayers, String turn){
-        String[] nicknames = new String[onlinePlayers.size()];
-        onlinePlayers.toArray(nicknames);
-        //TO DO: different style for online players and player who has the turn
+    public void updatePlayersStatus(List<String> onlinePlayers, String turn){
+        boolean isOnline, hasTurn;
+        for(int i = 0; i<listModel.size(); i++){
+            isOnline = onlinePlayers.contains(listModel.get(i).getNickname());
+            hasTurn = Objects.equals(listModel.get(i).getNickname(), turn);
+            listModel.get(i).setStatus(isOnline);
+            listModel.get(i).setTurn(hasTurn);
+            //calls listmodel.fireContentsChanged()
+            listModel.setElementAt(listModel.get(i) ,i);
+        }
     }
     private JCenterPanel createMainPlayerPanel(){
         return new JCenterPanel(new JMainSchemePanel(gui), new JMainBottomPanel(gui));
@@ -78,8 +84,9 @@ public class JCenterManager extends JPanel {
     }
     private JPanel createLeftPanel(String nickname){
         JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(new Color(230, 230, 230));
         listModel = new DefaultListModel<>();
-        listModel.addElement(new PlayerItem(nickname));
+        listModel.addElement(new PlayerItem(nickname, true));
         gamePlayers = new JList<>(listModel);
         gamePlayers.setCellRenderer(new PlayerRenderer());
         gamePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
