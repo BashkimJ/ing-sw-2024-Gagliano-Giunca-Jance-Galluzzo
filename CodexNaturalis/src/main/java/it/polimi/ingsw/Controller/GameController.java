@@ -587,7 +587,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
          * Starts the game for the player that has already chosen the initial and objective card.
          * @param NickName The name of the player to starty the game.
          */
-        private void initGame(String NickName){
+        private synchronized void initGame(String NickName){
             Iterator<Player> iterator  = game.getPlayers().iterator();
             while(iterator.hasNext()){
                 Player player = iterator.next();
@@ -599,6 +599,10 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
             }
             if(view.get(NickName)!=null)
                 view.get(NickName).alertGameStarted(new Message("Server",MessageType.Game_Started));
+            for(String name: view.keySet()){
+                if(view.get(name)!=null && !name.equals(NickName))
+                    showGameInfo(new ShowGameMess(name));
+            }
         }
 
         /**
