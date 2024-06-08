@@ -1,6 +1,7 @@
 package main.java.it.polimi.ingsw.View.GUI.Utils;
 
 import main.java.it.polimi.ingsw.View.GUI.GUI;
+import main.java.it.polimi.ingsw.View.GUI.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,15 +10,21 @@ public class SelectableCard extends JLabel {
 
     private final int cardId;
     private final Color selectionColor;
-    public SelectableCard(int cardId, Color selectionColor, boolean frontSide){
-        this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", 180, 120));
+    private final boolean resizable;
+    public SelectableCard(int cardId, Color selectionColor, boolean frontSide, boolean resizable){
+        this.resizable = resizable;
         this.cardId = cardId;
         this.selectionColor = selectionColor;
+        showSide(frontSide);
         setDefaultBorder();
         setToolTipText("ID: " + cardId);
     }
     public void showSide(boolean frontSide){
-        this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", 180, 120));
+        if(resizable)
+            this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", (int)(GameFrame.CARD_WIDTH*GameFrame.getScalingFactor()),
+                    (int)(GameFrame.CARD_HEIGHT*GameFrame.getScalingFactor())));
+        else
+            this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", GameFrame.CARD_WIDTH, GameFrame.CARD_HEIGHT));
     }
     public void setDefaultBorder(){
         this.setBorder(BorderFactory.createCompoundBorder(

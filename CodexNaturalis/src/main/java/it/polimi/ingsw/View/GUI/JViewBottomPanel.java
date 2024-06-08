@@ -3,6 +3,7 @@ package main.java.it.polimi.ingsw.View.GUI;
 import main.java.it.polimi.ingsw.Model.Cards.GoldCard;
 import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
 import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
+import main.java.it.polimi.ingsw.View.GUI.Utils.SelectableCard;
 import main.java.it.polimi.ingsw.View.GUI.Utils.UnselectableCard;
 
 import javax.swing.*;
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class JViewBottomPanel extends JPanel implements JBottomPanel{
     private GUI gui;
+    private static List<Integer> handCardsIDs = new ArrayList<>();
+    private int objectiveID = -1;
 
     public JViewBottomPanel(GUI gui){
         this.gui = gui;
@@ -19,20 +22,27 @@ public class JViewBottomPanel extends JPanel implements JBottomPanel{
         setBackground(new Color(230, 230, 230));
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
-    public void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand){
+    public void update(Integer playerObjective, List<Integer> playerHand){
         removeAll();
+        objectiveID = playerObjective;
+        handCardsIDs = playerHand;
         JToggleButton changeSideBtn = createToggleButton();
         changeSideBtn.setEnabled(false);
         this.add(changeSideBtn);
-        List<Integer> ids = playerHand.stream().map(x -> x.getCardId()).toList();
-        for(Integer id : ids){
-            UnselectableCard card = new UnselectableCard(id, false);
+        for(Integer id : playerHand){
+            UnselectableCard card = new UnselectableCard(id, false, true);
             add(card);
         }
-        UnselectableCard card = new UnselectableCard(playerObjective.getCardId(), false);
+        UnselectableCard card = new UnselectableCard(playerObjective, false, true);
         this.add(card);
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void resize() {
+        if(objectiveID >= 0 && !handCardsIDs.isEmpty())
+            update(objectiveID, handCardsIDs);
     }
 
     private JToggleButton createToggleButton() {
@@ -41,18 +51,25 @@ public class JViewBottomPanel extends JPanel implements JBottomPanel{
         return changeSideBtn;
     }
     public static void main(String[] args){
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        GameFrame.setScalingFactor(0.7777777f);
+                    }
+                }
+        );
         List<ResourceCard> playerHand = new ArrayList<>();
         playerHand.add(new ResourceCard(null, null, 10, null, 0));
         playerHand.add(new ResourceCard(null, null, 11, null, 0));
         playerHand.add(new GoldCard(null, null, 41, null, 0, null, null));
 
-        ObjectiveCard playerObjective = new ObjectiveCard(null, 96);
 
 
         JFrame frame = new JFrame();
         frame.setLayout(new BorderLayout());
         JViewBottomPanel viewBottomPanel = new JViewBottomPanel(null);
-        viewBottomPanel.update(playerObjective, playerHand);
+        viewBottomPanel.update(96, playerHand.stream().map(x -> x.getCardId()).toList());
         frame.add(viewBottomPanel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

@@ -8,6 +8,7 @@ import java.awt.*;
 import java.util.List;
 
 public interface JBottomPanel{
-    void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand);
+    void update(Integer playerObjective, List<Integer> playerHand);
+    void resize();
 
 }

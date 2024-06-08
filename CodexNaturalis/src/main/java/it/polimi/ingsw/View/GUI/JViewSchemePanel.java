@@ -24,12 +24,8 @@ import static main.java.it.polimi.ingsw.Model.Enumerations.Items.Quill;
 import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
 
 public class JViewSchemePanel extends JPanel implements JSchemePanel{
-    private final int CARD_WIDTH = 180;
-    private final int CARD_HEIGHT = 120;
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
-    private final int X_OVERLAPPING = 48;
-    private final int Y_OVERLAPPING = 40;
     private final int X_CARD_OFFSET;
     private final int Y_CARD_OFFSET;
     private final Point matrixOrigin = new Point(80, 80);
@@ -49,11 +45,11 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
                 new Point(-2,-2)
         );
 
-        X_CARD_OFFSET = CARD_HEIGHT - X_OVERLAPPING;
-        Y_CARD_OFFSET = CARD_WIDTH - Y_OVERLAPPING;
+        X_CARD_OFFSET = GameFrame.CARD_HEIGHT - GameFrame.X_OVERLAPPING;
+        Y_CARD_OFFSET = GameFrame.CARD_WIDTH - GameFrame.Y_OVERLAPPING;
         PANEL_HEIGHT = X_CARD_OFFSET*80;
         PANEL_WIDTH = Y_CARD_OFFSET*80;
-        pixelOrigin = new Point(PANEL_HEIGHT/2 - CARD_HEIGHT/2, PANEL_WIDTH/2 - CARD_WIDTH/2);
+        pixelOrigin = new Point(PANEL_HEIGHT/2 - GameFrame.CARD_HEIGHT/2, PANEL_WIDTH/2 - GameFrame.CARD_WIDTH/2);
 
         setLayout(new GridBagLayout());
         this.clientPane = createEmptyClientPane();
@@ -147,8 +143,8 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
     private void createCard(JLayeredPane clientPane, Integer id, boolean isFront, Point placeTo){
         int xDistance = ((placeTo.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
         int yDistance = ((placeTo.y - matrixOrigin.y)/2)*Y_CARD_OFFSET;
-        JLabel card = new UnselectableCard(id, isFront);
-        card.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
+        JLabel card = new UnselectableCard(id, isFront, false);
+        card.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, GameFrame.CARD_WIDTH + 10, GameFrame.CARD_HEIGHT + 10);
         clientPane.add(card, currentLayer);
         currentLayer++;
     }
@@ -169,7 +165,7 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         CardPlaceholder cardPlaceholder = new CardPlaceholder(position);
         int xDistance = ((position.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
         int yDistance = ((position.y - matrixOrigin.y)/2)*Y_CARD_OFFSET;
-        cardPlaceholder.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, CARD_WIDTH + 10, CARD_HEIGHT + 10);
+        cardPlaceholder.setBounds(pixelOrigin.y + yDistance, pixelOrigin.x + xDistance, GameFrame.CARD_WIDTH + 10, GameFrame.CARD_HEIGHT + 10);
         cardPlaceholder.addMouseListener(new PlaceholderListener());
         this.clientPane.add(cardPlaceholder, -1);
     }
@@ -214,7 +210,6 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         }
     }
     public static void main(String[] args) throws InterruptedException {
-
 
         JFrame frame = new JFrame();
         frame.setContentPane(new JPanel());

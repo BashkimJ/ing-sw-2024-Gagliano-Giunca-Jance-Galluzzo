@@ -17,6 +17,7 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
     private static List<SelectableCard> handCards = new ArrayList<>();
     private static boolean frontSide = true;
     private static int selectedCardIndex = -1;
+    private int objectiveID = -1;
     public JMainBottomPanel(GUI gui){
         this.gui = gui;
         setLayout(new FlowLayout());
@@ -32,24 +33,30 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         }
 
     }
-    public void update(ObjectiveCard playerObjective, List<ResourceCard> playerHand){
+    public void update(Integer playerObjective, List<Integer> playerHand){
         handCards=new ArrayList<>();
+        objectiveID = playerObjective;
         selectedCardIndex = -1;
         frontSide = true;
         removeAll();
         JToggleButton changeSideBtn = createToggleButton();
         this.add(changeSideBtn);
-        List<Integer> ids = playerHand.stream().map(x -> x.getCardId()).toList();
-        for(Integer id : ids){
-            SelectableCard card = new SelectableCard(id, Color.GREEN, true);
+        for(Integer id : playerHand){
+            SelectableCard card = new SelectableCard(id, Color.GREEN, true, true);
             card.addMouseListener(new handCardListener());
             handCards.add(card);
             add(card);
         }
-        UnselectableCard card = new UnselectableCard(playerObjective.getCardId(), true);
+        UnselectableCard card = new UnselectableCard(playerObjective, true, true);
         this.add(card);
         revalidate();
         repaint();
+    }
+
+    @Override
+    public void resize() {
+        if(objectiveID >= 0 && !handCards.isEmpty())
+            update(objectiveID, handCards.stream().map(x -> x.getCardId()).toList());
     }
 
     private JToggleButton createToggleButton() {
@@ -81,7 +88,14 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
     }
 
     public static void main(String[] args) throws InterruptedException {
-
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        GameFrame.setScalingFactor(0.7777777f);
+                    }
+                }
+        );
         List<ResourceCard> playerHand = new ArrayList<>();
         playerHand.add(new ResourceCard(null, null, 10, null, 0));
         playerHand.add(new ResourceCard(null, null, 11, null, 0));
@@ -100,7 +114,7 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         frame.setVisible(true);
 
         Thread.sleep(1000);
-        bottomPanel.update(playerObjective, playerHand);
+        bottomPanel.update(96, playerHand.stream().map(x -> x.getCardId()).toList());
 
     }
     private void flipAllCards(){

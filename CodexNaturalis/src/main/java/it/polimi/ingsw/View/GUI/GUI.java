@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GUI implements View {
+
     protected ClientManager clientManager;
     private ConfigFrame configFrame = null;
     private GameFrame gameFrame = null;

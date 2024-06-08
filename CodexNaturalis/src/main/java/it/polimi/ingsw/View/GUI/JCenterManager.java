@@ -65,6 +65,11 @@ public class JCenterManager extends JPanel {
         }
         centerPanel.update(player);
     }
+    public void resize(){
+        for(JCenterPanel panel : centerPanels.values()){
+            panel.resize();
+        }
+    }
     public void updatePlayersStatus(List<String> onlinePlayers, String turn){
         boolean isOnline, hasTurn;
         for(int i = 0; i<listModel.size(); i++){

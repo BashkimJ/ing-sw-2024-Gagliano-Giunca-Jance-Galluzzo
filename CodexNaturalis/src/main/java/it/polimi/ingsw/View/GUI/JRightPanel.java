@@ -18,6 +18,7 @@ import java.util.Objects;
 
 public class JRightPanel extends JPanel {
     private GUI gui;
+    private List<Integer> objIDs;
     private List<Integer> revealedIDs;
     private List<Integer> deckIDs;
     private JTextArea chat;
@@ -32,12 +33,13 @@ public class JRightPanel extends JPanel {
         setLayout(new GridBagLayout());
         chatReceivers=new ArrayList<>();
         tableCards = new JPanel();
-        tableCards.setLayout(new GridLayout(4, 2, 20, 20));
+        tableCards.setLayout(new GridLayout(4, 2, 10, 10));
         for(int i=0; i<8; i++){
             JLabel placeholder = new JLabel(GUI.getPlaceholder(180, 120));
             placeholder.setBorder(BorderFactory.createEmptyBorder(5,5,5,5));
             tableCards.add(placeholder);
         }
+        tableCards.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -54,7 +56,7 @@ public class JRightPanel extends JPanel {
         add(chatPanel, gbc);
 
         chatPanel.add(Box.createVerticalGlue());
-        chat = new JTextArea(10, 30);
+        chat = new JTextArea(10, 20);
         chat.setFont(new Font("Serif", Font.ITALIC, 16));
         chat.setLineWrap(true);
         chat.setWrapStyleWord(true);
@@ -102,38 +104,41 @@ public class JRightPanel extends JPanel {
 
         chatPanel.add(bottomPanel);
     }
-    public void update(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
+    public void update(List<Integer> revealed, List<Integer> obj, List<Integer> deck, List<String> onlinePlayers){
         JPanel tableCards = new JPanel();
-        tableCards.setLayout(new GridLayout(4, 2, 20, 20));
+        tableCards.setLayout(new GridLayout(4, 2, 10, 10));
         //Objectives
-        List<Integer> ids = obj.stream().map(x -> x.getCardId()).toList();
-        UnselectableCard u_card = new UnselectableCard(ids.get(0), true);
+        objIDs = obj;
+                //obj.stream().map(x -> x.getCardId()).toList();
+        UnselectableCard u_card = new UnselectableCard(objIDs.get(0), true, true);
         tableCards.add(u_card);
-        u_card = new UnselectableCard(ids.get(1), true);
+        u_card = new UnselectableCard(objIDs.get(1), true, true);
         tableCards.add(u_card);
         //Decks
-        this.deckIDs = deck.stream().map(x -> x.getCardId()).toList();
-        SelectableCard card = new SelectableCard(deckIDs.get(0), Color.RED, false);
+        this.deckIDs = deck;
+                //deck.stream().map(x -> x.getCardId()).toList();
+        SelectableCard card = new SelectableCard(deckIDs.get(0), Color.RED, false, true);
         card.addMouseListener(new PickCardListener());
         tableCards.add(card);
-        card = new SelectableCard(deckIDs.get(1), Color.RED, false);
+        card = new SelectableCard(deckIDs.get(1), Color.RED, false, true);
         tableCards.add(card);
         card.addMouseListener(new PickCardListener());
         //Faceup cards: 2 resources and 2 golds
-        this.revealedIDs  = revealed.stream().map(x -> x.getCardId()).toList();
-        card = new SelectableCard(revealedIDs.get(0), Color.RED, true);
+        this.revealedIDs  = revealed;
+                //revealed.stream().map(x -> x.getCardId()).toList();
+        card = new SelectableCard(revealedIDs.get(0), Color.RED, true, true);
         tableCards.add(card);
         card.addMouseListener(new PickCardListener());
 
-        card = new SelectableCard(revealedIDs.get(2), Color.RED, true);
+        card = new SelectableCard(revealedIDs.get(2), Color.RED, true, true);
         tableCards.add(card);
         card.addMouseListener(new PickCardListener());
 
-        card = new SelectableCard(revealedIDs.get(1), Color.RED, true);
+        card = new SelectableCard(revealedIDs.get(1), Color.RED, true, true);
         tableCards.add(card);
         card.addMouseListener(new PickCardListener());
 
-        card = new SelectableCard(revealedIDs.get(3), Color.RED, true);
+        card = new SelectableCard(revealedIDs.get(3), Color.RED, true, true);
         tableCards.add(card);
         card.addMouseListener(new PickCardListener());
 
@@ -142,9 +147,11 @@ public class JRightPanel extends JPanel {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1;
+        tableCards.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         add(tableCards, gbc);
         this.tableCards = tableCards;
-        updatePlayers(onlinePlayers);
+        if(onlinePlayers != null)
+            updatePlayers(onlinePlayers);
 
         revalidate();
         repaint();
@@ -173,6 +180,10 @@ public class JRightPanel extends JPanel {
         sender = Objects.equals(sender, gui.clientManager.getNickName()) ? "You" : sender;
         receiver = Objects.equals(receiver, gui.clientManager.getNickName()) ? "You" : receiver;
         chat.append("["+ sender + "→" + receiver + "]: " + msg + "\n");
+    }
+    public void resize(){
+        if(revealedIDs != null && objIDs != null && deckIDs != null)
+            update(revealedIDs, objIDs, deckIDs, null);
     }
     private class SendMsgListener implements ActionListener{
 
@@ -208,6 +219,14 @@ public class JRightPanel extends JPanel {
 
     }
     public static void main(String[] args) throws InterruptedException {
+        SwingUtilities.invokeLater(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        GameFrame.setScalingFactor(0.7777777f);
+                    }
+                }
+        );
 
         List<ResourceCard> revealed = new ArrayList<>();
         revealed.add(new ResourceCard(null, null, 10, null, 0));
@@ -239,6 +258,10 @@ public class JRightPanel extends JPanel {
         s.add("A");
         s.add("B");
         s.add("C");
-        rightPanel.update(revealed, obj, deck, s);
+        rightPanel.update(
+                revealed.stream().map(x -> x.getCardId()).toList(),
+                obj.stream().map(x -> x.getCardId()).toList(),
+                deck.stream().map(x -> x.getCardId()).toList(),
+                s);
     }
 }

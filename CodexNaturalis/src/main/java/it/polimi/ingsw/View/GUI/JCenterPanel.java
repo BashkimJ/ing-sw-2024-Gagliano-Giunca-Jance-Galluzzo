@@ -20,10 +20,13 @@ public class JCenterPanel extends JPanel {
         add((JPanel)bottomPanel, BorderLayout.SOUTH);
     }
     public void update(PlayerView player){
-        ObjectiveCard playerObjective = player.getPlayerObjective();
-        List<ResourceCard> playerHand = player.getPlayerHand();
+        Integer playerObjective = player.getPlayerObjective().getCardId();
+        List<Integer> playerHand = player.getPlayerHand().stream().map(x -> x.getCardId()).toList();
         CardSchemeView cardSchemeView = player.getPlayerScheme();
         bottomPanel.update(playerObjective, playerHand);
         schemePanel.update(cardSchemeView);
+    }
+    public void resize(){
+        bottomPanel.resize();
     }
 }

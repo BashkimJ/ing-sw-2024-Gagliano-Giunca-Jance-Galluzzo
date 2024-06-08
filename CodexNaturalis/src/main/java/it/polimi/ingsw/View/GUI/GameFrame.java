@@ -11,15 +11,17 @@ import main.java.it.polimi.ingsw.View.GUI.Utils.SelectableCard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.List;
 
 public class GameFrame extends JFrame {
     private static final String SMALL_PANEL = "1G";
     private static final String GAME_PANEL = "2G";
+    public static final int CARD_WIDTH = 180;
+    public static final int CARD_HEIGHT = 120;
+    public static final int X_OVERLAPPING = 48;
+    public static final int Y_OVERLAPPING = 40;
+    private static float scalingFactor = 1;
     private GUI gui;
     private JPanel cardPanel;
     private JPanel centralPanel;
@@ -54,6 +56,7 @@ public class GameFrame extends JFrame {
         cardPanel.add(smallPanel, SMALL_PANEL);
         cardPanel.add(gamePanel, GAME_PANEL);
 
+        addComponentListener(new resizedListener());
         setTitle("Codex Naturalis - " + gui.clientManager.getNickName());
         setIconImage(gameIcon.getImage());
         setContentPane(cardPanel);
@@ -63,11 +66,12 @@ public class GameFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setVisible(true);
+        setMinimumSize(new Dimension(1280, 600));
     }
     public void showTwoObj(ObjectiveCard one, ObjectiveCard two){
         addTopLabel("Choose your objective card:");
 
-        card1 = new SelectableCard(one.getCardId(), Color.GREEN, true);
+        card1 = new SelectableCard(one.getCardId(), Color.GREEN, true, false);
         card1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -86,7 +90,7 @@ public class GameFrame extends JFrame {
         });
 
 
-        card2 = new SelectableCard(two.getCardId(), Color.GREEN, true);
+        card2 = new SelectableCard(two.getCardId(), Color.GREEN, true, false);
         card2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent evt) {
@@ -111,8 +115,8 @@ public class GameFrame extends JFrame {
         centralPanel.removeAll();
         addTopLabel("Choose initial card's side:");
 
-        card1 = new SelectableCard(initialCard.getCardId(), Color.GREEN, true);
-        card2 = new SelectableCard(initialCard.getCardId(), Color.GREEN, false);
+        card1 = new SelectableCard(initialCard.getCardId(), Color.GREEN, true, false);
+        card2 = new SelectableCard(initialCard.getCardId(), Color.GREEN, false, false);
 
         card1.addMouseListener(new MouseAdapter() {
             @Override
@@ -177,7 +181,10 @@ public class GameFrame extends JFrame {
         centerManager.updatePlayersStatus(onlinePlayers, turn);
     }
     public void updateRightPanel(List<ResourceCard> revealed, List<ObjectiveCard> obj, List<ResourceCard> deck, List<String> onlinePlayers){
-        rightPanel.update(revealed, obj, deck, onlinePlayers);
+        List <Integer> objIDs = obj.stream().map(x -> x.getCardId()).toList();
+        List <Integer> deckIDs = deck.stream().map(x -> x.getCardId()).toList();
+        List <Integer> revealedIDs = revealed.stream().map(x -> x.getCardId()).toList();
+        rightPanel.update(revealedIDs, objIDs, deckIDs, onlinePlayers);
     }
     public void showChatMessage(String sender, String message){
         rightPanel.printChatMessage(sender, gui.clientManager.getNickName(), message);
@@ -228,5 +235,30 @@ public class GameFrame extends JFrame {
 //                gf.showWinner("Winner is Pietro");
             }
         });
+    }
+    public static float getScalingFactor(){ return scalingFactor;}
+    public static void setScalingFactor(float scalingFactor){
+        if(SwingUtilities.isEventDispatchThread())
+            GameFrame.scalingFactor = scalingFactor;}
+    private class resizedListener extends ComponentAdapter{
+        @Override
+        public void componentResized(ComponentEvent e) {
+            boolean changed = false;
+            if(getSize().height < 740 || getSize().width < 1550){
+                if(GameFrame.getScalingFactor() != 0.777777f) {
+                    changed = true;
+                    GameFrame.setScalingFactor(0.777777f);
+                }
+            }
+            else
+                if(GameFrame.getScalingFactor() != 1f) {
+                    changed = true;
+                    GameFrame.setScalingFactor(1f);
+                }
+            if(changed) {
+                rightPanel.resize();
+                centerManager.resize();
+            }
+        }
     }
 }
