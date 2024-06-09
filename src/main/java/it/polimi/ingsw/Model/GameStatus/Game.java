@@ -7,9 +7,6 @@ import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
 import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
 import it.polimi.ingsw.Model.Cards.*;
-import it.polimi.ingsw.Model.Enumerations.Items;
-import it.polimi.ingsw.Model.Enumerations.Pattern;
-import it.polimi.ingsw.Model.Enumerations.Resource;
 import it.polimi.ingsw.Model.Player.Player;
 
 import java.io.*;
