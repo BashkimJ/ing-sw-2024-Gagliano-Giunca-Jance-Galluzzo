@@ -1,20 +1,20 @@
-package test.java.it.polimi.ingsw.Model.Player;
+package it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
-import main.java.it.polimi.ingsw.Model.Cards.*;
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
-import main.java.it.polimi.ingsw.Model.Player.CardScheme;
-import main.java.it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
+import it.polimi.ingsw.Model.Cards.*;
+import it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.GameStatus.Game;
+import it.polimi.ingsw.Model.Player.CardScheme;
+import it.polimi.ingsw.Model.Player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
+import static it.polimi.ingsw.Model.Enumerations.Items.*;
+import static it.polimi.ingsw.Model.Enumerations.Resource.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CardSchemeTest {

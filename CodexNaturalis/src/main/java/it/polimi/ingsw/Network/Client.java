@@ -1,6 +1,6 @@
-package main.java.it.polimi.ingsw.Network;
+package it.polimi.ingsw.Network;
 
-import main.java.it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.Message;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

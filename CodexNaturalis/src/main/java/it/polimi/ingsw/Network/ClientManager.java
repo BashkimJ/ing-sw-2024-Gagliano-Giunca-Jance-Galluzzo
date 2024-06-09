@@ -1,12 +1,12 @@
-package main.java.it.polimi.ingsw.Network;
+package it.polimi.ingsw.Network;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
-import main.java.it.polimi.ingsw.Network.Messages.*;
-import main.java.it.polimi.ingsw.Network.rmi.RemoteClientInstance;
-import main.java.it.polimi.ingsw.Network.socket.SocketClient;
-import main.java.it.polimi.ingsw.View.TUI;
-import main.java.it.polimi.ingsw.View.View;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.Network.rmi.RemoteClientInstance;
+import it.polimi.ingsw.Network.socket.SocketClient;
+import it.polimi.ingsw.View.TUI;
+import it.polimi.ingsw.View.View;
 
 import java.io.IOException;
 import java.rmi.RemoteException;

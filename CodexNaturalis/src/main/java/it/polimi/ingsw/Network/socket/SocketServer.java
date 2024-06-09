@@ -1,13 +1,13 @@
-package main.java.it.polimi.ingsw.Network.socket;
+package it.polimi.ingsw.Network.socket;
 
-import main.java.it.polimi.ingsw.Controller.GameController;
-import main.java.it.polimi.ingsw.Controller.GameState;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
-import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.MessageType;
-import main.java.it.polimi.ingsw.View.VirtualView;
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.GameState;
+import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
+import it.polimi.ingsw.Network.ClientHandler;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.MessageType;
+import it.polimi.ingsw.View.VirtualView;
 
 import java.io.IOException;
 import java.net.ServerSocket;

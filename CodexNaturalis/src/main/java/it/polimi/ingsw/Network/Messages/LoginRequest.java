@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
 /**
  * This class represents a login request message. It extends the message class.

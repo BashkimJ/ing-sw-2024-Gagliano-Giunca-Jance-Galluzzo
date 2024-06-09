@@ -1,8 +1,8 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Cards.Side;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Cards.Side;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 /**
  * This class that also extends Message is used by the server to show a player his initial card.

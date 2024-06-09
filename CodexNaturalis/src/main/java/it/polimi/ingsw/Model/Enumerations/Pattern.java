@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Model.Enumerations;
+package it.polimi.ingsw.Model.Enumerations;
 
 public enum Pattern {
     downUpLR_RED,

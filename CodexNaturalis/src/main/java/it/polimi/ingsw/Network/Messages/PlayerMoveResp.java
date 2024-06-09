@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
-import main.java.it.polimi.ingsw.Model.Player.Player;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Model.Player.PlayerView;
 
 /**
  * This class represents a response from the server in case of a successful placement of a card.Used also for a successful picking.

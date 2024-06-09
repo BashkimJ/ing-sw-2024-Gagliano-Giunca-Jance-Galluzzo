@@ -1,11 +1,11 @@
-package main.java.it.polimi.ingsw.Model.Save;
+package it.polimi.ingsw.Model.Save;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import main.java.it.polimi.ingsw.Controller.GameState;
-import main.java.it.polimi.ingsw.Model.Cards.*;
-import main.java.it.polimi.ingsw.Model.GameStatus.*;
+import it.polimi.ingsw.Controller.GameState;
+import it.polimi.ingsw.Model.Cards.*;
+import it.polimi.ingsw.Model.GameStatus.*;
 
 import java.io.*;
 import java.lang.reflect.Array;

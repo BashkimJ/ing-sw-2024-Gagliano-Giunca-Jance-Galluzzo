@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
 import java.io.Serializable;
 

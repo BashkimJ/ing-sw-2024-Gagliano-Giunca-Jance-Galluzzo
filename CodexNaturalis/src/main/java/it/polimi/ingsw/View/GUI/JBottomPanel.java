@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.View.GUI;
+package it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,8 +1,8 @@
-package main.java.it.polimi.ingsw.View.GUI;
+package it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
-import main.java.it.polimi.ingsw.View.GUI.Utils.PlayerItem;
-import main.java.it.polimi.ingsw.View.GUI.Utils.PlayerRenderer;
+import it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.View.GUI.Utils.PlayerItem;
+import it.polimi.ingsw.View.GUI.Utils.PlayerRenderer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;

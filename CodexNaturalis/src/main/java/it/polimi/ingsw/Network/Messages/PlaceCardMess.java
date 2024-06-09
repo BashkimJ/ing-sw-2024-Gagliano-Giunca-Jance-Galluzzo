@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
 /**
  * A class representing a place card request.

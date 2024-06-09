@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Exceptions.SchemeCardExc;
+package it.polimi.ingsw.Exceptions.SchemeCardExc;
 
 public class InvalidPositionException extends Exception {
     public InvalidPositionException(){

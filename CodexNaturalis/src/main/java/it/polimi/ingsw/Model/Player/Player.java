@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.Model.Player;
+package it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Model.Enumerations.*;
-import main.java.it.polimi.ingsw.Model.Cards.*;
+import it.polimi.ingsw.Model.Enumerations.*;
+import it.polimi.ingsw.Model.Cards.*;
 
 
 import javax.imageio.ImageIO;

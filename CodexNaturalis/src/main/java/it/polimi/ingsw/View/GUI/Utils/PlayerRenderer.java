@@ -1,6 +1,6 @@
-package main.java.it.polimi.ingsw.View.GUI.Utils;
+package it.polimi.ingsw.View.GUI.Utils;
 
-import main.java.it.polimi.ingsw.View.GUI.GUI;
+import it.polimi.ingsw.View.GUI.GUI;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,10 @@
-package main.java.it.polimi.ingsw.View;
+package it.polimi.ingsw.View;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Network.ClientHandler;
+import it.polimi.ingsw.Network.Messages.*;
 
-import static main.java.it.polimi.ingsw.Network.Messages.MessageType.Winner_Mess;
+import static it.polimi.ingsw.Network.Messages.MessageType.Winner_Mess;
 
 /**
  * Class that implements the View. It is used from the controller to send messages to the client.

@@ -1,10 +1,10 @@
-package test.java.it.polimi.ingsw.Model.Cards;
+package it.polimi.ingsw.Model.Cards;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
-import main.java.it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.GameStatus.Game;
+import it.polimi.ingsw.Model.Player.Player;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

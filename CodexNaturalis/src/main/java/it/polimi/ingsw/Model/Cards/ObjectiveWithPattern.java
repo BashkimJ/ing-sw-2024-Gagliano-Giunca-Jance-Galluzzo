@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.Model.Cards;
+package it.polimi.ingsw.Model.Cards;
 
-import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.Enumerations.Pattern;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 public class ObjectiveWithPattern implements MainObjective{
     private final Pattern patternType;

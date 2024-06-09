@@ -1,10 +1,10 @@
-package main.java.it.polimi.ingsw.View;
+package it.polimi.ingsw.View;
 
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
-import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Network.ClientManager;
+import it.polimi.ingsw.Network.Messages.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -397,6 +397,9 @@ public class TUI implements View{
         this.stop = true;
     }
 
+    /**
+     * Method asking the players if he wants to start a new or saved game.
+     */
     @Override
     public void askForNewGame() {
         System.out.println("Would you like a new game  [y/n] : ");

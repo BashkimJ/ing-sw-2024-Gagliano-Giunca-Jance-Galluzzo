@@ -1,13 +1,13 @@
-package main.java.it.polimi.ingsw.Network.socket;
+package it.polimi.ingsw.Network.socket;
 
-import main.java.it.polimi.ingsw.Network.Client;
-import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.Network.Messages.ErrorMessage;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.MessageType;
-import main.java.it.polimi.ingsw.Network.Messages.Ping;
-import main.java.it.polimi.ingsw.View.TUI;
-import main.java.it.polimi.ingsw.View.View;
+import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Network.ClientManager;
+import it.polimi.ingsw.Network.Messages.ErrorMessage;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.MessageType;
+import it.polimi.ingsw.Network.Messages.Ping;
+import it.polimi.ingsw.View.TUI;
+import it.polimi.ingsw.View.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

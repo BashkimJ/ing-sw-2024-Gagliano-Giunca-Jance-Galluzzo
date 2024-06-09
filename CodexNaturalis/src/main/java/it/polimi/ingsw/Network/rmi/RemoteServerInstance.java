@@ -1,15 +1,15 @@
-package main.java.it.polimi.ingsw.Network.rmi;
+package it.polimi.ingsw.Network.rmi;
 
-import main.java.it.polimi.ingsw.Controller.GameController;
-import main.java.it.polimi.ingsw.Controller.GameState;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
-import main.java.it.polimi.ingsw.Network.Client;
-import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.ErrorMessage;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.MessageType;
-import main.java.it.polimi.ingsw.View.VirtualView;
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.GameState;
+import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
+import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Network.ClientHandler;
+import it.polimi.ingsw.Network.Messages.ErrorMessage;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.MessageType;
+import it.polimi.ingsw.View.VirtualView;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;

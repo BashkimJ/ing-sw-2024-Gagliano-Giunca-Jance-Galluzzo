@@ -1,10 +1,10 @@
-package main.java.it.polimi.ingsw.Network.rmi;
+package it.polimi.ingsw.Network.rmi;
 
-import main.java.it.polimi.ingsw.Network.Client;
-import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.Network.Messages.*;
-import main.java.it.polimi.ingsw.View.TUI;
-import main.java.it.polimi.ingsw.View.View;
+import it.polimi.ingsw.Network.Client;
+import it.polimi.ingsw.Network.ClientManager;
+import it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.View.TUI;
+import it.polimi.ingsw.View.View;
 
 import java.rmi.NotBoundException;
 import java.rmi.Remote;

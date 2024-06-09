@@ -1,11 +1,11 @@
-package main.java.it.polimi.ingsw.Network.socket;
+package it.polimi.ingsw.Network.socket;
 
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
-import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.MessageType;
-import main.java.it.polimi.ingsw.Network.Messages.Ping;
+import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
+import it.polimi.ingsw.Network.ClientHandler;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.MessageType;
+import it.polimi.ingsw.Network.Messages.Ping;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -18,7 +18,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-import static main.java.it.polimi.ingsw.Network.Messages.MessageType.Login_Req;
+import static it.polimi.ingsw.Network.Messages.MessageType.Login_Req;
 
 /**
  * This class implements the ClientHandler interface using the socket logic.

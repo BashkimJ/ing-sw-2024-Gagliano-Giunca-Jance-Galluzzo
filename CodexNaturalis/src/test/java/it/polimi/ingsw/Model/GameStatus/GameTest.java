@@ -1,15 +1,15 @@
-package test.java.it.polimi.ingsw.Model.GameStatus;
+package it.polimi.ingsw.Model.GameStatus;
 
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
-import main.java.it.polimi.ingsw.Model.Enumerations.Items;
-import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
-import main.java.it.polimi.ingsw.Model.GameStatus.Deck;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
-import main.java.it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.Enumerations.Items;
+import it.polimi.ingsw.Model.Enumerations.Pattern;
+import it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.GameStatus.Deck;
+import it.polimi.ingsw.Model.GameStatus.Game;
+import it.polimi.ingsw.Model.Player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

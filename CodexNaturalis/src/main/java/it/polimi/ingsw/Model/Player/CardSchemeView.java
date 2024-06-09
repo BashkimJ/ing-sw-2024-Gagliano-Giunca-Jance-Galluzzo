@@ -1,9 +1,9 @@
-package main.java.it.polimi.ingsw.Model.Player;
+package it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Model.Cards.Corner;
-import main.java.it.polimi.ingsw.Model.Cards.Side;
-import main.java.it.polimi.ingsw.Model.Enumerations.Items;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.Cards.Corner;
+import it.polimi.ingsw.Model.Cards.Side;
+import it.polimi.ingsw.Model.Enumerations.Items;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.awt.*;
 import java.io.Serializable;

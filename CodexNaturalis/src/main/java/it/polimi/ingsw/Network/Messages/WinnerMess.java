@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
 /**
  * This class extends the Message class and communicates to the players the winner of the game.

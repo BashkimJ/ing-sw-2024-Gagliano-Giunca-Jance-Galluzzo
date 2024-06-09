@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
 /**
  * The ChatMess class represents a chat message with a destination.

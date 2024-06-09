@@ -1,6 +1,6 @@
-package main.java.it.polimi.ingsw.View.GUI;
+package it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Model.Player.CardSchemeView;
+import it.polimi.ingsw.Model.Player.CardSchemeView;
 
 import javax.swing.*;
 

@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Exceptions.SchemeCardExc;
+package it.polimi.ingsw.Exceptions.SchemeCardExc;
 
 public class OutOfBoundsException extends Exception{
     public OutOfBoundsException(){

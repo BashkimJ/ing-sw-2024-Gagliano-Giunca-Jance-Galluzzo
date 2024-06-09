@@ -1,9 +1,9 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
-import main.java.it.polimi.ingsw.Model.Cards.MainObjective;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.Cards.MainObjective;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.util.ArrayList;
 import java.util.List;

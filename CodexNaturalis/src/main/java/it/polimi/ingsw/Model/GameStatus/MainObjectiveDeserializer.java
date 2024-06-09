@@ -1,10 +1,10 @@
-package main.java.it.polimi.ingsw.Model.GameStatus;
+package it.polimi.ingsw.Model.GameStatus;
 
 import com.google.gson.*;
-import main.java.it.polimi.ingsw.Model.Cards.MainObjective;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithItems;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithPattern;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
+import it.polimi.ingsw.Model.Cards.MainObjective;
+import it.polimi.ingsw.Model.Cards.ObjectiveWithItems;
+import it.polimi.ingsw.Model.Cards.ObjectiveWithPattern;
+import it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
 
 import java.lang.reflect.Type;
 

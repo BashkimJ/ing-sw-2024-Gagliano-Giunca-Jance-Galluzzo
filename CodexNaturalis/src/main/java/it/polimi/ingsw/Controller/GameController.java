@@ -1,24 +1,25 @@
-package main.java.it.polimi.ingsw.Controller;
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
-import main.java.it.polimi.ingsw.Model.Cards.GoldCard;
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
-import main.java.it.polimi.ingsw.Model.Player.Player;
-import main.java.it.polimi.ingsw.Model.Save.SavesManager;
-import main.java.it.polimi.ingsw.Network.Messages.*;
-import main.java.it.polimi.ingsw.View.VirtualView;
+package it.polimi.ingsw.Controller;
+
+import it.polimi.ingsw.Exceptions.GameExc.PlayersLimitExceededException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
+import it.polimi.ingsw.Model.Cards.GoldCard;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.GameStatus.Game;
+import it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Model.Save.SavesManager;
+import it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.View.VirtualView;
 
 import java.util.*;
 
 
-import static main.java.it.polimi.ingsw.Controller.GameState.*;
+import static it.polimi.ingsw.Controller.GameState.*;
 
     /**
      * Contains all the necessary methods to receive requests and elaborate them in order to update the model.
@@ -256,7 +257,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * This method initialises a new game in after one game is finished
+         * This method initialises a new game.
          */
         public void newGame(){
             this.lockPlayers = new Object();
@@ -285,8 +286,8 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * The method sends all the necessary information about the game to the player that asked.
-         * @param message The message must contain the name of the player that asked for info.
+         * The method sends all the necessary information about the game to the player that asked for it.
+         * @param message The message must contain the name of the player that asked for the game info.
          */
         private void showGameInfo(Message message){
             ArrayList<ResourceCard> revealed = (ArrayList<ResourceCard>) game.getFaceupCards();
@@ -372,8 +373,8 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * Allows the controller to obtain all the information of a player.
-         * @param message Must contain the name of the player who asked for information and the name of the player to obtain the info.
+         * Allows the controller to obtain all the information related to  a player.
+         * @param message Must contain the name of the player who asked for information and the name of the player to obtain the info about.
          */
         private void playerInfo(Message message) {
             String Nickname = message.getNickName();
@@ -415,7 +416,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         }
 
         /**
-         * Getter method to obtain the state of the ga,e
+         * Getter method to obtain the state of the game
          * @return GameState
          */
         public GameState getState(){
@@ -510,7 +511,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
         };
 
         /**
-         * Sends two objective cards to all the players to chose from.
+         * Sends two objective cards to all the players to choose from.
          */
         public synchronized void objectiveCardOptionsSender(){
             for (String name : new ArrayList<String>(view.keySet())) {
@@ -585,7 +586,7 @@ import static main.java.it.polimi.ingsw.Controller.GameState.*;
 
         /**
          * Starts the game for the player that has already chosen the initial and objective card.
-         * @param NickName The name of the player to starty the game.
+         * @param NickName The name of the player to start the game.
          */
         private synchronized void initGame(String NickName){
             Iterator<Player> iterator  = game.getPlayers().iterator();

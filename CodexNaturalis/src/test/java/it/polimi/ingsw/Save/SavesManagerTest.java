@@ -1,6 +1,6 @@
-package test.java.it.polimi.ingsw.Save;
+package it.polimi.ingsw.Save;
 
-import main.java.it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Controller.GameController;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

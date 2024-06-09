@@ -1,11 +1,11 @@
-package test.java.it.polimi.ingsw.Model.Cards;
+package it.polimi.ingsw.Model.Cards;
 
-import main.java.it.polimi.ingsw.Model.Cards.Corner;
+import it.polimi.ingsw.Model.Cards.Corner;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static main.java.it.polimi.ingsw.Model.Enumerations.Items.Inkwell;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.Animal;
+import static it.polimi.ingsw.Model.Enumerations.Items.Inkwell;
+import static it.polimi.ingsw.Model.Enumerations.Resource.Animal;
 import static org.junit.jupiter.api.Assertions.*;
 
 class CornerTest {

@@ -1,11 +1,11 @@
-package main.java.it.polimi.ingsw.View.GUI;
+package it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
-import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.Network.Messages.*;
-import main.java.it.polimi.ingsw.View.View;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Network.ClientManager;
+import it.polimi.ingsw.Network.Messages.*;
+import it.polimi.ingsw.View.View;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

@@ -1,4 +1,4 @@
-package main.java.it.polimi.ingsw.Model.Cards;
+package it.polimi.ingsw.Model.Cards;
 
 import java.io.File;
 import java.io.Serializable;

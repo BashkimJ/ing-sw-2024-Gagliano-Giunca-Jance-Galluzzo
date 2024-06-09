@@ -1,4 +1,4 @@
-package test.java.it.polimi.ingsw.Save;
+package it.polimi.ingsw.Save;
 
 public class SaveTest {
 

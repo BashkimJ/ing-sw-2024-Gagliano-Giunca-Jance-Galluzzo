@@ -1,9 +1,9 @@
-package main.java.it.polimi.ingsw.Network.rmi;
+package it.polimi.ingsw.Network.rmi;
 
-import main.java.it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
-import main.java.it.polimi.ingsw.Network.ClientHandler;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
-import main.java.it.polimi.ingsw.Network.Messages.Ping;
+import it.polimi.ingsw.Exceptions.GameExc.PlayerNotFoundException;
+import it.polimi.ingsw.Network.ClientHandler;
+import it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Network.Messages.Ping;
 
 import java.rmi.RemoteException;
 import java.util.concurrent.*;

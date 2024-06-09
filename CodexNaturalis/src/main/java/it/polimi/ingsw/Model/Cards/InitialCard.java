@@ -1,5 +1,5 @@
-package main.java.it.polimi.ingsw.Model.Cards;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+package it.polimi.ingsw.Model.Cards;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 
 import java.util.List;

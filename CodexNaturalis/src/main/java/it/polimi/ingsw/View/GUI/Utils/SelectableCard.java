@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.View.GUI.Utils;
+package it.polimi.ingsw.View.GUI.Utils;
 
-import main.java.it.polimi.ingsw.View.GUI.GUI;
-import main.java.it.polimi.ingsw.View.GUI.GameFrame;
+import it.polimi.ingsw.View.GUI.GUI;
+import it.polimi.ingsw.View.GUI.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;

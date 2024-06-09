@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.Network.Messages;
+package it.polimi.ingsw.Network.Messages;
 
-import main.java.it.polimi.ingsw.Model.Player.Player;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Model.Player.PlayerView;
 
 /**
  * This class is used as a way to ask for the info of the player. It is also used as a response form the server.

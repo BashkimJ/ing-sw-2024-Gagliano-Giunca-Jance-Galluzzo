@@ -1,8 +1,8 @@
-package main.java.it.polimi.ingsw.View;
+package it.polimi.ingsw.View;
 
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Network.Messages.ChatMess;
-import main.java.it.polimi.ingsw.Network.Messages.Message;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Network.Messages.ChatMess;
+import it.polimi.ingsw.Network.Messages.Message;
 
 /**
  * Interface used for the implementation of the TUI or GUI.

@@ -1,10 +1,10 @@
-package main.java.it.polimi.ingsw.Model.Player;
+package it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Model.Cards.GoldCard;
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.Cards.GoldCard;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Enumerations.Colour;
 
 import java.awt.image.BufferedImage;
 import java.io.Serializable;

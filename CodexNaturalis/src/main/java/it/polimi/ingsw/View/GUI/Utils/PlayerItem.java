@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.View.GUI.Utils;
+package it.polimi.ingsw.View.GUI.Utils;
 
-import main.java.it.polimi.ingsw.Model.Enumerations.Colour;
-import main.java.it.polimi.ingsw.Model.Player.PlayerView;
+import it.polimi.ingsw.Model.Enumerations.Colour;
+import it.polimi.ingsw.Model.Player.PlayerView;
 
 public class PlayerItem {
     private final String nickName;

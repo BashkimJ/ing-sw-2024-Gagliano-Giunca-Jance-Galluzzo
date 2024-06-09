@@ -1,7 +1,7 @@
-package main.java.it.polimi.ingsw.Model.Save;
-import main.java.it.polimi.ingsw.Controller.GameState;
-import main.java.it.polimi.ingsw.Model.Cards.ObjectiveCard;
-import main.java.it.polimi.ingsw.Model.GameStatus.Game;
+package it.polimi.ingsw.Model.Save;
+import it.polimi.ingsw.Controller.GameState;
+import it.polimi.ingsw.Model.Cards.ObjectiveCard;
+import it.polimi.ingsw.Model.GameStatus.Game;
 
 import java.io.Serializable;
 import java.util.List;

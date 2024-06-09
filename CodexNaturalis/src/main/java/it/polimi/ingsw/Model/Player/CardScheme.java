@@ -1,13 +1,13 @@
-package main.java.it.polimi.ingsw.Model.Player;
+package it.polimi.ingsw.Model.Player;
 
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
-import main.java.it.polimi.ingsw.Model.Cards.*;
-import main.java.it.polimi.ingsw.Model.Enumerations.Items;
-import main.java.it.polimi.ingsw.Model.Enumerations.Pattern;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.GoldCardPlacementException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidPositionException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.OutOfBoundsException;
+import it.polimi.ingsw.Model.Cards.*;
+import it.polimi.ingsw.Model.Enumerations.Items;
+import it.polimi.ingsw.Model.Enumerations.Pattern;
+import it.polimi.ingsw.Model.Enumerations.Resource;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -15,9 +15,9 @@ import java.util.*;
 import java.util.List;
 
 import static java.lang.Math.min;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Items.*;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Pattern.*;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
+import static it.polimi.ingsw.Model.Enumerations.Items.*;
+import static it.polimi.ingsw.Model.Enumerations.Pattern.*;
+import static it.polimi.ingsw.Model.Enumerations.Resource.*;
 
 public class CardScheme implements Serializable {
     private Map<ArrayList<Integer>, Side> playedCards;

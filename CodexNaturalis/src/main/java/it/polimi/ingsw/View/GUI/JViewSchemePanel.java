@@ -1,15 +1,15 @@
-package main.java.it.polimi.ingsw.View.GUI;
+package it.polimi.ingsw.View.GUI;
 
-import main.java.it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
-import main.java.it.polimi.ingsw.Model.Cards.Corner;
-import main.java.it.polimi.ingsw.Model.Cards.InitialCard;
-import main.java.it.polimi.ingsw.Model.Cards.ResourceCard;
-import main.java.it.polimi.ingsw.Model.Cards.Side;
-import main.java.it.polimi.ingsw.Model.Enumerations.Resource;
-import main.java.it.polimi.ingsw.Model.Player.CardScheme;
-import main.java.it.polimi.ingsw.Model.Player.CardSchemeView;
-import main.java.it.polimi.ingsw.View.GUI.Utils.CardPlaceholder;
-import main.java.it.polimi.ingsw.View.GUI.Utils.UnselectableCard;
+import it.polimi.ingsw.Exceptions.SchemeCardExc.InvalidSideException;
+import it.polimi.ingsw.Model.Cards.Corner;
+import it.polimi.ingsw.Model.Cards.InitialCard;
+import it.polimi.ingsw.Model.Cards.ResourceCard;
+import it.polimi.ingsw.Model.Cards.Side;
+import it.polimi.ingsw.Model.Enumerations.Resource;
+import it.polimi.ingsw.Model.Player.CardScheme;
+import it.polimi.ingsw.Model.Player.CardSchemeView;
+import it.polimi.ingsw.View.GUI.Utils.CardPlaceholder;
+import it.polimi.ingsw.View.GUI.Utils.UnselectableCard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +20,8 @@ import java.awt.event.MouseEvent;
 import java.util.*;
 import java.util.List;
 
-import static main.java.it.polimi.ingsw.Model.Enumerations.Items.Quill;
-import static main.java.it.polimi.ingsw.Model.Enumerations.Resource.*;
+import static it.polimi.ingsw.Model.Enumerations.Items.Quill;
+import static it.polimi.ingsw.Model.Enumerations.Resource.*;
 
 public class JViewSchemePanel extends JPanel implements JSchemePanel{
     private final int PANEL_WIDTH;

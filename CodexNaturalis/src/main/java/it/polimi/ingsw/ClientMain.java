@@ -1,8 +1,8 @@
-package main.java.it.polimi.ingsw;
+package it.polimi.ingsw;
 
-import main.java.it.polimi.ingsw.Network.ClientManager;
-import main.java.it.polimi.ingsw.View.GUI.GUI;
-import main.java.it.polimi.ingsw.View.TUI;
+import it.polimi.ingsw.Network.ClientManager;
+import it.polimi.ingsw.View.GUI.GUI;
+import it.polimi.ingsw.View.TUI;
 
 public class ClientMain {
     public static void main(String[] args) {

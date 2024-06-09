@@ -1,7 +1,10 @@
-package main.java.it.polimi.ingsw.Model.Cards;
+package it.polimi.ingsw.Model.Cards;
 
 import java.io.Serializable;
 
+/**
+ * Abstract class that represents a card.
+ */
  public  abstract class  Card implements Serializable {
     private final Side front;
     private final Side retro;

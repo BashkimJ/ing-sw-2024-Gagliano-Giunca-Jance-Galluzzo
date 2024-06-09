@@ -1,9 +1,9 @@
-package main.java.it.polimi.ingsw;
+package it.polimi.ingsw;
 
-import main.java.it.polimi.ingsw.Controller.GameController;
-import main.java.it.polimi.ingsw.Network.rmi.RemoteServer;
-import main.java.it.polimi.ingsw.Network.rmi.RemoteServerInstance;
-import main.java.it.polimi.ingsw.Network.socket.SocketServer;
+import it.polimi.ingsw.Controller.GameController;
+import it.polimi.ingsw.Network.rmi.RemoteServer;
+import it.polimi.ingsw.Network.rmi.RemoteServerInstance;
+import it.polimi.ingsw.Network.socket.SocketServer;
 
 import java.rmi.RemoteException;
 
