@@ -5,6 +5,9 @@ import it.polimi.ingsw.View.GUI.GUI;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Custom JList ListCellRenderer for playerItem objects
+ */
 public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerItem> {
     private JLabel nicknameLabel;
     private JLabel fungiLabel;
@@ -15,6 +18,10 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
     private JLabel quillLabel;
     private JLabel manuscriptLabel;
     private JLabel pointsLabel;
+
+    /**
+     * Class constructor. Creates a default graphical representation of a playerItem
+     */
     public PlayerRenderer() {
         setOpaque(true);
         setLayout(new GridBagLayout());
@@ -58,6 +65,10 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
         gbc.gridx = 3;
         add(pointsLabel, gbc);
     }
+
+    /**
+     * Shows a playerItem using the current information
+     */
     @Override
     public JPanel getListCellRendererComponent(JList<? extends PlayerItem> list, PlayerItem value, int index, boolean isSelected, boolean cellHasFocus) {
 
@@ -95,6 +106,13 @@ public class PlayerRenderer extends JPanel implements ListCellRenderer<PlayerIte
 
         return this;
     }
+
+    /**
+     * Creates a JLabel for representing an icon
+     * @param path Image location
+     * @param title JLabel's text
+     * @return The JLabel
+     */
     private JLabel getLabel(String path, String title){
         JLabel iconAndText;
         ImageIcon icon;

@@ -10,7 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * JBottomPanel of the client's opponents. Shows only the back of the cards
+ */
 public class JViewBottomPanel extends JPanel implements JBottomPanel{
     private GUI gui;
     private static List<Integer> handCardsIDs = new ArrayList<>();
@@ -22,6 +24,11 @@ public class JViewBottomPanel extends JPanel implements JBottomPanel{
         setBackground(new Color(230, 230, 230));
         setBorder(BorderFactory.createLoweredBevelBorder());
     }
+    /**
+     * Updates the Panel with the player private objective card and the cards in his hand
+     * @param playerObjective private objective card
+     * @param playerHand cards in the player hand
+     */
     public void update(Integer playerObjective, List<Integer> playerHand){
         removeAll();
         objectiveID = playerObjective;
@@ -38,7 +45,9 @@ public class JViewBottomPanel extends JPanel implements JBottomPanel{
         revalidate();
         repaint();
     }
-
+    /**
+     * Resizes the currently shown cards
+     */
     @Override
     public void resize() {
         if(objectiveID >= 0 && !handCardsIDs.isEmpty())

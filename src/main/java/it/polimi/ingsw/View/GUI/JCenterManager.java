@@ -13,15 +13,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-//Created the first time, then updated
-//Handles the different JCenterPanels, binding them with the nickname of the corresponding player.
+/**
+ * Subcomponent of the GameFrame that contains the leftPanel and the List of JCenterPanels.
+ * Handles the different JCenterPanels, binding them with the nickname of the corresponding player.
+ */
+//
 public class JCenterManager extends JPanel {
     private GUI gui;
     private Map<String, JCenterPanel> centerPanels;
+    /**
+     *  JPanel which contains a JList of the players who have played at least one turn in the game.
+     */
     private JPanel leftPanel;
     private JPanel cardsPanel;
     private JList<PlayerItem> gamePlayers;
     private DefaultListModel<PlayerItem>  listModel;
+
+    /**
+     * Class constructor. It creates the client's player JCenterPanel and the leftPanel.
+     * @param gui
+     */
     public JCenterManager(GUI gui){
         this.gui = gui;
         String nickname = gui.clientManager.getNickName();
@@ -39,7 +50,10 @@ public class JCenterManager extends JPanel {
         this.add(leftPanel, BorderLayout.WEST);
     }
 
-
+    /**
+     * Handles the update of the Panel when an updated PlayerView is received
+     * @param player the updated player
+     */
     public void handlePlayerView(PlayerView player){
         JCenterPanel centerPanel;
         if(centerPanels.containsKey(player.getNickName())){
@@ -65,11 +79,20 @@ public class JCenterManager extends JPanel {
         }
         centerPanel.update(player);
     }
+    /**
+     * Resizes all the JCenterPanels
+     */
     public void resize(){
         for(JCenterPanel panel : centerPanels.values()){
             panel.resize();
         }
     }
+
+    /**
+     * Updates the leftPanel's JList with updated information
+     * @param onlinePlayers players currently online
+     * @param turn player who has the turn
+     */
     public void updatePlayersStatus(List<String> onlinePlayers, String turn){
         boolean isOnline, hasTurn;
         for(int i = 0; i<listModel.size(); i++){
@@ -81,12 +104,27 @@ public class JCenterManager extends JPanel {
             listModel.setElementAt(listModel.get(i) ,i);
         }
     }
+
+    /**
+     * Methods that creates a JCenterPanel for the client's player
+     * @return the JCenterPanel
+     */
     private JCenterPanel createMainPlayerPanel(){
         return new JCenterPanel(new JMainSchemePanel(gui), new JMainBottomPanel(gui));
     }
+    /**
+     * Methods that creates a JCenterPanel for a client's player opponent
+     * @return the JCenterPanel
+     */
     private JCenterPanel createOtherPlayerPanel(){
         return new JCenterPanel(new JViewSchemePanel(gui), new JViewBottomPanel(gui));
     }
+
+    /**
+     * Creates the left panel and initialize the JList with only the client's player.
+     * @param nickname nickname of the client's player
+     * @return the created JPanel
+     */
     private JPanel createLeftPanel(String nickname){
         JPanel leftPanel = new JPanel();
         leftPanel.setBackground(new Color(230, 230, 230));
@@ -102,6 +140,10 @@ public class JCenterManager extends JPanel {
         leftPanel.add(gamePlayers);
         return leftPanel;
     }
+
+    /**
+     * Handles the selection of JCenterPanel to be shown
+     */
     private class PlayerSelectionHandler implements ListSelectionListener {
         public void valueChanged(ListSelectionEvent e) {
             if (!e.getValueIsAdjusting()) {

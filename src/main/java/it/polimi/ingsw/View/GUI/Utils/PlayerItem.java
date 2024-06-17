@@ -3,6 +3,9 @@ package it.polimi.ingsw.View.GUI.Utils;
 import it.polimi.ingsw.Model.Enumerations.Colour;
 import it.polimi.ingsw.Model.Player.PlayerView;
 
+/**
+ * Represents an item of the JList of players
+ */
 public class PlayerItem {
     private final String nickName;
     private int points;
@@ -17,6 +20,12 @@ public class PlayerItem {
     private boolean isOnline;
     private boolean hasTurn;
     private boolean isMainPlayer;
+
+    /**
+     * Class constructor.
+     * @param nickName player's nickname
+     * @param isMainPlayer indicates whether it's the client's player or not.
+     */
     public PlayerItem(String nickName, boolean isMainPlayer){
         this.nickName = nickName;
         this.points = 0;
@@ -37,6 +46,11 @@ public class PlayerItem {
     public void setTurn(boolean hasTurn){
         this.hasTurn = hasTurn;
     }
+
+    /**
+     * Updates the player item with new information
+     * @param playerView object from witch playerItem gathers data
+     */
     public void updatePlayer(PlayerView playerView){
         this.playerColour = playerView.getPlayerColour();
         this.points = playerView.getPoints();

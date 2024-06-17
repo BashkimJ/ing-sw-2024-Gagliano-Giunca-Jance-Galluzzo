@@ -14,6 +14,9 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.List;
 
+/**
+ * Frame of the game phase
+ */
 public class GameFrame extends JFrame {
     private static final String SMALL_PANEL = "1G";
     private static final String GAME_PANEL = "2G";
@@ -31,6 +34,11 @@ public class GameFrame extends JFrame {
     private JRightPanel rightPanel;
     private JCenterManager centerManager;
     private JPanel gamePanel;
+
+    /**
+     * Construct the frame and its subcomponent cards
+     * @param gui reference to the gui used for sending messages to server
+     */
     public GameFrame(GUI gui){
         this.gui = gui;
         ImageIcon gameIcon = GUI.getImageIcon("Images/General/GameIcon.png", 0, 0);
@@ -68,6 +76,12 @@ public class GameFrame extends JFrame {
         setVisible(true);
         setMinimumSize(new Dimension(1280, 600));
     }
+
+    /**
+     * Configures the frame to show the objective card choice
+     * @param one first obj card
+     * @param two second obj card
+     */
     public void showTwoObj(ObjectiveCard one, ObjectiveCard two){
         addTopLabel("Choose your objective card:");
 
@@ -110,6 +124,10 @@ public class GameFrame extends JFrame {
         revalidate();
         repaint();
     }
+    /**
+     * Configures the frame to show the initial card side choice
+     * @param initialCard card to choose the side of
+     */
     public void showInitial(InitialCard initialCard){
         System.out.println("Showing initial card with id: " + initialCard.getCardId());
         centralPanel.removeAll();
@@ -147,10 +165,18 @@ public class GameFrame extends JFrame {
         repaint();
 
     }
+
+    /**
+     * Sets the GAME_PANEL as cardLayout shown card
+     */
     public void showGamePanel(){
         CardLayout cl = (CardLayout)(cardPanel.getLayout());
         cl.show(cardPanel, GAME_PANEL);
     }
+    /**
+     * Configures the frame to show the winner
+     * @param winnerMessage message to be shown
+     */
     public void showWinner(String winnerMessage){
         centralPanel.removeAll();
         addTopLabel(winnerMessage);
@@ -174,6 +200,10 @@ public class GameFrame extends JFrame {
         CardLayout cl = (CardLayout)(cardPanel.getLayout());
         cl.show(cardPanel, SMALL_PANEL);
     }
+
+    /**
+     * Methods that propagate the updates to the frame subcomponents
+     */
     public void updateCenterPanel(PlayerView playerView){
         centerManager.handlePlayerView(playerView);
     }
@@ -186,9 +216,20 @@ public class GameFrame extends JFrame {
         List <Integer> revealedIDs = revealed.stream().map(x -> x.getCardId()).toList();
         rightPanel.update(revealedIDs, objIDs, deckIDs, onlinePlayers);
     }
+
+    /**
+     * Calls the rightPanel method to print the chat message in the chat box
+     * @param sender nickname of the sender
+     * @param message message to be printed
+     */
     public void showChatMessage(String sender, String message){
         rightPanel.printChatMessage(sender, gui.clientManager.getNickName(), message);
     }
+
+    /**
+     * Create the label at the top of the screen
+     * @param text the text of the label
+     */
     private void addTopLabel(String text){
         JLabel topLabel = new JLabel(text);
         topLabel.setFont(new Font("Microsoft YaHei UI", Font.BOLD, 25));
@@ -201,6 +242,10 @@ public class GameFrame extends JFrame {
         gbc.insets = new Insets(30, 30, 30, 30);
         centralPanel.add(topLabel, gbc);
     }
+
+    /**
+     * Configures the card1 and card2 label
+     */
     private void addCards(){
         card1.addMouseListener(new MouseSelection());
         card2.addMouseListener(new MouseSelection());
@@ -212,6 +257,10 @@ public class GameFrame extends JFrame {
         gbc.gridx=1;
         centralPanel.add(card2, gbc);
     }
+
+    /**
+     * MouseListener that handles the mouse hover on the label
+     */
     private class MouseSelection extends MouseAdapter{
         @Override
         public void mouseEntered(MouseEvent e) {
@@ -240,6 +289,11 @@ public class GameFrame extends JFrame {
     public static void setScalingFactor(float scalingFactor){
         if(SwingUtilities.isEventDispatchThread())
             GameFrame.scalingFactor = scalingFactor;}
+
+    /**
+     * ComponentListener that changes the GameFrame's scaling factor based on the current size of the frame.
+     * If the factor is changed, some of the component are resized via resize()
+     */
     private class resizedListener extends ComponentAdapter{
         @Override
         public void componentResized(ComponentEvent e) {

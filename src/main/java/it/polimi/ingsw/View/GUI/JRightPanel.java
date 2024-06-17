@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * JPanel that handles card picking. It shows the cards at the top of the decks and the face up cards.
+ */
 public class JRightPanel extends JPanel {
     private GUI gui;
     private List<Integer> objIDs;
@@ -27,6 +30,11 @@ public class JRightPanel extends JPanel {
     private JPanel tableCards;
     private List<String> chatReceivers;
     private JPanel bottomPanel;
+
+    /**
+     * Class constructor. It creates a Panel with the chat box and placeholders instead of cards.
+     * @param gui
+     */
     public JRightPanel(GUI gui){
         this.gui = gui;
         setBackground(new Color(230, 230, 230));
@@ -104,6 +112,14 @@ public class JRightPanel extends JPanel {
 
         chatPanel.add(bottomPanel);
     }
+
+    /**
+     * Updates the JPanel with the new information
+     * @param revealed ids of faceup cards
+     * @param obj ids of common objective cards
+     * @param deck ids of decks top card
+     * @param onlinePlayers nicknames of the online players
+     */
     public void update(List<Integer> revealed, List<Integer> obj, List<Integer> deck, List<String> onlinePlayers){
         JPanel tableCards = new JPanel();
         tableCards.setLayout(new GridLayout(4, 2, 10, 10));
@@ -156,6 +172,11 @@ public class JRightPanel extends JPanel {
         revalidate();
         repaint();
     }
+
+    /**
+     * Updates the list of players to send messages to. A player is added if he's not yet in the chatReceivers list
+     * @param players currenly online players
+     */
     private void updatePlayers(List<String> players){
         List<String> pl = new ArrayList<>(players);
         pl.remove(gui.clientManager.getNickName());
@@ -176,15 +197,30 @@ public class JRightPanel extends JPanel {
             bottomPanel.add(choosePlayer, gbc);
         }
     }
+
+    /**
+     * Prints a message in the chat JTextArea
+     * @param sender nickname of the sender
+     * @param receiver nickname of the receiver
+     * @param msg message
+     */
     public void printChatMessage(String sender, String receiver, String msg){
         sender = Objects.equals(sender, gui.clientManager.getNickName()) ? "You" : sender;
         receiver = Objects.equals(receiver, gui.clientManager.getNickName()) ? "You" : receiver;
         chat.append("["+ sender + "→" + receiver + "]: " + msg + "\n");
     }
+
+    /**
+     * Resizes the card labels by calling the update method with the current cards
+     */
     public void resize(){
         if(revealedIDs != null && objIDs != null && deckIDs != null)
             update(revealedIDs, objIDs, deckIDs, null);
     }
+
+    /**
+     * ActionListener that sends a chat message via the clientManager
+     */
     private class SendMsgListener implements ActionListener{
 
         @Override
@@ -199,6 +235,10 @@ public class JRightPanel extends JPanel {
             }
         }
     }
+
+    /**
+     * MouseListener that handles card picking and mouse hover on the cards
+     */
     private class PickCardListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {

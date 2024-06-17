@@ -6,6 +6,9 @@ import java.awt.event.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Frame that handles the pre game settings
+ */
 public class ConfigFrame extends JFrame{
     final static String CONNECTION_PANEL = "1";
     final static String ASK_GAME_PANEL = "2";
@@ -24,7 +27,10 @@ public class ConfigFrame extends JFrame{
 
     private boolean panelIsSwitchable = true;
 
-
+    /**
+     * Construct the frame and all the panels
+     * @param gui
+     */
     public ConfigFrame(GUI gui){
         this.gui = gui;
         ImageIcon gameIcon = null;
@@ -82,6 +88,11 @@ public class ConfigFrame extends JFrame{
         setVisible(true);
 
     }
+
+    /**
+     * Creates the CONNECTION_PANEL.
+     * @return the panel
+     */
     private JPanel createConnPanel(){
         JPanel connPanel = new JPanel();
         connPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
@@ -137,6 +148,10 @@ public class ConfigFrame extends JFrame{
         setEnterCommand(connPanel, connBtn);
         return connPanel;
     }
+    /**
+     * Creates the ASK_GAME_PANEL.
+     * @return the panel
+     */
     private JPanel createAskGamePanel(){
         JPanel askGamePanel = new JPanel();
         askGamePanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
@@ -186,6 +201,10 @@ public class ConfigFrame extends JFrame{
         setEnterCommand(askGamePanel, startGameBtn);
         return askGamePanel;
     }
+    /**
+     * Creates the NICKNAME_PANEL.
+     * @return the panel
+     */
     private JPanel createNicknamePanel(){
         JPanel nicknamePanel = new JPanel();
         nicknamePanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
@@ -207,6 +226,10 @@ public class ConfigFrame extends JFrame{
         setEnterCommand(nicknamePanel, cjBtn);
         return nicknamePanel;
     }
+
+    /** Creates the CREATE_PANEL
+     * @return the panel
+     */
     private JPanel createNumPlayersPanel(){
         JPanel createPanel = new JPanel();
         createPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
@@ -251,6 +274,9 @@ public class ConfigFrame extends JFrame{
         setEnterCommand(createPanel, createGame);
         return createPanel;
     }
+    /** Creates the WAITING_PANEL
+     * @return the panel
+     */
     private JPanel createWaitingPanel(){
         JPanel waitingPanel = new JPanel();
         waitingPanel.setBorder(BorderFactory.createEmptyBorder(30,0,25,0));
@@ -271,6 +297,11 @@ public class ConfigFrame extends JFrame{
                     }
                 });
     }
+    /**
+     * Controls if a certain strings is a valid IP address.
+     * @param IP The string that represents the IP address to be checked.
+     * @return True if it is a valid string, false otherwise!
+     */
     private boolean checkAddress(String IP){
         if(IP==null || IP.isEmpty()){
             return false;
@@ -282,19 +313,36 @@ public class ConfigFrame extends JFrame{
         return m.matches();
 
     }
+
+    /**
+     * Switchs card of the cardLayout to be shown
+     * @param string the identifier of the card
+     */
     public void changePanel(String string){
         if(panelIsSwitchable) {
             CardLayout cl = (CardLayout) (cards.getLayout());
             cl.show(cards, string);
         }
     }
+
+    /**
+     * Destroys the frame
+     */
     public void closeWindow(){
         setVisible(false);
         dispose();
     }
+
+    /**
+     * Allows/negates the switch of the cardLayout card.
+     * @param switchable true if cards are switchable
+     */
     public void setSwitchable(boolean switchable){
         panelIsSwitchable = switchable;
     }
+    /**
+     * Action listener that handles the input of the server IP
+     */
     private class CanPlayListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -312,12 +360,19 @@ public class ConfigFrame extends JFrame{
             }
         }
     }
+    /**
+     * Action listener that handles the input of the nickname
+     */
     private class NicknameListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             gui.clientManager.updateNickName(nickname.getText());
         }
     }
+
+    /**
+     * Action listener that handles the number of players selection
+     */
     private class PlayersNumberListener implements ActionListener{
 
         @Override
@@ -332,6 +387,10 @@ public class ConfigFrame extends JFrame{
             }
         }
     }
+
+    /**
+     * ComponentListener that sets the focus on the cardLayout card shown
+     */
     private class focusOnCurrentCard extends ComponentAdapter {
 
         @Override
