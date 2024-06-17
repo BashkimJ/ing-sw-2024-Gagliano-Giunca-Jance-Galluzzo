@@ -1,15 +1,9 @@
 package it.polimi.ingsw.Model.Save;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
 import it.polimi.ingsw.Controller.GameState;
 import it.polimi.ingsw.Model.Cards.*;
 import it.polimi.ingsw.Model.GameStatus.*;
 
 import java.io.*;
-import java.lang.reflect.Array;
-import java.lang.reflect.Type;
 import java.util.*;
 
 public class SavesManager
@@ -44,7 +38,7 @@ public class SavesManager
      */
     private void WriteSave(Save s){
         try{
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("CodexNaturalis/src/main/java/it/polimi/ingsw/resources/Games_data/saved_game.ser"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("saved_game.ser"));
             out.writeObject(s);
         } catch (IOException e) {
             System.out.println("Couldn't save");
@@ -55,9 +49,8 @@ public class SavesManager
      * @return the Save class containing all the data from the last Game.
      */
     private Save ReadSave() {
-
-        Save s = null;
-        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("CodexNaturalis/src/main/java/it/polimi/ingsw/resources/Games_data/saved_game.ser"))){
+        Save s  = null;
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream("saved_game.ser"))){
             s = (Save) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Couldn't read");;

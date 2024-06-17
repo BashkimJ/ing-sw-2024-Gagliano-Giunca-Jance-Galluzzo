@@ -39,5 +39,9 @@ class ResourceCardTest {
         assertEquals(Resource.Insects, card.getFront().getUpRight().getResource());
         assertEquals(Items.Manuscript, card.getFront().getDownRight().getItems());
         assertTrue(card.getRetro().getUpRight().isVisible());
+        assertNull(card.getCondition());
+        assertNull(card.getNecessaryRes());
+        System.out.println(card.toString());
+        ResourceCard newCard = new ResourceCard(card.getFront(),card.getRetro(),card.getCardId(),Resource.Animal,0);
     }
 }

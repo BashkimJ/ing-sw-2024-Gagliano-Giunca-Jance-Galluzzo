@@ -19,11 +19,21 @@
 
   <dependencies>
 
-
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.10.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>5.8.1</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
-      <version>RELEASE</version>
+      <version>4.13.2</version>
       <scope>test</scope>
     </dependency>
   </dependencies>
@@ -69,6 +79,63 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.4.2</version>
         </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.2.4</version>
+          <executions>
+            <execution>
+              <id>${project.description}-ClientMain</id>
+              <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+              <configuration>
+                <finalName>${project.description}-ClientMain}</finalName>
+                <transformers>
+                  <transformer implementation=
+                                       "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                    <mainClass>it.polimi.ingsw.ClientMain</mainClass>
+                  </transformer>
+                </transformers>
+                <filters>
+                  <filter>
+                    <artifact>*:*</artifact>
+                    <excludes>
+                      <exclude>module-info.class</exclude>
+                    </excludes>
+                  </filter>
+                </filters>
+              </configuration>
+            </execution>
+
+                <execution>
+                  <id>${project.description}-ServerMain</id>
+                  <phase>package</phase>
+                  <goals>
+                    <goal>shade</goal>
+                  </goals>
+                  <configuration>
+                    <transformers>
+                      <finalName>${project.description}-ServerMain</finalName>
+                      <transformer implementation=
+                                           "org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>it.polimi.ingsw.ServerMain</mainClass>
+                      </transformer>
+                    </transformers>
+                    <filters>
+                      <filter>
+                        <artifact>*:*</artifact>
+                        <excludes>
+                          <exclude>module-info.class</exclude>
+                        </excludes>
+                      </filter>
+                    </filters>
+                  </configuration>
+                </execution>
+          </executions>
+        </plugin>
+
       </plugins>
     </pluginManagement>
   </build>

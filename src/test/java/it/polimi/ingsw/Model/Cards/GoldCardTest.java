@@ -37,4 +37,12 @@ class GoldCardTest {
         assertEquals(Resource.Fungi, card.getNecessaryRes().get(1));
         assertEquals(Resource.Plant,card.getNecessaryRes().get(2));
     }
+    @Test
+    void stringTest(){
+        System.out.println(card.toString());
+    }
+    @Test
+    void initCard(){
+        GoldCard card1 = new GoldCard(card.getFront(),card.getRetro(),card.getCardId(),card.getResourceType(),3,card.getNecessaryRes(),card.getCondition());
+    }
 }

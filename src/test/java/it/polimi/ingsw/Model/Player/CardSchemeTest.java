@@ -186,7 +186,7 @@ class CardSchemeTest {
     }
 
     @Test
-    void controlObjectiveTest(){
+    void controlObjectiveTest() {
         //Create a new scheme to test that the function returns the right points
         ObjectiveCard objPattern = game.getObjectiveCards().get(1);
         ObjectiveCard objRsc = game.getObjectiveCards().get(9);
@@ -202,18 +202,18 @@ class CardSchemeTest {
 
         scheme = new CardScheme();
         try {
-            OK = scheme.placeInitialCard(initialCard,"retro");
+            OK = scheme.placeInitialCard(initialCard, "retro");
         } catch (InvalidSideException e) {
             throw new RuntimeException(e);
         }
         assertTrue(OK);
 
-        int[] pos = new int[]{161,160};
+        int[] pos = new int[]{161, 160};
 
-        pos[0]=82;
-        pos[1]=82;
+        pos[0] = 82;
+        pos[1] = 82;
         try {
-            points = scheme.placeCard(rsc_plant1,pos,"retro");
+            points = scheme.placeCard(rsc_plant1, pos, "retro");
         } catch (GoldCardPlacementException e) {
             points = -1;
         } catch (OutOfBoundsException e) {
@@ -225,9 +225,9 @@ class CardSchemeTest {
         }
         assertEquals(0, points);
 
-        pos = new int[]{84,84};
+        pos = new int[]{84, 84};
         try {
-            points = scheme.placeCard(rsc_plant2,pos,"front");
+            points = scheme.placeCard(rsc_plant2, pos, "front");
         } catch (GoldCardPlacementException e) {
             points = -1;
         } catch (OutOfBoundsException e) {
@@ -239,10 +239,10 @@ class CardSchemeTest {
         }
         assertEquals(0, points);
 
-        pos[0]=86;
-        pos[1]=86;
+        pos[0] = 86;
+        pos[1] = 86;
         try {
-            points = scheme.placeCard(rsc_plant3,pos,"front");
+            points = scheme.placeCard(rsc_plant3, pos, "front");
         } catch (GoldCardPlacementException e) {
             points = -1;
         } catch (OutOfBoundsException e) {
@@ -254,10 +254,10 @@ class CardSchemeTest {
         }
         assertEquals(0, points);
 
-        pos[0]=78;
-        pos[1]=78;
+        pos[0] = 78;
+        pos[1] = 78;
         try {
-            points = scheme.placeCard(rsc_Inkwell1,pos,"front");
+            points = scheme.placeCard(rsc_Inkwell1, pos, "front");
         } catch (GoldCardPlacementException e) {
             points = -1;
         } catch (OutOfBoundsException e) {
@@ -269,10 +269,10 @@ class CardSchemeTest {
         }
         assertEquals(0, points);
 
-        pos[0]=78;
-        pos[1]=82;
+        pos[0] = 78;
+        pos[1] = 82;
         try {
-            points = scheme.placeCard(rsc_Inkwell2,pos,"front");
+            points = scheme.placeCard(rsc_Inkwell2, pos, "front");
         } catch (GoldCardPlacementException e) {
             points = -1;
         } catch (OutOfBoundsException e) {
@@ -288,7 +288,23 @@ class CardSchemeTest {
         assertEquals(2, scheme.ControlObjective(objPattern));
         assertEquals(4, scheme.ControlObjective(objRsc));
         assertEquals(2, scheme.ControlObjective(objItems));
+
+        CardSchemeView view = new CardSchemeView(scheme);
+        assertEquals(view.getPlayedCards().size(), 6);
+        assertEquals(view.getCardsIds().size(), 6);
+        assertEquals(view.getCardsResource().size(), 5);
+        assertEquals(view.getNumAnimal(),scheme.getResourceNum(Animal));
+        assertEquals(view.getNumPlants(),scheme.getResourceNum(Plant));
+        assertEquals(view.getNumInsects(),scheme.getResourceNum(Insects));
+        assertEquals(view.getNumFungi(),scheme.getResourceNum(Fungi));
+        assertEquals(view.getNumQuill(),scheme.getItemNum(Quill));
+        assertEquals(view.getNumInkwell(),scheme.getItemNum(Inkwell));
+        assertEquals(view.getNumManuscript(),scheme.getItemNum(Manuscript));
+        view.toString();
+
+
     }
+
 
 
 }

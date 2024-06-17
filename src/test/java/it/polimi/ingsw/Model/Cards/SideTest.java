@@ -58,4 +58,9 @@ class SideTest {
         assertTrue(card.getFront().getDownRight().isVisible());
         assertTrue(card.getFront().getDownRight().isFree());
     }
+    @Test
+    void initTest(){
+        Side s = new Side(card.getFront().getUpLeft(),card.getFront().getDownLeft(), card.getFront().getUpRight(), card.getRetro().getDownRight(), card.getFront().getImage());
+        System.out.print(s.toString());
+    }
 }

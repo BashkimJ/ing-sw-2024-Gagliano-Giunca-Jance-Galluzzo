@@ -58,5 +58,11 @@ public class ObjectiveCardTest {
         assertEquals(itemsList, objectiveCard_items.getObjective().getObjectives());
         assertEquals(2, objectiveCard_items.getObjective().getPoints());
     }
+    @Test
+    void general(){
+        ObjectiveCard card1 = new ObjectiveCard(objectiveCard_resources.getObjective(),3);
+        assertEquals(card1.getCardId(),3);
+        card1.toString();
+    }
 
 }

@@ -1,0 +1,143 @@
+[
+  {
+    "cardId": 87,
+    "objective": {
+      "patternType": "downUpLR_RED",
+      "points": 2
+    }
+  },
+  {
+    "cardId": 88,
+    "objective": {
+      "patternType": "upDownLR_GREEN",
+      "points": 2
+    }
+  },
+  {
+    "cardId": 89,
+    "objective": {
+      "patternType": "upDownLR_BLUE",
+      "points": 2
+    }
+  },
+  {
+    "cardId": 90,
+    "objective": {
+      "patternType": "downUpLR_PURPLE",
+      "points": 2
+    }
+  },
+  {
+    "cardId": 91,
+    "objective": {
+      "patternType": "LdownRight",
+      "points": 3
+    }
+  },
+  {
+    "cardId": 92,
+    "objective": {
+      "patternType": "LdownLeft",
+      "points": 3
+    }
+  },
+  {
+    "cardId": 93,
+    "objective": {
+      "patternType": "LupRight",
+      "points": 3
+    }
+  },
+  {
+    "cardId": 94,
+    "objective": {
+      "patternType": "LupLeft",
+      "points": 3
+    }
+  },
+  {
+    "cardId": 95,
+    "objective": {
+      "objectivesRESOURCES": [
+        "Fungi",
+        "Fungi",
+        "Fungi"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 96,
+    "objective": {
+      "objectivesRESOURCES": [
+        "Plant",
+        "Plant",
+        "Plant"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 97,
+    "objective": {
+      "objectivesRESOURCES": [
+        "Animal",
+        "Animal",
+        "Animal"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 98,
+    "objective": {
+      "objectivesRESOURCES": [
+        "Insects",
+        "Insects",
+        "Insects"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 99,
+    "objective": {
+      "objectivesITEMS": [
+        "Quill",
+        "Inkwell",
+        "Manuscript"
+      ],
+      "points": 3
+    }
+  },
+  {
+    "cardId": 100,
+    "objective": {
+      "objectivesITEMS": [
+        "Manuscript",
+        "Manuscript"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 101,
+    "objective": {
+      "objectivesITEMS": [
+        "Inkwell",
+        "Inkwell"
+      ],
+      "points": 2
+    }
+  },
+  {
+    "cardId": 102,
+    "objective": {
+      "objectivesITEMS": [
+        "Quill",
+        "Quill"
+      ],
+      "points": 2
+    }
+  }
+]

@@ -40,46 +40,51 @@ class InitialCardTest {
     @Test   //Control the methods from Card which is an abstract class
     void generalTest(){
         assertEquals(85, card.getCardId());
-        //Front: upLeft
-        assertEquals(Resource.Insects, card.getFront().getUpLeft().getResource() );
-        assertNull(card.getFront().getUpLeft().getItems());
-        assertTrue(card.getFront().getUpLeft().isVisible());
-        assertTrue(card.getFront().getUpLeft().isFree());
-        //Front: downleft
-        assertEquals(Resource.Plant, card.getFront().getDownLeft().getResource() );
-        assertNull(card.getFront().getDownLeft().getItems());
-        assertTrue(card.getFront().getDownLeft().isVisible());
-        assertTrue(card.getFront().getDownLeft().isFree());
-        //Front: upRight
-        assertEquals(Resource.Fungi, card.getFront().getUpRight().getResource() );
-        assertNull(card.getFront().getUpRight().getItems());
-        assertTrue(card.getFront().getUpRight().isVisible());
-        assertTrue(card.getFront().getUpRight().isFree());
-        //Front: downRight
-        assertEquals(Resource.Animal, card.getFront().getDownRight().getResource() );
-        assertNull(card.getFront().getDownRight().getItems());
-        assertTrue(card.getFront().getDownRight().isVisible());
-        assertTrue(card.getFront().getDownRight().isFree());
         //Retro: upLeft
-        assertNull(card.getRetro().getUpLeft().getResource() );
+        assertEquals(Resource.Insects, card.getRetro().getUpLeft().getResource() );
         assertNull(card.getRetro().getUpLeft().getItems());
         assertTrue(card.getRetro().getUpLeft().isVisible());
         assertTrue(card.getRetro().getUpLeft().isFree());
         //Retro: downleft
-        assertNull(card.getRetro().getDownLeft().getResource() );
+        assertEquals(Resource.Plant, card.getRetro().getDownLeft().getResource() );
         assertNull(card.getRetro().getDownLeft().getItems());
-        assertFalse(card.getRetro().getDownLeft().isVisible());
-        assertFalse(card.getRetro().getDownLeft().isFree());
+        assertTrue(card.getRetro().getDownLeft().isVisible());
+        assertTrue(card.getRetro().getDownLeft().isFree());
         //Retro: upRight
-        assertNull(card.getRetro().getUpRight().getResource() );
+        assertEquals(Resource.Fungi, card.getRetro().getUpRight().getResource() );
         assertNull(card.getRetro().getUpRight().getItems());
         assertTrue(card.getRetro().getUpRight().isVisible());
         assertTrue(card.getRetro().getUpRight().isFree());
         //Retro: downRight
-        assertNull(card.getRetro().getDownRight().getResource() );
+        assertEquals(Resource.Animal, card.getRetro().getDownRight().getResource() );
         assertNull(card.getRetro().getDownRight().getItems());
-        assertFalse(card.getRetro().getDownRight().isVisible());
-        assertFalse(card.getRetro().getDownRight().isFree());
+        assertTrue(card.getRetro().getDownRight().isVisible());
+        assertTrue(card.getRetro().getDownRight().isFree());
+        //Front: upLeft
+        assertNull(card.getFront().getUpLeft().getResource() );
+        assertNull(card.getFront().getUpLeft().getItems());
+        assertTrue(card.getFront().getUpLeft().isVisible());
+        assertTrue(card.getFront().getUpLeft().isFree());
+        //Front: downleft
+        assertNull(card.getFront().getDownLeft().getResource() );
+        assertNull(card.getFront().getDownLeft().getItems());
+        assertFalse(card.getFront().getDownLeft().isVisible());
+        assertFalse(card.getFront().getDownLeft().isFree());
+        //Front: upRight
+        assertNull(card.getFront().getUpRight().getResource() );
+        assertNull(card.getFront().getUpRight().getItems());
+        assertTrue(card.getFront().getUpRight().isVisible());
+        assertTrue(card.getFront().getUpRight().isFree());
+        //Front: downRight
+        assertNull(card.getFront().getDownRight().getResource() );
+        assertNull(card.getFront().getDownRight().getItems());
+        assertFalse(card.getFront().getDownRight().isVisible());
+        assertFalse(card.getFront().getDownRight().isFree());
+        System.out.println(card.toString());
+    }
+    @Test
+    void initCardTest(){
+        InitialCard init = new InitialCard(card.getFront(),card.getRetro(), card.getCardId(),card.getMiddleResource());
     }
 }
 

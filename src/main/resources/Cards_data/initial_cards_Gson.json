@@ -1,0 +1,288 @@
+[
+  {
+    "middleResource": [
+      "Insects"
+    ],
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Animal"
+      }
+    },
+    "CardId": 81
+  },
+  {
+    "middleResource": [
+      "Fungi"
+    ],
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Animal"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      }
+    },
+    "CardId": 82
+  },
+  {
+    "middleResource": [
+      "Plant",
+      "Fungi"
+    ],
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      }
+    },
+    "CardId": 83
+  },
+{
+  "middleResource": [
+    "Animal",
+    "Insects"
+  ],
+  "front": {
+    "upLeft": {
+      "Visible": true,
+      "Free": true
+    },
+    "downLeft": {
+      "Visible": true,
+      "Free": true
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true
+    },
+    "downRight": {
+      "Visible": true,
+      "Free": true
+    }
+  },
+  "retro": {
+    "upLeft": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Plant"
+    },
+    "downLeft": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Animal"
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Insects"
+    },
+    "downRight": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Fungi"
+    }
+  },
+  "CardId": 84
+},
+{
+  "middleResource": [
+    "Animal",
+    "Insects",
+    "Plant"
+  ],
+  "front": {
+    "upLeft": {
+      "Visible": true,
+      "Free": true
+    },
+    "downLeft": {
+      "Visible": false,
+      "Free": false
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true
+    },
+    "downRight": {
+      "Visible": false,
+      "Free": false
+    }
+  },
+  "retro": {
+    "upLeft": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Insects"
+    },
+    "downLeft": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Plant"
+    },
+    "upRight": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Fungi"
+    },
+    "downRight": {
+      "Visible": true,
+      "Free": true,
+      "resourceType": "Animal"
+    }
+  },
+  "CardId": 85
+},
+  {
+    "middleResource": [
+      "Plant",
+      "Animal",
+      "Fungi"
+    ],
+    "front": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true
+      },
+      "downLeft": {
+        "Visible": false,
+        "Free": false
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true
+      },
+      "downRight": {
+        "Visible": false,
+        "Free": false
+      }
+    },
+    "retro": {
+      "upLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Fungi"
+      },
+      "downLeft": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Plant"
+      },
+      "upRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Animal"
+      },
+      "downRight": {
+        "Visible": true,
+        "Free": true,
+        "resourceType": "Insects"
+      }
+    },
+    "CardId": 86
+  }
+]

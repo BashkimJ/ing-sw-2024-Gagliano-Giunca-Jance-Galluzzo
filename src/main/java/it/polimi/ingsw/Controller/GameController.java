@@ -12,6 +12,7 @@ import it.polimi.ingsw.Model.Cards.ResourceCard;
 import it.polimi.ingsw.Model.Enumerations.Colour;
 import it.polimi.ingsw.Model.GameStatus.Game;
 import it.polimi.ingsw.Model.Player.Player;
+import it.polimi.ingsw.Model.Save.Save;
 import it.polimi.ingsw.Model.Save.SavesManager;
 import it.polimi.ingsw.Network.Messages.*;
 import it.polimi.ingsw.View.VirtualView;
@@ -59,12 +60,16 @@ import static it.polimi.ingsw.Controller.GameState.*;
          */
         public void loadGame(){
             SavesManager sm = new SavesManager();
-            this.gameState = sm.LoadGame().getGameState();
-            this.game = sm.LoadGame().getGame();
-            this.offlinePlayers = sm.LoadGame().getOfflinePlayers();
-            this.objectives = sm.LoadGame().getObjectives();
-            this.playerTurn = sm.LoadGame().getPlayerTurn();
-            this.numPlayers = sm.LoadGame().getNumPlayers();
+            Save s = new Save();
+            s = sm.LoadGame();
+            if(s!=null) {
+                this.gameState = s.getGameState();
+                this.game = s.getGame();
+                this.offlinePlayers = s.getOfflinePlayers();
+                this.objectives = s.getObjectives();
+                this.playerTurn = s.getPlayerTurn();
+                this.numPlayers = s.getNumPlayers();
+            }
         }
 
         /**

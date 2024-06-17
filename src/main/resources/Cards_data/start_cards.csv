@@ -1,0 +1,7 @@
+card_id,corner0,corner1,corner2,corner3,resurces_at_front,corner4,corner5,corner6,corner7
+81,o,g,p,o,p,r,g,p,b
+82,b,o,o,r,r,g,b,r,p
+83,o,o,o,o,gr,p,b,r,g
+84,o,o,o,o,bp,g,p,b,r
+85,o,o,x,x,bpg,p,r,g,b
+86,o,o,x,x,gbr,r,b,g,p
