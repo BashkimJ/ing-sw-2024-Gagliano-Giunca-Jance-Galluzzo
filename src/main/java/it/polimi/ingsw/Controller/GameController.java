@@ -449,8 +449,9 @@ import static it.polimi.ingsw.Controller.GameState.*;
          * @return Colour.
          */
         private synchronized Colour getColor(){
-            boolean present = false;
+            boolean present;
             for(Colour color: Colour.values()){
+                present = false;
                 for(Player player: game.getPlayers()){
                     if(player.getPlayerColour()!=null && player.getPlayerColour().equals(color)){
                         present = true;
