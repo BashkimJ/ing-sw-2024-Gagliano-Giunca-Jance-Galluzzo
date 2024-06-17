@@ -8,6 +8,10 @@ import it.polimi.ingsw.Model.Cards.ObjectiveWithResources;
 
 import java.lang.reflect.Type;
 
+/**
+ * Custom Gson Deserializer for MainObjective interface.
+ */
+
 public class MainObjectiveDeserializer implements JsonDeserializer<MainObjective> {
 
     @Override

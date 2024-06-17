@@ -9,9 +9,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * JPanel that is a composition of a JBottomPanel and a JSchemePanel. It is relative to one specific player
+ */
 public class JCenterPanel extends JPanel {
     private JBottomPanel bottomPanel;
     private JSchemePanel schemePanel;
+
+    /**
+     * Class constructor
+     * @param schemePanel object of a class that implements JSchemePanel
+     * @param bottomPanel object of a class that implements JBottomPanel
+     */
     public JCenterPanel(JSchemePanel schemePanel, JBottomPanel bottomPanel){
         setLayout(new BorderLayout());
         this.bottomPanel = bottomPanel;
@@ -19,6 +28,11 @@ public class JCenterPanel extends JPanel {
         add(schemePanel.getSchemePanel(), BorderLayout.CENTER);
         add((JPanel)bottomPanel, BorderLayout.SOUTH);
     }
+
+    /**
+     * Propagates the updates to the subcomponents
+     * @param player the updated player
+     */
     public void update(PlayerView player){
         Integer playerObjective = player.getPlayerObjective().getCardId();
         List<Integer> playerHand = player.getPlayerHand().stream().map(x -> x.getCardId()).toList();
@@ -26,6 +40,10 @@ public class JCenterPanel extends JPanel {
         bottomPanel.update(playerObjective, playerHand);
         schemePanel.update(cardSchemeView);
     }
+
+    /**
+     * Propagates the resize request to the JBottomPanel
+     */
     public void resize(){
         bottomPanel.resize();
     }

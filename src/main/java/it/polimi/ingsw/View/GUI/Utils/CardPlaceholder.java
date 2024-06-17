@@ -4,10 +4,17 @@ import it.polimi.ingsw.View.GUI.GUI;
 
 import javax.swing.*;
 import java.awt.*;
-
+/**
+ * JLabel that represents a placeholder used for selecting coordinates for card placing in the card scheme
+ */
 public class CardPlaceholder extends JLabel{
     private final Point position;
     private final Color hooverColor = Color.WHITE;
+
+    /**
+     * Class contructor
+     * @param position indicates the coordinates that the placeholder represents
+     */
     public CardPlaceholder(Point position){
         this.position = position;
         this.setIcon(GUI.getImageIcon("Images/Cards/CardPlaceholder.png", 180, 120));

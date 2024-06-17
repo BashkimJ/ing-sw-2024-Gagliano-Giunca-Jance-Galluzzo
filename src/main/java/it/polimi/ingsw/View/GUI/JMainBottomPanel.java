@@ -12,12 +12,20 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JBottomPanel of the client's player. Shows player's hand and handles the selection of the card to place
+ */
 public class JMainBottomPanel extends JPanel implements JBottomPanel{
     private GUI gui;
     private static List<SelectableCard> handCards = new ArrayList<>();
     private static boolean frontSide = true;
     private static int selectedCardIndex = -1;
     private int objectiveID = -1;
+
+    /**
+     * Class constructor. It creates a Panel with placeholders instead of cards
+     * @param gui
+     */
     public JMainBottomPanel(GUI gui){
         this.gui = gui;
         setLayout(new FlowLayout());
@@ -33,6 +41,12 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         }
 
     }
+
+    /**
+     * Updates the Panel with the player private objective card and the cards in his hand
+     * @param playerObjective private objective card
+     * @param playerHand cards in the player hand
+     */
     public void update(Integer playerObjective, List<Integer> playerHand){
         handCards=new ArrayList<>();
         objectiveID = playerObjective;
@@ -53,6 +67,9 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
         repaint();
     }
 
+    /**
+     * Resizes the currently shown cards
+     */
     @Override
     public void resize() {
         if(objectiveID >= 0 && !handCards.isEmpty())
@@ -122,6 +139,9 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
             card.showSide(frontSide);
     }
 
+    /**
+     * MouseListener that keeps track of the currently selected card
+     */
     private class handCardListener extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {

@@ -23,6 +23,9 @@ import java.util.List;
 import static it.polimi.ingsw.Model.Enumerations.Items.Quill;
 import static it.polimi.ingsw.Model.Enumerations.Resource.*;
 
+/**
+ * Class that handles and shows the card scheme of a certain player.
+ */
 public class JViewSchemePanel extends JPanel implements JSchemePanel{
     private final int PANEL_WIDTH;
     private final int PANEL_HEIGHT;
@@ -36,6 +39,10 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
     private Integer currentLayer = 0;
     private final List<Point> adjacentPositions;
 
+    /**
+     * Class constructor. Creates a JScollPane with an empty panel as client, and adds the "center view" button
+     * @param gui
+     */
     public JViewSchemePanel(GUI gui){
         this.gui = gui;
         this.adjacentPositions = Arrays.asList(
@@ -84,9 +91,19 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         add(scrollPane, gbc);
 
     }
+
+    /**
+     * Updates the JViewScheme by creating a new JLayeredPanel and setting it as JScollPane's client
+     * @param cardSchemeView the updated card scheme
+     */
     public void update(CardSchemeView cardSchemeView){
         replaceClientPane(cardSchemeView);
     }
+
+    /**
+     * Creates an empty JLayeredPanel used as JScollPane's client
+     * @return the JLayeredPanel
+     */
     private JLayeredPane createEmptyClientPane(){
         JLayeredPane clientPane = new JLayeredPane();
         currentLayer = 0;
@@ -95,6 +112,11 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         clientPane.setOpaque(true);
         return clientPane;
     }
+    /**
+     * Creates a JLayeredPanel that represents the card scheme
+     * @param cardSchemeView the card scheme to represent
+     * @return the JLayeredPanel
+     */
     private void replaceClientPane(CardSchemeView cardSchemeView){
         JLayeredPane clientPane = createEmptyClientPane();
         boolean isFront;
@@ -136,10 +158,24 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
 
     }
     public JPanel getSchemePanel(){return this;}
+
+    /**
+     * Analyzes a Side object
+     * @param side the Side to analyze
+     * @return true if a card Side is the front one, else false
+     */
     private boolean getSide(Side side){
         return !(side.getDownLeft().isVisible() && side.getUpLeft().isVisible() && side.getDownRight().isVisible() && side.getUpRight().isVisible()
                 && side.getUpLeft().getResource() == null);
     }
+
+    /**
+     * Adds a card to the given JLayeredPane
+     * @param clientPane the JLayeredPane to which the card is to be added
+     * @param id id of the card to be added
+     * @param isFront side of the card to be added
+     * @param placeTo coordinates for the card placement
+     */
     private void createCard(JLayeredPane clientPane, Integer id, boolean isFront, Point placeTo){
         int xDistance = ((placeTo.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
         int yDistance = ((placeTo.y - matrixOrigin.y)/2)*Y_CARD_OFFSET;
@@ -148,6 +184,11 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         clientPane.add(card, currentLayer);
         currentLayer++;
     }
+
+    /**
+     * Adds clickable placeholders to the JPanel to allow the user to choose the placement position
+     * @param cardsIds Map of the currently placed cards in the JViewSchemePanel
+     */
     public void createPlaceholders(Map<Point,Integer> cardsIds){
         HashSet<Point> placeholderPositions = new HashSet<>();
         Point toAdd;
@@ -161,6 +202,11 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
             createCardPlaceholder(p);
         }
     }
+
+    /**
+     * Creates a single placeholder
+     * @param position where has to be placed
+     */
     private void createCardPlaceholder(Point position){
         CardPlaceholder cardPlaceholder = new CardPlaceholder(position);
         int xDistance = ((position.x - matrixOrigin.x)/2)*X_CARD_OFFSET;
@@ -169,17 +215,28 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
         cardPlaceholder.addMouseListener(new PlaceholderListener());
         this.clientPane.add(cardPlaceholder, -1);
     }
+
+    /**
+     * Centers the ScrollPanel ViewPort's view
+     */
     private void centerView(){
         Rectangle bounds = scrollPane.getViewport().getViewRect();
         int x = (PANEL_WIDTH - bounds.width) / 2;
         int y = (PANEL_HEIGHT - bounds.height) / 2;
         scrollPane.getViewport().setViewPosition(new Point(x, y));
     }
+
+    /**
+     * Allows overlapping of the "center view" button and the JLayeredPane
+     */
     @Override
     public boolean isOptimizedDrawingEnabled() {
         return false;
     }
 
+    /**
+     * MouseListener that handles the clicking and hovering on a placeholder; when clicked it sends a message of card placing via the client manager
+     */
     private class PlaceholderListener extends MouseAdapter{
         @Override
         public void mouseClicked(MouseEvent e) {

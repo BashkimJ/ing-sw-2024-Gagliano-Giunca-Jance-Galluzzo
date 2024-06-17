@@ -13,6 +13,10 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Gets all the cards from JSON files and stores them in Decks and Lists.
+ */
 public class Game implements Serializable {
     private int MAX_N_PLAYERS;
     private final int N_FACEUP_CARDS = 4;
@@ -24,7 +28,11 @@ public class Game implements Serializable {
     private List<ResourceCard> faceupCards;
     private List<ObjectiveCard> globalObj;
 
-    //player who starts the game and number of players chosen
+    /**
+     * Construct a Game object.
+     * @param player the player who creates the game
+     * @param MAX_N_PLAYERS the maxium number of players chosen by the first player
+     */
     public Game(Player player, int MAX_N_PLAYERS){
         this.MAX_N_PLAYERS = MAX_N_PLAYERS;
         players = new ArrayList<>();
@@ -56,6 +64,12 @@ public class Game implements Serializable {
     public List<Player> getPlayers() {
         return players;
     }
+
+    /**
+     * Adds a player to che Game.
+     * @param player player to be added
+     * @throws PlayersLimitExceededException when the maxium number of players is exceeded.
+     */
     public void addPlayer(Player player) throws PlayersLimitExceededException {
         if(players.size() < MAX_N_PLAYERS)
             players.add(player);
@@ -87,6 +101,12 @@ public class Game implements Serializable {
     public Deck getInitialDeck() {
         return initialDeck;
     }
+
+    /**
+     * Removes a player
+     * @param player player to be removed
+     * @throws PlayerNotFoundException when player is not found in the game
+     */
     public void removePlayer(Player player) throws PlayerNotFoundException {
         boolean deleted = players.remove(player);
         if (!deleted){
@@ -95,6 +115,10 @@ public class Game implements Serializable {
 
     }
 
+    /**
+     * Reads the ObjectiveCards from the corresponding JSON file
+     * @return the list of ObjectiveCard
+     */
     private List<ObjectiveCard>  initializeObjCards(){
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
@@ -108,6 +132,12 @@ public class Game implements Serializable {
 
         return listObj;
     }
+
+    /**
+     * Reads the ResourceCards from the corresponding JSON file.
+     * @return a deck of ResourceCards
+     * @throws IOException when cannot read the file
+     */
     private Deck readResFile () throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting()
                 .create();
@@ -119,6 +149,11 @@ public class Game implements Serializable {
         List<Card> listCards = new ArrayList<>(listRes);
         return new Deck(listCards);
     }
+    /**
+     * Reads the GoldCards from the corresponding JSON file.
+     * @return a deck of GoldCards
+     * @throws IOException when cannot read the file
+     */
     private Deck readGoldFile () throws IOException {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         InputStream inputStream = this.getClass().getClassLoader().getResourceAsStream("Cards_data/gold_cards_Gson.json");
@@ -129,6 +164,11 @@ public class Game implements Serializable {
         List<Card> listCards = new ArrayList<>(listGolds);
         return new Deck(listCards);
     }
+    /**
+     * Reads the InitialCards from the corresponding JSON file.
+     * @return a deck of InitialCards
+     * @throws IOException when cannot read the file
+     */
     private Deck readInitFile () throws IOException {
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
