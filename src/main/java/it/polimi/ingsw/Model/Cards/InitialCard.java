@@ -13,7 +13,7 @@ public class InitialCard extends Card{
      * @param front The front side of the card.
      * @param retro The retro side of the card.
      * @param Id The card ID, which is an integer.
-     * @param rsc The resources contained in the front of the card. Type List<Resource>.
+     * @param rsc The resources contained in the front of the card.
      */
     public InitialCard(Side front,Side retro, int Id, List<Resource> rsc){
         super(front,retro,Id);

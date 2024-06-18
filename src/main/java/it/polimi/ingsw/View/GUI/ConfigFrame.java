@@ -29,7 +29,7 @@ public class ConfigFrame extends JFrame{
 
     /**
      * Construct the frame and all the panels
-     * @param gui
+     * @param gui Reference to the gui used for sending messages to server
      */
     public ConfigFrame(GUI gui){
         this.gui = gui;

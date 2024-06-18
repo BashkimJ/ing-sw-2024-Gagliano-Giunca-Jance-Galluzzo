@@ -37,7 +37,7 @@ public class GameFrame extends JFrame {
 
     /**
      * Construct the frame and its subcomponent cards
-     * @param gui reference to the gui used for sending messages to server
+     * @param gui Reference to the gui used for sending messages to server
      */
     public GameFrame(GUI gui){
         this.gui = gui;

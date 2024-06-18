@@ -41,7 +41,7 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
 
     /**
      * Class constructor. Creates a JScollPane with an empty panel as client, and adds the "center view" button
-     * @param gui
+     * @param gui Reference to the gui used for sending messages to server
      */
     public JViewSchemePanel(GUI gui){
         this.gui = gui;
@@ -115,7 +115,6 @@ public class JViewSchemePanel extends JPanel implements JSchemePanel{
     /**
      * Creates a JLayeredPanel that represents the card scheme
      * @param cardSchemeView the card scheme to represent
-     * @return the JLayeredPanel
      */
     private void replaceClientPane(CardSchemeView cardSchemeView){
         JLayeredPane clientPane = createEmptyClientPane();
