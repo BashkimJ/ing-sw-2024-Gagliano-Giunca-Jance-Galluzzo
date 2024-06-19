@@ -28,7 +28,7 @@ di Milano, Italy.
 |Multiple Games|❌ |
 
 ## Java Doc And Testing
-You can consult the documentation of this project by navigating to Deriverables/JavaDoc. In our project we have been mostly concentrated in testing the Model which contains all the game's logic. He have been
+You can consult the documentation of this project by seeing the comments at the top of each method or class. In our project we have been mostly concentrated in testing the Model which contains all the game's logic. He have been
 able to cover overall:
 - Between 90%-95% of all the methods in the Model.
 - 80% of the lines included in the Model.
@@ -54,6 +54,6 @@ Firstly you must obtain the two executable jar files that can be found in Derive
 8. To start a new game type y when asked, n to resume a possible saved game.
 ### Considerations
 Our projects uses Ansi Escape Codes which infact are not supported from CMD or the PowerShell of windows. So if you want to run the game using the TUI mode you must use a terminal that supports the ANSI Escape
-Codes. We would recommend using the Intellij Idea Terminal or the <a href="https://learn.microsoft.com/it-it/windows/terminal/install">Windows Terminal</a>. If you want to move the jar files from one folder
+Codes. We would recommend using the Intellij Idea Terminal or the <a href="https://learn.microsoft.com/it-it/windows/terminal/install">Windows Terminal</a>.Also will work fine with Ubuntu terminal. If you want to move the jar files from one folder
 to another be sure to also move the file save_game.ser created at runtime to save the state of a started game. If you don't do so you want be able to resume a previous game and at runtime a new saved_game.ser will 
 be created to save the state of the new created game.
