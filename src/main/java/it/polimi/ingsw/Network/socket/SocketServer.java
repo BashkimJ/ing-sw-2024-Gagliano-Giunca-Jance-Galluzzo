@@ -77,7 +77,7 @@ public class SocketServer implements Runnable{
         else if(gameController.getState().equals(GameState.In_Game)){
             this.clientHandler.add(clientHandler);
             gameController.reconnect(clientHandler.getNickName(),virtualview);
-            System.out.println(clientHandler.getNickName() + "Reconnected");
+
 
         }
 

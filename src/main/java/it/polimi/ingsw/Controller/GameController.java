@@ -703,6 +703,7 @@ import static it.polimi.ingsw.Controller.GameState.*;
                     } else {
                         initGame(nickName);
                     }
+                    System.out.println(nickName + "Reconnected");
 
 
                 } else {

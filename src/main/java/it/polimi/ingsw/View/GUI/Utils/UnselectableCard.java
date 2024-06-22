@@ -23,7 +23,6 @@ public class UnselectableCard extends JLabel {
         else
             this.setIcon(GUI.getImageIcon("Images/Cards/"+ (frontSide ? "Front" : "Back") + "/" + cardId +".png", GameFrame.CARD_WIDTH, GameFrame.CARD_HEIGHT));
         setDefaultBorder();
-        setToolTipText("ID: " + cardId);
     }
     private void setDefaultBorder(){
         this.setBorder(BorderFactory.createCompoundBorder(

@@ -38,7 +38,7 @@ public class Player implements Serializable {
         try {
             this.tokenImage = ImageIO.read(new File("/../ImageFiles/" + c + ".png"));
         } catch (IOException e) {
-            out.println("Impossible to load token image.");
+
         }
     }
 

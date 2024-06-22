@@ -19,7 +19,6 @@ public class CardPlaceholder extends JLabel{
         this.position = position;
         this.setIcon(GUI.getImageIcon("Images/Cards/CardPlaceholder.png", 180, 120));
         setDefaultBorder();
-        setToolTipText("{" + position.x + ", " + position.y + "}");
     }
     public void setDefaultBorder(){
         this.setBorder(BorderFactory.createCompoundBorder(

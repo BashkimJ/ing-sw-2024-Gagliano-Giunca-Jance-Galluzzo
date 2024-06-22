@@ -51,6 +51,9 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
      */
     @Override
     public void messageToServer(Message message,RemoteClient client){
+        if(message.getType()!=MessageType.Ping){
+            System.out.println("Message received: RMI connection");
+        }
         if (message.getType() == MessageType.Login_Req) {
             addClient(message.getNickName(), client);
         } else {
@@ -77,7 +80,6 @@ public class RemoteServerInstance extends UnicastRemoteObject implements RemoteS
         else if(gameController.getState().equals(GameState.In_Game)){
            this.clientHandler.add(clientHandler);
             gameController.reconnect(NickName,virtualview);
-            System.out.println(clientHandler.getNickName() + "Reconnected");
 
         }
 

@@ -26,7 +26,6 @@ public class SelectableCard extends JLabel {
         this.selectionColor = selectionColor;
         showSide(frontSide);
         setDefaultBorder();
-        setToolTipText("ID: " + cardId);
     }
 
     /**
