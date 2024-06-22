@@ -11,7 +11,7 @@ di Milano, Italy.
 - <a href="https://github.com/BashkimJ">Bashkim Jance</a>
 - <a href="https://github.com/SimoneGalluzzo">Simone Galluzzo</a>
 - <a href="https://github.com/EmanueleGagliano">Emanuele Gagliano</a>
-- <a href="https://github.com/samuelgiunca">Samuele Giunca</a>
+- <a href="https://github.com/samuelgiunca">Samuel Giunca</a>
 
 ## Implemented Features
 | Feature | Implemented |
@@ -34,6 +34,10 @@ able to cover overall:
 - 80% of the lines included in the Model.
 - 100% of all the classes included in the model.
 To consult the tests you can find them at src/test/java/it/polimi/ingsw.
+
+## Display settings
+- Resolution: 1920x1080
+- UI scale: 100%
 
 ## How to run the game.
 Firstly you must obtain the two executable jar files that can be found in Deriverables/Jars. They are named Server.jar and Client.jar.
