@@ -31,7 +31,7 @@ public class JCenterManager extends JPanel {
 
     /**
      * Class constructor. It creates the client's player JCenterPanel and the leftPanel.
-     * @param gui
+     * @param gui Reference to the gui used for sending messages to server
      */
     public JCenterManager(GUI gui){
         this.gui = gui;

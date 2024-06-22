@@ -24,7 +24,7 @@ public class JMainBottomPanel extends JPanel implements JBottomPanel{
 
     /**
      * Class constructor. It creates a Panel with placeholders instead of cards
-     * @param gui
+     * @param gui Reference to the gui used for sending messages to server
      */
     public JMainBottomPanel(GUI gui){
         this.gui = gui;

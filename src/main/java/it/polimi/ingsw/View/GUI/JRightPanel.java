@@ -33,7 +33,7 @@ public class JRightPanel extends JPanel {
 
     /**
      * Class constructor. It creates a Panel with the chat box and placeholders instead of cards.
-     * @param gui
+     * @param gui Reference to the gui used for sending messages to server
      */
     public JRightPanel(GUI gui){
         this.gui = gui;
